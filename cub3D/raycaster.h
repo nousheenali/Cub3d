@@ -1,6 +1,16 @@
 #ifndef RAYCASTER_H
 #define RAYCASTER_H
 
+# define GRID 64
+# define PI 3.1416
+
+typedef struct  s_vec
+{
+	double x;
+	double y;
+}t_vec;
+
+
 typedef struct  s_game
 {
 	void *mlx;
@@ -9,34 +19,14 @@ typedef struct  s_game
 	int win_ht;
 	int win_wt;
 
-
 	char **map;
-	double px;
-	double py;
-	double dx;
-	double dy;
-	double planex;
-	double planey;
-
-	double camx;
-	double rayDirX;
-	double rayDirY;	
-
-	int mapx;
-	int mapy;
-	double sideX;
-	double sideY;
-	double deltaX;
-	double deltaY;
-	int stepX;
-	int stepY;
-
-	int hit;
-	int side_flag;
+	t_vec pos;
+	t_vec init_dist;
+	double angle;
+	double fov;
+	double angle_btw_rays;
 
 
 }t_game;
-
-
 
 #endif 

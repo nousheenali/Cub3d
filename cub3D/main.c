@@ -2,136 +2,88 @@
 # include <stdlib.h>
 #include "raycaster.h"
 # include <math.h>
+#include <stdio.h>
 
-int map[640][480]=
+int map[7][6]=
 {
-  {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,2,2,2,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
-  {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,3,0,0,0,3,0,0,0,1},
-  {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,2,2,0,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,0,0,0,0,5,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,0,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
+	{1,1,1,1,1,1},
+	{1,0,0,1,0,1},
+	{1,0,1,0,0,1},
+	{1,1,0,0,'N',1},
+	{1,1,1,1,1,1}
 };
 
 void ft_init_variables(t_game *g)
 {
-	g->px = 22;
-	g->py = 12;
-	g->dx = -1;
-	g->dy = 0;
-	g->planex = 0;
-	g->planey = 0.66;
-	g->hit = 0;
+	g->pos.x = 4; //player pos x
+	g->pos.y = 3;   //player pos y
+	g->angle = 90;  //angle facing north
+	g->init_dist.x = 280; //initial distance of player x direction
+	g->init_dist.y = 220; //initial distance of player y direction
+	g->fov = 60; //fov
+	g->angle_btw_rays = g->fov/g->win_wt; //angle between subsequent rays
 }
 
-//Distance between x to x and y to y.
-void ft_delta_cal(t_game *g)
+double ft_convert_deg_to_rad(double deg)
 {
-	if (g->rayDirX == 0)
-		g->deltaX = 1e30;
-	else
-		g->deltaX = abs(1 / g->rayDirX);
-	if (g->rayDirY == 0)
-		g->deltaY = 1e30;
-	else
-		g->deltaY = abs(1 / g->rayDirY);
+	return (deg * PI/180);
 }
 
-//to calculate steps and initial side distance  
-void ft_step_cal(t_game *g)
+void ft_y_axis_hit(t_game *g)
 {
-	if (g->rayDirX < 0)
-      {
-        g->stepX = -1;
-        g->sideX = (g->px - g->mapx) * g->deltaX;
-      }
-      else
-      {
-        g->stepX = 1;
-        g->sideX = (g->mapx + 1.0 - g->px) * g->deltaX;
-      }
-      if (g->rayDirY < 0)
-      {
-        g->stepY = -1;
-        g->sideY = (g->py - g->mapy) * g->deltaY;
-      }
-      else
-      {
-        g->stepY = 1;
-        g->sideY = (g->mapy + 1.0 - g->py) * g->deltaY;
-      }
-}
- 
-//DDA algorithm
-void ft_dda(t_game *g)
-{
-	while (g->hit == 0)
+	float alpha;
+	t_vec hit;
+	int x;
+	int y;
+	float x_inc;
+
+
+	alpha = g->angle - (g->fov / 2); // angle to rightmost ray in degrees
+
+	hit.y = (floor(g->init_dist.y/GRID) * GRID) - 1;
+	hit.x = g->init_dist.x + ((g->init_dist.y - hit.y)/ tan(ft_convert_deg_to_rad(alpha)));
+	printf("%f  %f\n", hit.x, hit.y);
+	x = floor(hit.x/GRID);
+	y = floor(hit.y/GRID);
+	while (map[x][y] == 1)
 	{
-		if (g->sideX < g->sideY)
-		{
-			g->sideX += g->deltaX;
-			g->mapx += g->stepX;
-			g->side_flag = 0;
-		}
-		else
-		{
-			g->sideY += g->deltaY;
-			g->mapy += g->stepY;
-			g->side_flag = 1;
-	
-		}
-		if (map[g->mapx][g->mapy] > 0)
-			g->hit = 1;
+		y = y * GRID +GRID
 	}
+	printf("Wall has been hit\n");
+
 }
 
 //to calculate the camare plane
 void start_game(t_game *g)
 {
+	ft_y_axis_hit(g);
+
 	int i = 0;
-	while (i < g->win_wt)
-	{
-		g->camx = 2 * i / (double)g->win_wt - 1;
-		g->rayDirX = g->dx + g->planex * g->camx;
-		g->rayDirY = g->dy + g->planey * g->camx;
+	int x, y;
+	int theta = g->angle - (g->fov / 2); //angle of 1st ray on the right
+	t_vec hit;
 
-	g->mapx = (int)g->px;
-	g->mapy = (int)g->py;
+	hit.y = (floor(g->init_dist.y/GRID) * GRID) - 1;
+	hit.x = g->init_dist.x + ((g->init_dist.y - hit.y)/ tan(ft_convert_deg_to_rad(theta)));
+	printf("%f  %f\n", hit.x, hit.y);
+	int x = floor(hit.x/64);
+	int y = floor(hit.y/64);
+	printf("%d  %d\n", x, y);
 
-	ft_delta_cal(g);
-	ft_step_cal(g);
-	ft_dda(g);
-		i++;
-	}
+
+
+
 }
 
 int main()
 {
 	t_game g;
-	g.win_ht = 480;
-	g.win_wt = 640;
+	g.win_ht = 200;
+	g.win_wt = 320;
 	ft_init_variables(&g);
 
-	g.mlx = mlx_init();
-	g.win = mlx_new_window(g.mlx, g.win_wt, g.win_ht, "cuB3d");
+	// g.mlx = mlx_init();
+	// g.win = mlx_new_window(g.mlx, g.win_wt, g.win_ht, "cuB3d");
 	start_game(&g);
-	mlx_loop(g.mlx);
+	// mlx_loop(g.mlx);
 }
