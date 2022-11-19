@@ -25,7 +25,9 @@ typedef struct  s_game
 	double angle;
 	double fov;
 	double angle_btw_rays;
+	double dist_proj; //distance to proj palne
 
+	unsigned int	**buffer;
 
 }t_game;
 
