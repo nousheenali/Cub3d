@@ -19,6 +19,13 @@ typedef struct  s_game
 	int win_ht;
 	int win_wt;
 
+	void *img;
+	int *data;
+	int	bits;
+	int	lines;
+	int	endian;
+
+
 	char **map;
 	t_vec pos;
 	t_vec init_dist;
