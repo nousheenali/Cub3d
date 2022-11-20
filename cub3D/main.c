@@ -162,9 +162,7 @@ void ft_populate_buffer(t_game *g, double proj_h, int x)
 		bottom = g->win_ht - 1;
 	y = (top - 1);
 	while (++y < bottom)
-	{
 		g->buffer[y][x] = 0x8545e6;
-	}
 }
 
 //to calculate the camare plane
@@ -177,7 +175,7 @@ void start_game(t_game *g)
 	double proj_h;//projected height
 
 	i = -1;
-	alpha = g->angle - (g->fov / 2); // angle to rightmost ray in degrees
+	alpha = g->angle + (g->fov / 2); // angle to rightmost ray in degrees
 	beta = g->fov/2;
 	while(++i < g->win_wt)
 	{
@@ -188,11 +186,11 @@ void start_game(t_game *g)
 		// printf("%f %f\n", hit.x, hit.y);
 		proj_h = ft_get_projected_height(g, alpha, hit, beta);
 		ft_populate_buffer(g, proj_h, i);
-		alpha = alpha + g->angle_btw_rays;
+		alpha = alpha - g->angle_btw_rays;
 		if(alpha <= g->angle)
-			beta = beta - g->angle_btw_rays;
-		else
 			beta = beta + g->angle_btw_rays;
+		else
+			beta = beta - g->angle_btw_rays;
 	}
 }
 
