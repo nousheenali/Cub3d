@@ -4,7 +4,18 @@
 # include <math.h>
 #include <stdio.h>
 
-int map[7][6]=
+// int map[13][8]=
+// {
+// 	{1,1,1,1,1,1,1,1,1,1,1,1},
+// 	{1,0,0,0,0,0,0,0,0,0,0,1},
+// 	{1,0,0,0,0,0,0,0,0,0,0,1},
+// 	{1,0,0,0,0,0,0,0,0,0,0,1},
+// 	{1,0,0,0,0,0,0,0,0,0,0,1},
+// 	{1,0,0,0,0,0,0,0,0,0,0,1},
+// 	{1,1,1,1,1,1,1,1,1,1,1,1}
+// };
+
+int map[5][6]=
 {
 	{1,1,1,1,1,1},
 	{1,0,0,0,0,1},
@@ -171,13 +182,17 @@ void start_game(t_game *g)
 	while(++i < g->win_wt)
 	{
 		printf("alpha = %f\n",alpha);
+		printf("beta = %f\n",beta);
 		hit.y = ft_y_axis_hit(g, alpha);
 		hit.x = ft_x_axis_hit(g, alpha);
 		// printf("%f %f\n", hit.x, hit.y);
 		proj_h = ft_get_projected_height(g, alpha, hit, beta);
 		ft_populate_buffer(g, proj_h, i);
 		alpha = alpha + g->angle_btw_rays;
-		beta = beta + g->angle_btw_rays;
+		if(alpha <= g->angle)
+			beta = beta - g->angle_btw_rays;
+		else
+			beta = beta + g->angle_btw_rays;
 	}
 }
 
