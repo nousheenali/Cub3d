@@ -1,8 +1,6 @@
-# include "minilibx/mlx.h"
-# include <stdlib.h>
+
+
 #include "raycaster.h"
-# include <math.h>
-#include <stdio.h>
 
 // int map[13][8]=
 // {
@@ -63,73 +61,6 @@ void ft_init_variables(t_game *g)
 	ft_create_buffer_init(g);
 }
 
-
-double ft_y_axis_hit(t_game *g, float alpha)
-{
-	t_vec hit;
-	int x;
-	int y;
-	float x_inc;
-
-	x_inc =  GRID/tan(ft_convert_deg_to_rad(alpha));
-	if (alpha >= 180 && alpha <= 360) 
-		hit.y = (floor(g->init_dist.y/GRID) * GRID) + GRID;  // if ray facing down
-	else  
-		hit.y = (floor(g->init_dist.y/GRID) * GRID) - 1;  // if ray facing up
-	hit.x = g->init_dist.x + ((g->init_dist.y - hit.y)/ tan(ft_convert_deg_to_rad(alpha)));
-	x = floor(hit.x/GRID);
-	y = floor(hit.y/GRID);
-	// printf("%f  %f\n", hit.x, hit.y);
-	// printf("%d  %d\n", x, y);
-	while (map[y][x] != 1)
-	{
-		if (alpha >= 180 && alpha <= 360)
-			hit.y = hit.y + GRID ;
-		else
-			hit.y = hit.y - GRID ;
-		hit.x = hit.x+ x_inc;
-		x = floor(hit.x/GRID);
-		y = floor(hit.y/GRID);
-		// printf("%f  %f\n", hit.x, hit.y);
-		// printf("%d  %d\n", x, y);
-	}
-	printf("Wall has been hit on y-axis\n");
-	return (hit.y);
-}
-
-double ft_x_axis_hit(t_game *g, float alpha)
-{
-	t_vec hit;
-	int x;
-	int y;
-	float y_inc;
-
-	y_inc =  GRID/tan(ft_convert_deg_to_rad(alpha));
-	if (alpha >= 90 && alpha <= 270)
-		hit.x = (floor(g->init_dist.x/GRID) * GRID) - 1;  // if ray facing left
-	else
-		hit.x = (floor(g->init_dist.x/GRID) * GRID) + GRID;  // if ray facing right
-	hit.y = g->init_dist.y + ((g->init_dist.x - hit.x)/ tan(ft_convert_deg_to_rad(alpha)));
-	x = floor(hit.x/GRID);
-	y = floor(hit.y/GRID);
-	// printf("%f  %f\n", hit.x, hit.y);
-	// printf("%d  %d\n", x, y);
-	while (map[y][x] != 1)
-	{
-		if (alpha >= 90 && alpha <= 270)
-			hit.x =hit.x - GRID ;
-		else
-			hit.x =hit.x + GRID ;
-		hit.y = hit.y - y_inc;
-		x = floor(hit.x/GRID);
-		y = floor(hit.y/GRID);
-		// printf("%f  %f\n", hit.x, hit.y);
-		// printf("%d  %d\n", x, y);
-	}
-	printf("Wall has been hit on x-axis\n");
-	return (hit.x);
-}
-
 double ft_get_projected_height(t_game *g, double alpha, t_vec hit, double beta)
 {
 	double y_dist;
@@ -181,11 +112,11 @@ void start_game(t_game *g)
 	{
 		printf("alpha = %f\n",alpha);
 		printf("beta = %f\n",beta);
-		hit.y = ft_y_axis_hit(g, alpha);
+		// hit.y = ft_y_axis_hit(g, alpha);
 		hit.x = ft_x_axis_hit(g, alpha);
 		// printf("%f %f\n", hit.x, hit.y);
-		proj_h = ft_get_projected_height(g, alpha, hit, beta);
-		ft_populate_buffer(g, proj_h, i);
+		// proj_h = ft_get_projected_height(g, alpha, hit, beta);
+		// ft_populate_buffer(g, proj_h, i);
 		alpha = alpha - g->angle_btw_rays;
 		if(alpha <= g->angle)
 			beta = beta + g->angle_btw_rays;
@@ -203,10 +134,10 @@ int main()
 	g.win_wt = 640;
 	
 	ft_init_variables(&g);
-	g.mlx = mlx_init();
-	g.win = mlx_new_window(g.mlx, g.win_wt, g.win_ht, "cuB3d");
-	g.img = mlx_new_image(g.mlx, g.win_wt, g.win_ht);
-	g.data = (int *)mlx_get_data_addr(g.img, &g.bits, &g.lines, &g.endian);
+	// g.mlx = mlx_init();
+	// g.win = mlx_new_window(g.mlx, g.win_wt, g.win_ht, "cuB3d");
+	// g.img = mlx_new_image(g.mlx, g.win_wt, g.win_ht);
+	// g.data = (int *)mlx_get_data_addr(g.img, &g.bits, &g.lines, &g.endian);
 	start_game(&g);
 	i = -1;
 	while (++i < g.win_ht)
@@ -215,6 +146,6 @@ int main()
 		while (++k < g.win_wt)
 			g.data[i * g.win_wt + k] = g.buffer[i][k];
 	}
-	mlx_put_image_to_window(g.mlx, g.win, g.img, 0, 0);
-	mlx_loop(g.mlx);
+	// mlx_put_image_to_window(g.mlx, g.win, g.img, 0, 0);
+	// mlx_loop(g.mlx);
 }

@@ -1,8 +1,16 @@
 #ifndef RAYCASTER_H
 #define RAYCASTER_H
 
+
+# include "minilibx/mlx.h"
+# include <stdlib.h>
+# include <math.h>
+#include <stdio.h>
+
 # define GRID 64
 # define PI 3.1416
+
+extern int map[5][6];
 
 typedef struct  s_vec
 {
@@ -37,5 +45,12 @@ typedef struct  s_game
 	unsigned int	**buffer;
 
 }t_game;
+
+//main.c
+double ft_convert_deg_to_rad(double deg);
+//hit.c
+double ft_x_axis_hit(t_game *g, float alpha);
+double ft_y_axis_hit(t_game *g, float alpha);
+
 
 #endif 
