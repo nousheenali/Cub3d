@@ -6,7 +6,7 @@
 /*   By: nali <nali@42abudhabi.ae>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 13:17:27 by nali              #+#    #+#             */
-/*   Updated: 2022/11/23 10:24:48 by nali             ###   ########.fr       */
+/*   Updated: 2022/11/23 22:38:41 by nali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ double ft_y_axis_hit(t_game *g, float alpha)
     ft_first_hit_y(g, alpha, &hit);
 	x = floor(hit.x/GRID);
 	y = floor(hit.y/GRID);
-    if (hit.x < 0 || hit.x > g->map_width)
-        return (g->map_height);
-	printf("%f  %f\n", hit.x, hit.y);
-	printf("%d  %d\n", x, y);
+    // if (hit.x < 0 || hit.x > g->map_width)
+    //     return (g->map_height);
+	// printf("first hit %f  %f\n", hit.x, hit.y);
+	// printf("%d  %d\n", x, y);
 	while (map[y][x] != 1)
 	{
 		if (alpha > 180 && alpha < 360)
@@ -55,10 +55,7 @@ double ft_y_axis_hit(t_game *g, float alpha)
 		if (alpha < 180 && alpha > 0) 
         {
 			hit.y = hit.y - GRID ;
-            printf("hit.x before %f\n", hit.x);
-            printf("tan val %f\n", tan(ft_convert_deg_to_rad(alpha)));
             hit.x = hit.x + GRID/tan(ft_convert_deg_to_rad(alpha));
-            printf("hit.x after %f\n", hit.x);
         }
         if (alpha == 0) 
             hit.x = hit.x + GRID;
@@ -66,8 +63,15 @@ double ft_y_axis_hit(t_game *g, float alpha)
             hit.x = hit.x - GRID;
 		x = floor(hit.x/GRID);
 		y = floor(hit.y/GRID);
-		printf("%f  %f\n", hit.x, hit.y);
-		printf("%d  %d\n", x, y);
+        if (hit.x < 0 || hit.x > g->map_width)
+        {
+            printf("-----------------------\n");
+            printf("%f  %f\n", hit.x, hit.y);
+		    printf("%d  %d\n", x, y);
+            return (g->map_height);
+        }
+		// printf("%f  %f\n", hit.x, hit.y);
+		// printf("%d  %d\n", x, y);
 	}
 	printf("Wall has been hit on y-axis\n");
 	return (hit.y);
@@ -104,8 +108,8 @@ double ft_x_axis_hit(t_game *g, float alpha)
 	y = floor(hit.y/GRID);
 	// printf("%f  %f\n", hit.x, hit.y);
 	// printf("%d  %d\n", x, y);
-    if (hit.y < 0 || hit.y > g->map_height)
-        return (g->map_width);
+    // if (hit.y < 0 || hit.y > g->map_height)
+    //     return (g->map_width);
 	while (map[y][x] != 1)
 	{
 		if (alpha > 90 && alpha < 270)
@@ -124,6 +128,8 @@ double ft_x_axis_hit(t_game *g, float alpha)
             hit.y = hit.y + GRID;
 		x = floor(hit.x/GRID);
 		y = floor(hit.y/GRID);
+        if (hit.y < 0 || hit.y > g->map_height)
+            return (g->map_width);
 		// printf("%f  %f\n", hit.x, hit.y);
 		// printf("%d  %d\n", x, y);
 	}
