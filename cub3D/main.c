@@ -55,6 +55,8 @@ void ft_init_variables(t_game *g)
 	g->init_dist.x = 280; //initial distance of player x direction
 	g->init_dist.y = 220; //initial distance of player y direction
 	g->fov = 60; //fov
+	g->map_height = 320; //map height * GRID
+	g->map_width = 384; //map width * GRID
 	g->angle_btw_rays = g->fov/g->win_wt; //angle between subsequent rays
 	rad = ft_convert_deg_to_rad(g->fov / 2) ;
 	g->dist_proj = (g->win_wt / 2) / tan(rad);
@@ -112,11 +114,11 @@ void start_game(t_game *g)
 	{
 		printf("alpha = %f\n",alpha);
 		printf("beta = %f\n",beta);
-		// hit.y = ft_y_axis_hit(g, alpha);
+		hit.y = ft_y_axis_hit(g, alpha);
 		hit.x = ft_x_axis_hit(g, alpha);
 		// printf("%f %f\n", hit.x, hit.y);
-		// proj_h = ft_get_projected_height(g, alpha, hit, beta);
-		// ft_populate_buffer(g, proj_h, i);
+		proj_h = ft_get_projected_height(g, alpha, hit, beta);
+		ft_populate_buffer(g, proj_h, i);
 		alpha = alpha - g->angle_btw_rays;
 		if(alpha <= g->angle)
 			beta = beta + g->angle_btw_rays;
@@ -134,10 +136,10 @@ int main()
 	g.win_wt = 640;
 	
 	ft_init_variables(&g);
-	// g.mlx = mlx_init();
-	// g.win = mlx_new_window(g.mlx, g.win_wt, g.win_ht, "cuB3d");
-	// g.img = mlx_new_image(g.mlx, g.win_wt, g.win_ht);
-	// g.data = (int *)mlx_get_data_addr(g.img, &g.bits, &g.lines, &g.endian);
+	g.mlx = mlx_init();
+	g.win = mlx_new_window(g.mlx, g.win_wt, g.win_ht, "cuB3d");
+	g.img = mlx_new_image(g.mlx, g.win_wt, g.win_ht);
+	g.data = (int *)mlx_get_data_addr(g.img, &g.bits, &g.lines, &g.endian);
 	start_game(&g);
 	i = -1;
 	while (++i < g.win_ht)
@@ -146,6 +148,6 @@ int main()
 		while (++k < g.win_wt)
 			g.data[i * g.win_wt + k] = g.buffer[i][k];
 	}
-	// mlx_put_image_to_window(g.mlx, g.win, g.img, 0, 0);
-	// mlx_loop(g.mlx);
+	mlx_put_image_to_window(g.mlx, g.win, g.img, 0, 0);
+	mlx_loop(g.mlx);
 }

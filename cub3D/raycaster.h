@@ -33,6 +33,9 @@ typedef struct  s_game
 	int	lines;
 	int	endian;
 
+	double map_height;
+	double map_width;
+
 
 	char **map;
 	t_vec pos;
