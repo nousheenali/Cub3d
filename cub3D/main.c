@@ -49,9 +49,9 @@ void ft_init_variables(t_game *g)
 {
 	double rad;
 
-	g->pos.x = 3; //player pos x
-	g->pos.y = 4;   //player pos y
-	g->angle = 90;  //angle facing north
+	// g->pos.x = 3; //player pos x
+	// g->pos.y = 4;   //player pos y
+	g->angle = 180;  //angle facing north
 	g->init_dist.x = 280; //initial distance of player x direction
 	g->init_dist.y = 220; //initial distance of player y direction
 	g->fov = 60; //fov
@@ -70,13 +70,16 @@ double ft_get_projected_height(t_game *g, double alpha, t_vec hit, double beta)
 	double ray_length;
 	double proj_h;
 
-	y_dist = fabs((hit.y - g->init_dist.y )/ sin(ft_convert_deg_to_rad(alpha)));
-	x_dist = fabs((g->init_dist.x - hit.x) / cos(ft_convert_deg_to_rad(alpha)));
+	x_dist = hit.x;
+	y_dist = hit.y;
+	
+	// y_dist = fabs((hit.y - g->init_dist.y )/ sin(ft_convert_deg_to_rad(alpha)));
+	// x_dist = fabs((g->init_dist.x - hit.x) / cos(ft_convert_deg_to_rad(alpha)));
 	if (x_dist < y_dist)
 		ray_length = x_dist * cos(ft_convert_deg_to_rad(beta));//correcting fish eye
 	else
 		ray_length = y_dist * cos(ft_convert_deg_to_rad(beta)); //correcting fish eye
-	//ray_length is the actual length of the ray when it hits the wall
+	// //ray_length is the actual length of the ray when it hits the wall
 	proj_h = (GRID * g->dist_proj) / ray_length;
 	return (proj_h);
 }
@@ -98,24 +101,6 @@ void ft_populate_buffer(t_game *g, double proj_h, int x)
 		g->buffer[y][x] = 0x8545e6;
 }
 
-void ft_populate_buffer_2(t_game *g, double proj_h, int x)
-{
-	int top;
-	int bottom;
-	int y;
-	
-	top = (g->win_ht / 2) - (int)(proj_h / 2);
-	if (top < 0)
-		top = 0;
-	bottom = (g->win_ht / 2) + (int)(proj_h / 2);
-	if (bottom >= g->win_ht)
-		bottom = g->win_ht - 1;
-	y = (top - 1);
-	while (++y < bottom)
-		g->buffer[y][x] = 0xff0000;
-}
-
-
 //to calculate the camare plane
 void start_game(t_game *g)
 {
@@ -124,19 +109,23 @@ void start_game(t_game *g)
 	double beta;
 	t_vec hit;
 	double proj_h;//projected height
+	double x,y;
 
 	i = -1;
 	alpha = g->angle + (g->fov / 2); // angle to rightmost ray in degrees
 	beta = g->fov/2;
 	while(++i < g->win_wt)
 	{
+
+    	printf("=============================\n");
 		printf("alpha = %f\n",alpha);
 		printf("beta = %f\n",beta);
 		hit.y = ft_y_axis_hit(g, alpha);
 		hit.x = ft_x_axis_hit(g, alpha);
-		printf("%f %f\n", hit.x, hit.y);
+		printf("hit.x = %f hit.y = %f \n",hit.x, hit.y);
 		proj_h = ft_get_projected_height(g, alpha, hit, beta);
 		ft_populate_buffer(g, proj_h, i);
+		printf("projected height= %f \n",proj_h);
 		alpha = alpha - g->angle_btw_rays;
 		if(alpha <= g->angle)
 			beta = beta + g->angle_btw_rays;
