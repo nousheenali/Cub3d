@@ -52,7 +52,7 @@ void ft_init_variables(t_game *g)
 	// g->pos.x = 3; //player pos x
 	// g->pos.y = 4;   //player pos y
 	g->angle = 180;  //angle facing north
-	g->init_dist.x = 280; //initial distance of player x direction
+	g->init_dist.x = 200; //initial distance of player x direction
 	g->init_dist.y = 220; //initial distance of player y direction
 	g->fov = 60; //fov
 	g->map_height = 320; //map height * GRID

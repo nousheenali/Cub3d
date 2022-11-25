@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hit.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nali <nali@42abudhabi.ae>                  +#+  +:+       +#+        */
+/*   By: nali <nali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 13:17:27 by nali              #+#    #+#             */
-/*   Updated: 2022/11/24 17:44:37 by nali             ###   ########.fr       */
+/*   Updated: 2022/11/25 19:10:15 by nali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ double ft_y_axis_hit(t_game *g, float alpha)
 		if (alpha >= 180 && alpha <= 360)
         {
 			hit.y = hit.y + GRID ;
-            hit.x = hit.x + GRID/tan(ft_convert_deg_to_rad(alpha));
+            hit.x = hit.x - GRID/tan(ft_convert_deg_to_rad(alpha));
         }
 		if (alpha < 180 && alpha > 0) 
         {
@@ -135,7 +135,7 @@ double ft_x_axis_hit(t_game *g, float alpha)
 		if (alpha < 90 || alpha > 270) 
         {
 			hit.x =hit.x + GRID ;
-            hit.y = hit.y + GRID*tan(ft_convert_deg_to_rad(alpha));;
+            hit.y = hit.y - GRID*tan(ft_convert_deg_to_rad(alpha));;
         }
         // if (alpha == 90)
         //     hit.y = hit.y - GRID;
