@@ -33,7 +33,7 @@ int main(int argc, char **argv)
 		printf("Wrong no. of arg!! Try ./cub3D map");
 		return (1);
 	}
-	ft_read_map(&g, argv[1]);
+	parse_map(&g, argv[1]);
 	ft_init_variables(&g);
 	ft_start(&g);
 	mlx_hook(g.win, 2, 0, &ft_button, &g);

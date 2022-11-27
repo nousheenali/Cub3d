@@ -71,7 +71,7 @@ void ft_read_map(t_game *g, char *map_name)
 	}
 	g->map.ht = g->map.ht * 64.0;
 	g->map.wt = (g->map.wt - 1) * 64.0;
-	
+    // printf("%f %f\n", g->map.wt , g->map.ht);
 	close(fd);
 	// print_map(g->map);
 }

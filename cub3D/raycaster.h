@@ -7,6 +7,8 @@
 # include <math.h>
 # include <stdio.h>
 # include <fcntl.h>
+# include <errno.h>
+# include <string.h>
 
 # define GRID 64
 # define PI 3.1416
@@ -92,6 +94,12 @@ double ft_convert_deg_to_rad(double deg);
 //move
 int ft_button(int key, t_game *g);
 int ft_close(t_game *g);
+
+//parse_map
+void parse_map(t_game *g, char *m_name);
+
+//error
+void ft_error(t_game *g, char *msg);
 
 
 #endif 
