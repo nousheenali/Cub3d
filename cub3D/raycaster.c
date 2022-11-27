@@ -93,6 +93,30 @@ void start_game(t_game *g)
 	}
 }
 
+int ft_ceiling(unsigned int	**buffer, int i, int k)
+{
+	if (i == 0)
+		return (1);
+	while (--i > -1)
+	{
+		if (buffer[i][k] != 0)
+			return (0);
+	}
+	return (1);
+}
+
+int ft_floor(unsigned int **buffer, int i, int k, t_game *g)
+{
+	if (i == 0)
+		return (1);
+	while (++i < g->win_ht)
+	{
+		if (buffer[i][k] != 0)
+			return (0);
+	}
+	return (1);
+}
+
 void ft_start(t_game *g)
 {
 
@@ -105,7 +129,14 @@ void ft_start(t_game *g)
 	{
 		k = -1;
 		while (++k < g->win_wt)
+		{
+			if (ft_ceiling(g->buffer, i, k))
+				g->data[i * g->win_wt + k] = 0x00FFFF;
+			else if (ft_floor(g->buffer, i, k, g))
+				g->data[i * g->win_wt + k] = 0x228B22;
+			else
 			g->data[i * g->win_wt + k] = g->buffer[i][k];
+		}
 	}
 	mlx_put_image_to_window(g->mlx, g->win, g->img, 0, 0);
 }
