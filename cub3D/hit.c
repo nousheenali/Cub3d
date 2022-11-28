@@ -57,13 +57,14 @@ double ft_y_axis_hit(t_game *g, float alpha)
 		if (alpha >= 180 && alpha <= 360)
         {
 			hit.y = hit.y + GRID ;
-            hit.x = hit.x - GRID/tan(ft_convert_deg_to_rad(alpha));
+            hit.x = hit.x - GRID/ tan(ft_convert_deg_to_rad(alpha));
         }
 		if (alpha < 180 && alpha > 0) 
         {
 			hit.y = hit.y - GRID ;
-            hit.x = hit.x + GRID/tan(ft_convert_deg_to_rad(alpha));
+            hit.x = hit.x + GRID / tan(ft_convert_deg_to_rad(alpha));
         }
+		// printf("alpha %f\n", alpha);
 		x = floor(hit.x/GRID);
 		y = floor(hit.y/GRID);
         // printf("next hits y %f  %f\n", hit.x, hit.y);

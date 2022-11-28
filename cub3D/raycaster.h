@@ -87,6 +87,7 @@ void	ft_create_buffer(t_game *g);
 //raycaster
 void ft_start(t_game *g);
 void start_game(t_game *g);
+void fill_buf(t_game *g);
 
 //main
 double ft_convert_deg_to_rad(double deg);

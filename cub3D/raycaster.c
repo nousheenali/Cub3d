@@ -24,16 +24,16 @@ void ft_populate_buffer(t_game *g, double proj_h, int x)
 	int bottom;
 	int y;
 	
-	top = (g->win_ht / 2) - (int)(proj_h / 2);
+	// fill_buf(g);
+	top = (int)(g->win_ht / 2) - (int)(proj_h / 2);
 	if (top < 0)
 		top = 0;
-	bottom = (g->win_ht / 2) + (int)(proj_h / 2);
+	bottom = (int)(g->win_ht / 2) + (int)(proj_h / 2);
 	if (bottom >= g->win_ht)
 		bottom = g->win_ht - 1;
 	y = (top - 1);
 	while (++y < bottom)
 		g->buffer[y][x] = 0x8545e6;
-
 }
 // void	do_raycast(t_game *g, int x)
 // {
@@ -76,34 +76,44 @@ void start_game(t_game *g)
 	// double x,y;
 
 	i = -1;
-	alpha = g->angle + (g->fov / 2); // angle to rightmost ray in degrees
-	beta = g->fov/2;
+	alpha = g->angle + (g->fov / 2.0); // angle to rightmost ray in degrees
+	beta = g->fov /2;
 	if (alpha > 359)
 	{
-		alpha = alpha -360;
-		g->angle = 0;
+		alpha = alpha - 360;
+		// g->angle = 0;
+		printf("test %f \n", alpha);
+	}
+	if (g->angle > 359)
+	{
+		g->angle -= 360;
 	}
 	while(++i < g->win_wt)
 	{
+	// 	beta = g->angle - alpha;
+	// if (beta > 359)
+	// 		beta -= 360;
+	// 	else if(beta < 0)
+	// 		beta += 360;
 		hit.y = ft_y_axis_hit(g, alpha);
 		hit.x = ft_x_axis_hit(g, alpha);
 		proj_h = ft_get_projected_height(g, alpha, hit, beta);
 		ft_populate_buffer(g, proj_h, i);
 		if (alpha > 0)
 			alpha = alpha - g->angle_btw_rays;
-		if (alpha == 0)
+		else if (alpha <= 0)
 		{
-			alpha = 360;
-			g->angle = 360;
+			alpha += 359; //changed from 360
+			// g->angle = 359;
 		}
 		if(alpha <= g->angle)
 			beta = beta + g->angle_btw_rays;
 		else
 			beta = beta - g->angle_btw_rays;
-		// do_raycast(g, i);
-
+		printf("a b %f %f\n", alpha, beta);
 	}
-		printf("initial dis: %f %f\n", g->init_dist.x, g->init_dist.y);
+	printf("hi\n");
+	// printf("initial dis: %f %f\n", g->init_dist.x, g->init_dist.y);
 }
 
 int ft_ceiling(unsigned int	**buffer, int i, int k)
@@ -130,20 +140,42 @@ int ft_floor(unsigned int **buffer, int i, int k, t_game *g)
 	return (1);
 }
 
-void ft_clear_buffer(unsigned int **b)
+void ft_clear_buffer(unsigned int **b, t_game *g)
 {
-	int i = 0;
-	int j = 0;
+	int i = -1;
+	int j = -1;
 
-	while(b[i])
+	while(++i < g->win_ht)
 	{
-		j = 0;
-		while(b[i][j])
+		j = -1;
+		while(++j < g->win_wt)
 		{
 			b[i][j] = 0;
-			j++;
 		}
-		i++;
+	}
+}
+
+void fill_buf(t_game *g)
+{
+	int i = -1;
+	int j;
+
+	while(++i < g->win_ht/2)
+	{
+		j = -1;
+		while(++j < g->win_wt)
+		{
+			g->buffer[i][j] = 0x00FFFF; //* g->win_wt + j] = 0x00FFFF;
+		}
+	}
+	i = g->win_ht / 2;
+	while(++i < g->win_ht)
+	{
+		j = -1;
+		while(++j < g->win_wt)
+		{
+			// g->buffer[i * g->win_wt + j] = 0x228B22;
+		}
 	}
 }
 
@@ -154,20 +186,18 @@ void ft_start(t_game *g)
 	int	k;
 
 	i = -1;
-	ft_clear_buffer(g->buffer);
-	// fill_floor()
+	ft_clear_buffer(g->buffer, g);
 	start_game(g);
 	while (++i < g->win_ht)
 	{
 		k = -1;
 		while (++k < g->win_wt)
 		{
-			// if (ft_ceiling(g->buffer, i, k))
 			g->data[i * g->win_wt + k] = g->buffer[i][k];
-			// if (ft_ceiling(g->buffer, i, k))
-			// 	g->data[i * g->win_wt + k] = 0x00FFFF;
-			// else if (ft_floor(g->buffer, i, k, g))
-			// 	g->data[i * g->win_wt + k] = 0x228B22;
+			if (ft_ceiling(g->buffer, i, k))
+				g->data[i * g->win_wt + k] = 0x00FFFF;
+			else if (ft_floor(g->buffer, i, k, g))
+				g->data[i * g->win_wt + k] = 0x228B22;
 		}
 	}
 	mlx_put_image_to_window(g->mlx, g->win, g->img, 0, 0);
