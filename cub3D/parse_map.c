@@ -43,10 +43,10 @@ void ft_valid_name(t_game *g, char *m_name)
 	if (ft_strrchr(m_name, '.'))
 	{
 		if (ft_strncmp(ft_strrchr(m_name, '.'), ".cub", 5) || ft_strlen(m_name) == 4)
-			ft_error(g, "Map invalid!\n");
+			ft_error(g, "Map name invalid!\n");
 	}
 	else
-		ft_error(g, "Map invalid! Map shld have .cub extension\n");
+		ft_error(g, "Map name invalid! Map should have .cub extension\n");
 	if ((fd = open(m_name, O_RDONLY)) < 0)
 		ft_error(g, strerror(errno));
 	close(fd);
@@ -113,14 +113,12 @@ char	*ft_strtrim(char const *s1, char const *set)
 
 void ft_valid_map(t_game *g)
 {
-    // printf("%d %d\n", (int)(g->map.wt / GRID),(int)(g->map.ht / GRID));
     for(int i = 0; i < (int)(g->map.ht / GRID); i++)
     {
         for (int j = 0; j <= (int)(g->map.wt/GRID); j++)
         {
             if (g->map.map[i][j] != '1' && g->map.map[i][j] != '0' && g->map.map[i][j] != ' ' && (g->map.map[i][j] != '\n' && g->map.map[i][j] != '\0')) // add player posi
             {
-                // printf("%c", g->map.map[i][j]);
                 ft_error(g, "Invalid map content!!\n");
             }
         }
@@ -141,7 +139,7 @@ int	walls_spaces_only(char *temp)
 	return (0);
 }
 
-void check_closed_walls(t_game *g)
+void check_closed_walls_hori(t_game *g)
 {
 	char	*temp;
 	int		i;
@@ -150,26 +148,56 @@ void check_closed_walls(t_game *g)
 	i = 0;
 	while (g->map.map[i])
 	{
+		// printf("map %s %d %f\n", g->map.map[i], i, g->map.ht);
 		temp = ft_strtrim(g->map.map[i], " ");
+		printf("%d %s\n", i, temp);
 		if (temp[0] != '1' || temp[strlen(temp) - 1] != '1')
 			flag = 1;
 		if (i == 0)
 			if (walls_spaces_only(temp))
 				flag = 1;
-		if (i == (g->map.ht - 1))
+		if (i == (g->map.ht/GRID) - 1)
 			if (walls_spaces_only(temp))
 				flag = 1;
 		i++;
 		free(temp);
 		if (flag == 1)
-			ft_error(g, "Map not surrounded by walls!!!");
+			ft_error(g, "Map not surrounded by walls!!");
+	}
+}
+
+void check_closed_walls_ver(t_game *g)
+{
+	char	*temp;
+	int		i;
+	int		flag;
+
+	i = 0;
+	while (g->map.map[i])
+	{
+		// printf("map %s %d %f\n", g->map.map[i], i, g->map.ht);
+		temp = ft_strtrim(g->map.map[i], " ");
+		printf("%d %s\n", i, temp);
+		if (temp[0] != '1' || temp[strlen(temp) - 1] != '1')
+			flag = 1;
+		if (i == 0)
+			if (walls_spaces_only(temp))
+				flag = 1;
+		if (i == (g->map.ht/GRID) - 1)
+			if (walls_spaces_only(temp))
+				flag = 1;
+		i++;
+		free(temp);
+		if (flag == 1)
+			ft_error(g, "Map not surrounded by walls!!");
 	}
 }
 
 void parse_map(t_game *g, char *m_name)
 {
-	ft_valid_name(g, m_name);
-	ft_read_map(g, m_name);
-    ft_valid_map(g);
-	check_closed_walls(g);
+	ft_valid_name(g, m_name); //checks extentions .cub
+	ft_read_map(g, m_name);	//reads value and stores in g->map
+    ft_valid_map(g); //checks for other charcters ----->need to add the texture and player position
+	check_closed_walls_hori(g);
+	check_closed_walls_ver(g);
 }

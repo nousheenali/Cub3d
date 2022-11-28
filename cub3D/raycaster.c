@@ -78,16 +78,11 @@ void start_game(t_game *g)
 
 	i = -1;
 	
-	printf("angle 1 %f\n", g->angle);
 	alpha = g->angle + (g->fov / 2.0); // angle to rightmost ray in degrees
 	beta = g->fov /2;
-	printf("hello1 a b fov %f %f %f\n", alpha, beta, g->fov);
 	if (alpha > 359)
 	{
-		printf("hello a b %f %f\n", alpha, beta);
 		alpha = alpha - 360;
-		// g->angle = 0;
-		printf("test %f \n", alpha);
 	}
 	while(++i < g->win_wt)
 	{
@@ -113,10 +108,7 @@ void start_game(t_game *g)
 			beta = beta - g->angle_btw_rays;
 		if(beta == 0.00) 
 			flag = 1;
-
-		printf("a b %f %f\n", alpha, beta);
 	}
-	printf("hi\n");
 	// printf("initial dis: %f %f\n", g->init_dist.x, g->init_dist.y);
 }
 

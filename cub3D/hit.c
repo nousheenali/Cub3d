@@ -27,7 +27,6 @@ void ft_first_hit_y(t_game *g, float alpha, t_vec *hit)
     }
     if (alpha > 180 && alpha < 360) 
     {
-		// printf("here\n");
 		hit->y = (floor(g->init_dist.y/GRID) * GRID) + GRID;  // if ray facing down
         hit->x = g->init_dist.x + ((g->init_dist.y - hit->y)/ tan(ft_convert_deg_to_rad(alpha)));
     }
@@ -48,8 +47,6 @@ double ft_y_axis_hit(t_game *g, float alpha)
     ft_first_hit_y(g, alpha, &hit);
     x = floor(hit.x/GRID);
 	y = floor(hit.y/GRID);
-    // printf("first hit y %f  %f\n", hit.x, hit.y);
-	// printf("%d  %d\n", x, y);
     if(!check_edges(g, hit.x, hit.y))
         return (pythg(g->init_dist.x, hit.x, g->init_dist.y, hit.y));
 	while (g->map.map[y][x] != '1' && g->map.map[y][x])
@@ -64,18 +61,12 @@ double ft_y_axis_hit(t_game *g, float alpha)
 			hit.y = hit.y - GRID ;
             hit.x = hit.x + GRID / tan(ft_convert_deg_to_rad(alpha));
         }
-		// printf("alpha %f\n", alpha);
 		x = floor(hit.x/GRID);
 		y = floor(hit.y/GRID);
-        // printf("next hits y %f  %f\n", hit.x, hit.y);
-	    // printf("%d  %d\n", x, y);
         if(!check_edges(g, hit.x, hit.y))
             return (pythg(g->init_dist.x, hit.x, g->init_dist.y, hit.y));
 
 	}
-	// printf("Wall has been hit on y-axis\n");
-    // printf("final hit  y %f  %f\n", hit.x, hit.y);
-	// printf("%d  %d\n", x, y);
 	return (pythg(g->init_dist.x, hit.x, g->init_dist.y, hit.y));
 }
 
@@ -108,8 +99,6 @@ double ft_x_axis_hit(t_game *g, float alpha)
     ft_first_hit_x(g, alpha, &hit);
     x = floor(hit.x/GRID);
 	y = floor(hit.y/GRID);
-    // printf("first hit x %f  %f\n", hit.x, hit.y);
-	// printf("%d  %d\n", x, y);
     if(!check_edges(g, hit.x, hit.y))
         return (pythg(g->init_dist.x, hit.x, g->init_dist.y, hit.y));
 	while (g->map.map[y][x] != '1')
@@ -124,22 +113,11 @@ double ft_x_axis_hit(t_game *g, float alpha)
 			hit.x =hit.x + GRID ;
             hit.y = hit.y - GRID*tan(ft_convert_deg_to_rad(alpha));;
         }
-        // if (alpha == 90)
-        //     hit.y = hit.y - GRID;
-        // if (alpha == 270) 
-        //     hit.y = hit.y + GRID;
 		x = floor(hit.x/GRID);
 		y = floor(hit.y/GRID);
-        // printf("next hits x %f  %f\n", hit.x, hit.y);
-	    // printf("%d  %d\n", x, y);
         if(!check_edges(g, hit.x, hit.y))
             return (pythg(g->init_dist.x, hit.x, g->init_dist.y, hit.y));
     
 	}
-    // printf("%f  %f\n", hit.x, hit.y);
-	// printf("%d  %d\n", x, y);
-	// printf("Wall has been hit on x-axis\n");
-    // printf("last hit x %f  %f\n", hit.x, hit.y);
-	// printf("%d  %d\n", x, y);
 	return (pythg(g->init_dist.x, hit.x, g->init_dist.y, hit.y));
 }

@@ -5,7 +5,6 @@ void check_for_wall(t_vec t, t_game *g)
 	int x = t.x/GRID;
 	int y = t.y/GRID;
 
-	printf("x y = %d %d\n", x, y);
 	if (g->map.map[y][x] != '1')
 	{
 		g->init_dist.x = t.x;

@@ -30,19 +30,6 @@ char *get_ln(char *ln)
 	return (new);
 }
 
-void print_map(t_map m)
-{
-	
-	for(int i = 0; i < m.ht; i++)
-	{
-		for(int j = 0; j < m.wt; j++)
-		{
-			printf("%c", m.map[i][j]);
-		}
-		printf("\n");
-	}
-}
-
 void ft_init(t_map *m)
 {
 	m->map = NULL;
@@ -71,7 +58,5 @@ void ft_read_map(t_game *g, char *map_name)
 	}
 	g->map.ht = g->map.ht * 64.0;
 	g->map.wt = (g->map.wt - 1) * 64.0;
-    // printf("%f %f\n", g->map.wt , g->map.ht);
 	close(fd);
-	// print_map(g->map);
 }

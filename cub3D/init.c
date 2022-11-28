@@ -33,8 +33,8 @@ void ft_init_variables(t_game *g)
 	g->data = (int *)mlx_get_data_addr(g->img, &g->bits, &g->lines, &g->endian);
 
 	//player pos and direction
-	g->pos.ax.x = 200; 	
-	g->pos.ax.y = 160;
+	g->pos.ax.x = 288; 	
+	g->pos.ax.y = 352;
 	g->init_dist.x = 200; //initial distance of player x direction
 	g->init_dist.y = 160;
 
