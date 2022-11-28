@@ -97,6 +97,9 @@ int ft_close(t_game *g);
 
 //parse_map
 void parse_map(t_game *g, char *m_name);
+void ft_valid_name(t_game *g, char *m_name);
+void ft_valid_map(t_game *g);
+void check_closed_walls(t_game *g);
 
 //error
 void ft_error(t_game *g, char *msg);

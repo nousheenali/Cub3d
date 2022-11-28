@@ -78,13 +78,24 @@ void start_game(t_game *g)
 	i = -1;
 	alpha = g->angle + (g->fov / 2); // angle to rightmost ray in degrees
 	beta = g->fov/2;
+	if (alpha > 359)
+	{
+		alpha = alpha -360;
+		g->angle = 0;
+	}
 	while(++i < g->win_wt)
 	{
 		hit.y = ft_y_axis_hit(g, alpha);
 		hit.x = ft_x_axis_hit(g, alpha);
 		proj_h = ft_get_projected_height(g, alpha, hit, beta);
 		ft_populate_buffer(g, proj_h, i);
-		alpha = alpha - g->angle_btw_rays;
+		if (alpha > 0)
+			alpha = alpha - g->angle_btw_rays;
+		if (alpha == 0)
+		{
+			alpha = 360;
+			g->angle = 360;
+		}
 		if(alpha <= g->angle)
 			beta = beta + g->angle_btw_rays;
 		else

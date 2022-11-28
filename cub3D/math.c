@@ -1,4 +1,4 @@
-#include "cub3D.h"
+#include "raycaster.h"
 
 double ft_deg_to_rad(double deg)
 {
