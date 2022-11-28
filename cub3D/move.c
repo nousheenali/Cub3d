@@ -34,18 +34,43 @@ int ft_button(int key, t_game *g)
 	t.y = g->init_dist.y;
 	t.a = g->angle;
 
-	// printf("%d\n", key);
 	if (key == 13) //w
 	{
 		t.x -= (-cos(ft_convert_deg_to_rad(a)) * 5);
 		t.y -= (sin(ft_convert_deg_to_rad(a)) * 5);
 		check_for_wall(t, g);
 	}
-	else if (key == 1) //s----->moves right
+	if (key == 1) //s
 	{
 		t.x += (-cos(ft_convert_deg_to_rad(a)) * 5);
 		t.y += (sin(ft_convert_deg_to_rad(a)) * 5);
 		check_for_wall(t, g);
+	}
+
+	if (key == 0)//a
+	{
+		t.x -= (sin(ft_convert_deg_to_rad(a)) * 5);
+		t.y += (cos(ft_convert_deg_to_rad(a)) * 5);
+		check_for_wall(t, g);
+	}
+	if (key == 2)
+	{
+		t.x += (sin(ft_convert_deg_to_rad(a)) * 5);
+		t.y -= (cos(ft_convert_deg_to_rad(a)) * 5);
+		check_for_wall(t, g);
+	}
+
+	if (key == 124) //->
+	{
+		t.a = m->angle - 10;
+		t.a = limit_ang(t.a);
+		m->angle = t.a;
+	}
+	if (key == 123) //<-
+	{
+		t.a = m->angle + 10;
+		t.a = limit_ang(t.a);
+		m->angle = t.a;
 	}
 
 	if (key == 53) //esc___yet to free all
@@ -54,16 +79,7 @@ int ft_button(int key, t_game *g)
 		free (g->buffer);
 		exit(0);
 	}
-	if (key == 124) //->
-	{
-		t.a = m->angle + 8.5;
-		t.a = limit_ang(t.a);
-		m->angle = t.a;
-	}
-	else if (key == 123) //<-
-		m->angle -= 8;
 	ft_start(g);
-	printf("angle %f \n",  g->angle);
 }
 
 int ft_close(t_game *g)
