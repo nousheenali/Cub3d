@@ -33,21 +33,21 @@ void ft_init_variables(t_game *g)
 	g->data = (int *)mlx_get_data_addr(g->img, &g->bits, &g->lines, &g->endian);
 
 	//player pos and direction
-	g->pos.ax.x = 608; 	
-	g->pos.ax.y = 280;
+	g->pos.ax.x = 280; 	
+	g->pos.ax.y = 220;
+	g->init_dist.x = 160; //initial distance of player x direction
+	g->init_dist.y = 220;
 
 
 	g->pos.vc.a = 280;  //Need vc for movement... but what is the initial value
 	g->pos.vc.x = cos(ft_convert_deg_to_rad(280.00));
 	g->pos.vc.y = sin(ft_convert_deg_to_rad(280.00));
-	g->init_dist.x = 608; //initial distance of player x direction
-	g->init_dist.y = 280;
 
 	//for screen color
 	ft_create_buffer(g);
 
 	//for rays
-	g->angle = 135;
+	g->angle = 90;
 	g->fov = 60;
 	g->n_rays = g->win_wt;
 	g->angle_btw_rays = g->fov / g->win_wt;

@@ -52,7 +52,7 @@ double ft_y_axis_hit(t_game *g, float alpha)
 	// printf("%d  %d\n", x, y);
     if(!check_edges(g, hit.x, hit.y))
         return (pythg(g->init_dist.x, hit.x, g->init_dist.y, hit.y));
-	while (g->map.map[y][x] != '1')
+	while (g->map.map[y][x] != '1' && g->map.map[y][x])
 	{
 		if (alpha >= 180 && alpha <= 360)
         {
