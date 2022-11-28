@@ -6,9 +6,9 @@ void	ft_create_buffer(t_game *g)
 	int	j;
 
 	i = -1;
-	g->buffer = (unsigned int **)malloc(g->win_ht * sizeof(unsigned int *));
+	g->buffer = (unsigned int **)malloc((g->win_ht + 1) * sizeof(unsigned int *));
 	while (++i < g->win_ht)
-		g->buffer[i] = (unsigned int *)malloc(g->win_wt * sizeof(unsigned int));
+		g->buffer[i] = (unsigned int *)malloc((g->win_wt) * sizeof(unsigned int));
 	i = -1;
 	while (++i < g->win_ht)
 	{

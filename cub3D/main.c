@@ -2,7 +2,7 @@
 
 double ft_convert_deg_to_rad(double deg)
 {
-	return (deg * PI/180);
+	return (deg * PI/180.0);
 }
 
 //IS THIS NEEDED???

@@ -101,7 +101,9 @@ void start_game(t_game *g)
 		else
 			beta = beta - g->angle_btw_rays;
 		// do_raycast(g, i);
+
 	}
+		printf("initial dis: %f %f\n", g->init_dist.x, g->init_dist.y);
 }
 
 int ft_ceiling(unsigned int	**buffer, int i, int k)
@@ -128,6 +130,23 @@ int ft_floor(unsigned int **buffer, int i, int k, t_game *g)
 	return (1);
 }
 
+void ft_clear_buffer(unsigned int **b)
+{
+	int i = 0;
+	int j = 0;
+
+	while(b[i])
+	{
+		j = 0;
+		while(b[i][j])
+		{
+			b[i][j] = 0;
+			j++;
+		}
+		i++;
+	}
+}
+
 void ft_start(t_game *g)
 {
 
@@ -135,18 +154,20 @@ void ft_start(t_game *g)
 	int	k;
 
 	i = -1;
+	ft_clear_buffer(g->buffer);
+	// fill_floor()
 	start_game(g);
 	while (++i < g->win_ht)
 	{
 		k = -1;
 		while (++k < g->win_wt)
 		{
-			if (ft_ceiling(g->buffer, i, k))
-				g->data[i * g->win_wt + k] = 0x00FFFF;
-			else if (ft_floor(g->buffer, i, k, g))
-				g->data[i * g->win_wt + k] = 0x228B22;
-			else
+			// if (ft_ceiling(g->buffer, i, k))
 			g->data[i * g->win_wt + k] = g->buffer[i][k];
+			// if (ft_ceiling(g->buffer, i, k))
+			// 	g->data[i * g->win_wt + k] = 0x00FFFF;
+			// else if (ft_floor(g->buffer, i, k, g))
+			// 	g->data[i * g->win_wt + k] = 0x228B22;
 		}
 	}
 	mlx_put_image_to_window(g->mlx, g->win, g->img, 0, 0);

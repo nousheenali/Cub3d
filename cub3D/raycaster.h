@@ -11,7 +11,7 @@
 # include <string.h>
 
 # define GRID 64
-# define PI 3.1416
+# define PI 3.14159265359
 
 // extern int map[5][6];
 
