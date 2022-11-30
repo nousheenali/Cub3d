@@ -18,6 +18,35 @@ void	ft_create_buffer(t_game *g)
 	}
 }
 
+void ft_find_ply_posi(t_game *g)
+{
+	int i = -1;
+	int j = -1;
+
+	while (g->map.map[++i])
+	{
+		j = -1;
+		while (++j < (int)(g->map.wt / 64))
+		{
+			if (g->map.map[i][j] == 'N' || g->map.map[i][j] == 'S' || g->map.map[i][j] == 'E' || g->map.map[i][j] == 'W')
+			{
+				g->init_dist.y = (i * 64.0) + 32;
+				g->init_dist.x = (j * 64.0) + 32;
+				if (g->map.map[i][j] == 'N')
+					g->angle = 90;
+				else if (g->map.map[i][j] == 'W')
+					g->angle = 180;
+				else if (g->map.map[i][j] == 'S')
+					g->angle = 270;
+				else if (g->map.map[i][j] == 'E')
+					g->angle = 360;
+				g->map.map[i][j] = '0';
+				return ;
+			}
+		}
+	}
+}
+
 void ft_init_variables(t_game *g)
 {
 	double rad;
@@ -33,11 +62,7 @@ void ft_init_variables(t_game *g)
 	g->data = (int *)mlx_get_data_addr(g->img, &g->bits, &g->lines, &g->endian);
 
 	//player pos and direction
-	g->pos.ax.x = 288; 	
-	g->pos.ax.y = 352;
-	g->init_dist.x = 200; //initial distance of player x direction
-	g->init_dist.y = 160;
-
+	ft_find_ply_posi(g);
 
 	g->pos.vc.a = 280;  //Need vc for movement... but what is the initial value
 	g->pos.vc.x = cos(ft_convert_deg_to_rad(280.00));
@@ -47,7 +72,6 @@ void ft_init_variables(t_game *g)
 	ft_create_buffer(g);
 
 	//for rays
-	g->angle = 90;
 	g->fov = 60;
 	g->n_rays = g->win_wt;
 	g->angle_btw_rays = g->fov / g->win_wt;
