@@ -4,7 +4,7 @@
 
 
 ### AIM
-To create 3D projection of a 2D map using DDA algorithm
+To create 3D projection of a 2D map using raycasting and DDA algorithm.
 
 ### REFERENCES
 
