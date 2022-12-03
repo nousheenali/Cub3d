@@ -48,6 +48,7 @@ If the person is facing NORTH(90°), then the leftmost ray will be at an angle (
 We start from the leftmost ray.
 
 ![alt text](https://permadi.com/tutorial/raycast/images/figure15.gif)
+
 [Image reference link](https://permadi.com/1996/05/ray-casting-tutorial-7/)
 
 **STEP 1** :Find coordinates of first hit on y axis (A.x,A.y):
