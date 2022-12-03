@@ -31,6 +31,8 @@ By knowing the field of view and width of the projection plane we can calculate 
 
 <img width="242" alt="Screen Shot 2022-12-03 at 3 06 05 PM" src="https://user-images.githubusercontent.com/66158938/205437887-beddb09c-9104-41e9-8e1f-7723017491a0.png">
 
+[Image reference](https://permadi.com/1996/05/ray-casting-tutorial-5/)
+
 
 (half of screenwidth) / distance to projection plane = tan(30°)
 
@@ -46,6 +48,7 @@ If the person is facing NORTH(90°), then the leftmost ray will be at an angle (
 We start from the leftmost ray.
 
 ![alt text](https://permadi.com/tutorial/raycast/images/figure15.gif)
+[Image reference link](https://permadi.com/1996/05/ray-casting-tutorial-7/)
 
 **STEP 1** :Find coordinates of first hit on y axis (A.x,A.y):
 
@@ -82,6 +85,8 @@ PD = sqrt((P.x - D.x)(P.x - D.x) + (P.y - D.y)(P.y - D.y))
 **STEP 5** :Now find coordinates of first hit on x axis (B.x,B.y) and repeat the steps above to get distance PE
 
 ![alt text](https://permadi.com/tutorial/raycast/images/figure16.gif)
+
+[Image reference link](https://permadi.com/1996/05/ray-casting-tutorial-7/)
 
 
 
