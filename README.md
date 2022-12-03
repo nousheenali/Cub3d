@@ -24,8 +24,8 @@ Considerations:
 * Screenwidth = 640
 * Screenheight = 400
 * FOV = 60
-
-If the person is facing NORTH(90°), then the leftmost ray will be at an angle (90°+30°) and the rightmost ray will be at an angle(90°-30°)
+* GRID = 64
+* alpha = angle each ray forms with the x axis.
 
 By knowing the field of view and width of the projection plane we can calculate the **distance between player and the projection plane** and **angle between subsequent rays**.
 
@@ -38,7 +38,37 @@ By knowing the field of view and width of the projection plane we can calculate 
 
 **Angle between subsequent rays** = fov / screenwidth = 60/640
 
+
+If the person is facing NORTH(90°), then the leftmost ray will be at an angle (90°+30°) and the rightmost ray will be at an angle(90°-30°)
+We start from the leftmost ray.
+
 ![alt text](https://permadi.com/tutorial/raycast/images/figure15.gif)
+
+**STEP 1** :Find coordinates of first hit on y axis (A.x,A.y):
+
+**A.y = floor(P.y/GRID) * GRID - 1**   (If the ray is facing UP)
+
+**A.y = floor(P.y/GRID) * GRID + GRID**   (If the ray is facing DOWN)
+
+- P.y is distance of player in y direction
+- floor(P.y/GRID) -> gives closest y coordinate
+- floor(P.y/GRID) * GRID  -> gives distance to closest y coordinate
+- floor(P.y/GRID) * GRID - 1  -> we do not want the value to be on the grid line
+
+**A.x = P.x + dist between P.x and A.x**
+
+**A.x = P.x + (P.y - A.y)/tan(alpha)**
+
+**STEP 2** : check if (A.x,A.y)is a wall. If yes, got to step 4.
+
+**STEP 3** : Increament A.y in steps, find coressponding A.x. Continue this till it hits a wall.
+  
+
+
+
+
+
+
 
 
 
