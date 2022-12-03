@@ -3,10 +3,10 @@
 
 
 
-### AIM
+## AIM
 To create 3D projection of a 2D map using raycasting and DDA algorithm.
 
-### REFERENCES
+## REFERENCES
 
 1. The calculations used in the program are based on the [permadi's raycasting tutorial](https://permadi.com/1996/05/ray-casting-tutorial-table-of-contents/). We have used the images from the same article for better understanding.
 
@@ -15,7 +15,7 @@ To create 3D projection of a 2D map using raycasting and DDA algorithm.
 3. For textures [Lode's tutorial](https://lodev.org/cgtutor/raycasting.html)
 
 
-### WALL RENDERING CALCULATIONS
+## WALL RENDERING CALCULATIONS
 
 To apply raycasting we divide the player's view into multiple segments and find the distance at which the corresponding ray in each segment hits a wall. Using this information we create projections.
 
@@ -38,6 +38,9 @@ By knowing the field of view and width of the projection plane we can calculate 
 
 **Angle between subsequent rays** = fov / screenwidth = 60/640
 
+
+
+## FINDING WALLS USING DDA ALGORITHM
 
 If the person is facing NORTH(90°), then the leftmost ray will be at an angle (90°+30°) and the rightmost ray will be at an angle(90°-30°)
 We start from the leftmost ray.
