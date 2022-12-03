@@ -48,8 +48,6 @@ We start from the leftmost ray.
 
 **A.y = floor(P.y/GRID) * GRID - 1**   (If the ray is facing UP)
 
-**A.y = floor(P.y/GRID) * GRID + GRID**   (If the ray is facing DOWN)
-
 - P.y is distance of player in y direction
 - floor(P.y/GRID) -> gives closest y coordinate
 - floor(P.y/GRID) * GRID  -> gives distance to closest y coordinate
@@ -62,6 +60,30 @@ We start from the leftmost ray.
 **STEP 2** : check if (A.x,A.y)is a wall. If yes, got to step 4.
 
 **STEP 3** : Increament A.y in steps, find coressponding A.x. Continue this till it hits a wall.
+
+  C.y = A.y - GRID
+  
+  C.x = A.x + GRID/tan(alpha)
+  
+  (C.x,C.y)is not a wall so find (D.x, D.y)
+  
+   D.y = C.y - GRID
+  
+  D.x = C.x + GRID/tan(alpha)
+  
+**STEP 4** : Once a wall is hit, we can calculate the distance to the point D using pythagorean theorem
+
+PD = sqrt((P.x - D.x)(P.x - D.x) + (P.y - D.y)(P.y - D.y))
+
+
+**STEP 5** :Now find coordinates of first hit on x axis (B.x,B.y) and repeat the steps above to get distance PE
+
+![alt text](https://permadi.com/tutorial/raycast/images/figure16.gif)
+
+
+
+
+
   
 
 
