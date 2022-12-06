@@ -2,11 +2,12 @@
 
 void check_for_wall(t_vec t, t_game *g)
 {
-	int x = t.x/GRID;
-	int y = t.y/GRID;
+	int x = (t.x + 32)/GRID;
+	int y = (t.y + 32)/GRID;
 
 	if (g->map.map[y][x] != '1')
 	{
+		// printf("test %f %f %d %d\n", t.x, t.y, x, y);
 		g->init_dist.x = t.x;
 		g->init_dist.y = t.y;
 	}
@@ -35,27 +36,27 @@ int ft_button(int key, t_game *g)
 
 	if (key == 13) //w
 	{
-		t.x -= (-cos(ft_convert_deg_to_rad(a)) * 5);
-		t.y -= (sin(ft_convert_deg_to_rad(a)) * 5);
+		t.x -= (-cos(ft_convert_deg_to_rad(a)) * 8);
+		t.y -= (sin(ft_convert_deg_to_rad(a)) * 8);
 		check_for_wall(t, g);
 	}
 	if (key == 1) //s
 	{
-		t.x += (-cos(ft_convert_deg_to_rad(a)) * 5);
-		t.y += (sin(ft_convert_deg_to_rad(a)) * 5);
+		t.x += (-cos(ft_convert_deg_to_rad(a)) * 8);
+		t.y += (sin(ft_convert_deg_to_rad(a)) * 8);
 		check_for_wall(t, g);
 	}
 
 	if (key == 0)//a
 	{
-		t.x -= (sin(ft_convert_deg_to_rad(a)) * 5);
-		t.y += (cos(ft_convert_deg_to_rad(a)) * 5);
+		t.x -= (sin(ft_convert_deg_to_rad(a)) * 8);
+		t.y += (cos(ft_convert_deg_to_rad(a)) * 8);
 		check_for_wall(t, g);
 	}
 	if (key == 2)
 	{
-		t.x += (sin(ft_convert_deg_to_rad(a)) * 5);
-		t.y -= (cos(ft_convert_deg_to_rad(a)) * 5);
+		t.x += (sin(ft_convert_deg_to_rad(a)) * 8);
+		t.y -= (cos(ft_convert_deg_to_rad(a)) * 8);
 		check_for_wall(t, g);
 	}
 

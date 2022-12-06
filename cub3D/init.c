@@ -36,7 +36,7 @@ void ft_valid_ply(t_game *g)
 		}
 	}
 	if (flag != 1)
-		ft_error(g, "wrong player!");
+		ft_error_before("wrong player!");
 }
 
 void ft_find_ply_posi(t_game *g)

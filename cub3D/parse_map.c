@@ -36,18 +36,20 @@ char	*ft_strrchr(const char *s, int c)
 	return (NULL);
 }
 
-void ft_valid_name(t_game *g, char *m_name)
+void	ft_valid_name(t_game *g, char *m_name)
 {
-	int fd;
+	int	fd;
 
 	if (ft_strrchr(m_name, '.'))
 	{
-		if (ft_strncmp(ft_strrchr(m_name, '.'), ".cub", 5) || ft_strlen(m_name) == 4)
+		if (ft_strncmp(ft_strrchr(m_name, '.'), ".cub", 5)
+			|| ft_strlen(m_name) == 4)
 			ft_error(g, "Map name invalid!\n");
 	}
 	else
 		ft_error(g, "Map name invalid! Map should have .cub extension\n");
-	if ((fd = open(m_name, O_RDONLY)) < 0)
+	fd = open(m_name, O_RDONLY);
+	if (fd < 0)
 		ft_error(g, strerror(errno));
 	close(fd);
 }
@@ -63,7 +65,7 @@ void ft_valid_map(t_game *g)
 				&& g->map.map[i][j] != '\0') && (g->map.map[i][j] != 'N' \
 				&& g->map.map[i][j] != 'S' && g->map.map[i][j] != 'E' && g->map.map[i][j] != 'W'))
             {
-                ft_error(g, "Invalid map content!!\n");
+                ft_error_before("Invalid map content!!\n");
             }
         }
     }
@@ -234,11 +236,11 @@ void check_init_space(t_game *g)
 	}
 }
 
-void parse_map(t_game *g, char *m_name)
+void	parse_map(t_game *g, char *m_name)
 {
-	ft_valid_name(g, m_name); //checks extentions .cub
-	ft_read_map(g, m_name);	//reads value and stores in g->map
-    ft_valid_map(g); //checks for other charcters ----->need to add the texture and player position
+	ft_valid_name(g, m_name);
+	ft_read_map(g, m_name);
+	ft_valid_map(g);
 	check_init_space(g);
 	check_closed_walls_r(g);
 	check_closed_walls_l(g);

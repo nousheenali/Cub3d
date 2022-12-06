@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nali <nali@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 15:04:07 by nali              #+#    #+#             */
-/*   Updated: 2022/12/06 15:05:42 by nali             ###   ########.fr       */
+/*   Updated: 2022/12/06 15:32:41 by sfathima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,9 @@ void	ft_start(t_game *g)
 		{
 			g->data[i * g->win_wt + k] = g->buffer[i][k];
 			if (ft_ceiling(g->buffer, i, k))
-				g->data[i * g->win_wt + k] = 0x00FFFF;
+				g->data[i * g->win_wt + k] = g->map.ce;
 			else if (ft_floor(g->buffer, i, k, g))
-				g->data[i * g->win_wt + k] = 0x228B22;
+				g->data[i * g->win_wt + k] = g->map.fl;
 		}
 	}
 	mlx_put_image_to_window(g->mlx, g->win, g->img, 0, 0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nali <nali@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:53:47 by nali              #+#    #+#             */
-/*   Updated: 2022/12/06 15:12:06 by nali             ###   ########.fr       */
+/*   Updated: 2022/12/06 15:38:59 by sfathima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "minilibx/mlx.h"
 # include "gnl/get_next_line.h"
+# include "libft/libft.h"
 # include <stdlib.h>
 # include <math.h>
 # include <stdio.h>
@@ -125,6 +126,8 @@ void	ft_valid_map(t_game *g);
 void	check_closed_walls(t_game *g);
 //error
 void	ft_error(t_game *g, char *msg);
+void ft_error_before(char *msg);
+
 //load_textures
 int		ft_convert_xpm_to_img(t_game *g);
 //ft_texture

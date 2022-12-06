@@ -1,36 +1,64 @@
 #include "raycaster.h"
 
-void get_floor(char *ln, t_map *m)
+void	get_floor(char *ln, t_map *m)
 {
-	printf("%s", ln);
-	// if (ln[0] == 'F')
-	// ft_split()
+	char	**c;
+	int		r;
+	int		g;
+	int		b;
 
+	c = ft_split(&ln[2], ',');
+	r = ft_atoi(c[0]);
+	g = ft_atoi(c[1]);
+	b = ft_atoi(c[2]);
+	m->fl = (r << 16) + (g << 8) + (b);
+}
+
+void	get_ceiling(char *ln, t_map *m)
+{
+	char	**c;
+	int		r;
+	int		g;
+	int		b;
+
+	c = ft_split(&ln[2], ',');
+	r = ft_atoi(c[0]);
+	g = ft_atoi(c[1]);
+	b = ft_atoi(c[2]);
+	m->ce = (r << 16) + (g << 8) + (b);
 }
 
 int	get_map_size(t_map *m, int fd)
 {
-	char *ln;
-	int ct = 0;
+	char	*ln;
+	int		ct;
 
 	ln = get_next_line(fd);
-	while (strcmp(ln, "\n")) // textures
+	ct = 0;
+	while (ft_strcmp(ln, "\n"))
 	{
 		ln = get_next_line(fd);
 		ct++;
 	}
-
-	while (!strcmp(ln, "\n"))
-		ln = get_next_line(fd); //floor
-	// get_floor(ln, m);
-	
-	ct++;
-	while (strcmp(ln, "\n")) //ceiling
+	while (!ft_strcmp(ln, "\n"))
+	{
+		ln = get_next_line(fd);
+		if (ln[0] == 'F')
+			get_floor(ln, m);
+		ct++;
+	}
+	while (ft_strcmp(ln, "\n"))
+	{
+		ln = get_next_line(fd);
+		if (ln[0] == 'C')
+			get_ceiling(ln, m);
+		ct++;
+	}
+	while (!ft_strcmp(ln, "\n"))
 	{
 		ln = get_next_line(fd);
 		ct++;
 	}
-	ln = get_next_line(fd);
 	m->wt = ft_strlen(ln);
 	while (ln)
 	{
@@ -65,16 +93,15 @@ void ft_init(t_map *m)
 	m->ht = 0.0;
 }
 
-void ft_read_map(t_game *g, char *map_name)
+void	ft_read_map(t_game *g, char *map_name)
 {
-	int fd;
-	int	i;
-	int j;
-	int ct;
-	char *ln;
+	int		fd;
+	int		i;
+	int		j;
+	int		ct;
+	char	*ln;
 
-
-	j = - 1;
+	j = -1;
 	fd = open(map_name, O_RDONLY);
 	ft_init(&g->map);
 	ct = get_map_size(&g->map, fd);
@@ -82,13 +109,15 @@ void ft_read_map(t_game *g, char *map_name)
 	g->map.map[(int)g->map.ht] = NULL;
 	fd = open(map_name, O_RDONLY);
 	i = g->map.ht;
-	while (ct >= 0)
+	while (ct > 0)
 	{
 		ln = get_next_line(fd);
 		ct--;
 	}
 	while (++j < i)
+	{
 		g->map.map[j] = get_ln(get_next_line(fd));
+	}
 	g->map.ht = g->map.ht * 64.0;
 	g->map.wt = (g->map.wt - 1) * 64.0;
 	close(fd);

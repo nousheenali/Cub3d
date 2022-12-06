@@ -6,3 +6,9 @@ void ft_error(t_game *g, char *msg)
     free (g->buffer);
     exit(1);
 }
+
+void ft_error_before(char *msg)
+{
+    printf("%s", msg);
+    exit(1);
+}
