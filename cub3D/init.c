@@ -18,11 +18,33 @@ void	ft_create_buffer(t_game *g)
 	}
 }
 
+void ft_valid_ply(t_game *g)
+{
+	int	i;
+	int	j;
+	int	flag;
+
+	flag = 0;
+	i = -1;
+	while (g->map.map[++i])
+	{
+		j = -1;
+		while (++j < (int)(g->map.wt / 64))
+		{
+			if (g->map.map[i][j] == 'N' || g->map.map[i][j] == 'S' || g->map.map[i][j] == 'E' || g->map.map[i][j] == 'W')
+				flag++;
+		}
+	}
+	if (flag != 1)
+		ft_error(g, "wrong player!");
+}
+
 void ft_find_ply_posi(t_game *g)
 {
 	int i = -1;
 	int j = -1;
 
+	ft_valid_ply(g);
 	while (g->map.map[++i])
 	{
 		j = -1;
@@ -46,6 +68,7 @@ void ft_find_ply_posi(t_game *g)
 		}
 	}
 }
+
 
 void ft_init_variables(t_game *g)
 {

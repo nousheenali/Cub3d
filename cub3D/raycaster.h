@@ -39,6 +39,8 @@ typedef struct  s_map
 	char **map;
 	double	ht;
 	double	wt;
+	unsigned int fl;
+	unsigned int ce;
 }t_map;
 
 typedef struct  s_game
