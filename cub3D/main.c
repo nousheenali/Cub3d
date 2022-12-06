@@ -1,14 +1,8 @@
 #include "raycaster.h"
 
-double ft_convert_deg_to_rad(double deg)
+int	main(int argc, char **argv)
 {
-	return (deg * PI/180.0);
-}
-
-
-int main(int argc, char **argv)
-{
-	t_game g;
+	t_game	g;
 
 	if (argc != 2)
 	{
@@ -17,6 +11,8 @@ int main(int argc, char **argv)
 	}
 	parse_map(&g, argv[1]);
 	ft_init_variables(&g);
+	if (ft_convert_xpm_to_img(&g))
+		return (1);
 	ft_start(&g);
 	mlx_hook(g.win, 2, 0, &ft_button, &g);
 	mlx_hook(g.win, 17, 0, ft_close, &g); //handles x-mouse click

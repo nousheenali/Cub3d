@@ -1,18 +1,8 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/02/14 12:01:29 by sfathima          #+#    #+#              #
-#    Updated: 2022/12/06 11:07:42 by sfathima         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 NAME	=	cube
 
-SRCS = main.c get_map.c error.c init.c raycaster.c hit.c move.c parse_map.c math.c gnl/get_next_line.c gnl/get_next_line_utils.c
+SRCS = main.c get_map.c error.c init.c raycaster.c hit.c move.c parse_map.c \
+	math.c gnl/get_next_line.c load_textures.c gnl/get_next_line_utils.c\
+	render_texture.c render_utils.c buffer_utils.c
 
 				
 LIBFT 	= libft
@@ -23,7 +13,7 @@ OBJS	= ${SRCS:.c=.o}
 
 CC		= gcc
 
-CFLAGS	= -Wall -Wextra -Werror
+CFLAGS	= -Wall -Wextra
 
 IFLAGS = -I. -I./libft -I./minilibx
 

@@ -3,8 +3,8 @@
 void get_floor(char *ln, t_map *m)
 {
 	printf("%s", ln);
-	if (ln[0] == 'F')
-	ft_split()
+	// if (ln[0] == 'F')
+	// ft_split()
 
 }
 
@@ -22,7 +22,7 @@ int	get_map_size(t_map *m, int fd)
 
 	while (!strcmp(ln, "\n"))
 		ln = get_next_line(fd); //floor
-	get_floor(ln, m);
+	// get_floor(ln, m);
 	
 	ct++;
 	while (strcmp(ln, "\n")) //ceiling
