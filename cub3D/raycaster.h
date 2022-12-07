@@ -6,7 +6,7 @@
 /*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:53:47 by nali              #+#    #+#             */
-/*   Updated: 2022/12/07 09:09:19 by sfathima         ###   ########.fr       */
+/*   Updated: 2022/12/07 10:39:08 by sfathima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct s_data
 	int		bpp;
 	int		line;
 	int		endian;
+	char	*path;
 }				t_data;
 
 typedef struct  s_game

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_textures.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nali <nali@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 09:24:18 by nali              #+#    #+#             */
-/*   Updated: 2022/12/06 14:06:47 by nali             ###   ########.fr       */
+/*   Updated: 2022/12/07 11:03:36 by sfathima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ int	ft_wall_1_image(t_game *g)
 	char	*wall;
 	int		pos[2];
 
-	wall = "./textures/greybrick.xpm";
+	wall = g->wall1.path;
 	g->wall1.img = mlx_xpm_file_to_image(g->mlx, wall, &pos[0], &pos[1]);
 	if (!(g->wall1.img))
 	{
-		printf("Unable to load xpm image.\n");
+		printf("-Unable to load xpm image.\n");
 		return (1);
 	}
 	g->wall1.addr = mlx_get_data_addr(g->wall1.img, \
@@ -34,7 +34,7 @@ int	ft_wall_2_image(t_game *g)
 	char	*wall;
 	int		pos[2];
 
-	wall = "./textures/brownbrick.xpm";
+	wall = g->wall2.path;
 	g->wall2.img = mlx_xpm_file_to_image(g->mlx, wall, &pos[0], &pos[1]);
 	if (!(g->wall2.img))
 	{
@@ -51,7 +51,7 @@ int	ft_wall_3_image(t_game *g)
 	char	*wall;
 	int		pos[2];
 
-	wall = "./textures/browngreyborder.xpm";
+	wall = g->wall3.path;
 	g->wall3.img = mlx_xpm_file_to_image(g->mlx, wall, &pos[0], &pos[1]);
 	if (!(g->wall3.img))
 	{
@@ -68,7 +68,7 @@ int	ft_wall_4_image(t_game *g)
 	char	*wall;
 	int		pos[2];
 
-	wall = "./textures/multibrick.xpm";
+	wall = g->wall4.path;
 	g->wall4.img = mlx_xpm_file_to_image(g->mlx, wall, &pos[0], &pos[1]);
 	if (!(g->wall4.img))
 	{

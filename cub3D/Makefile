@@ -30,13 +30,6 @@ ${NAME}:
 			cp minilibx/libmlx.a .
 			$(CC) ${CFLAGS} ${IFLAGS} ${SRCS} -L. ${LIBS} -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
-bonus:		
-			make -C ${LIBFT}
-			make -C ${MLX_DIR}
-			cp libft/libft.a .
-			cp mlx/libmlx.a .
-			$(CC) ${CFLAGS} ${IFLAGS}  -D BONUS=1 ${SRCS} -L. ${LIBS} -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)		
-
 clean:		
 			${RM} ${OBJS}
 			make clean -C ${LIBFT}

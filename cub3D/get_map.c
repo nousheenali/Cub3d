@@ -6,7 +6,7 @@
 /*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:12:24 by sfathima          #+#    #+#             */
-/*   Updated: 2022/12/07 09:47:44 by sfathima         ###   ########.fr       */
+/*   Updated: 2022/12/07 11:02:51 by sfathima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,21 @@ void	get_ceiling(char *ln, t_map *m)
 	m->ce = (r << 16) + (g << 8) + (b);
 }
 
-int	get_map_size(t_map *m, int fd)
+void	ft_get_texture(t_game *g, char *ln)
+{
+	if (ln[strlen(ln) - 1] == '\n')
+		ln[strlen(ln) - 1] = '\0';
+	if (ln[0] == 'N')
+		g->wall1.path = &ln[3];
+	else if (ln[0] == 'S')
+		g->wall2.path = &ln[3];
+	else if (ln[0] == 'W')
+		g->wall3.path = &ln[3];
+	else if (ln[0] == 'E')
+		g->wall4.path = &ln[3];
+}
+
+int	get_map_size(t_map *m, int fd, t_game *g)
 {
 	char	*ln;
 	int		ct;
@@ -64,6 +78,7 @@ int	get_map_size(t_map *m, int fd)
 	}
 	while (ft_strcmp(ln, "\n"))
 	{
+		ft_get_texture(g, ln);
 		ln = get_next_line(fd);
 		ct++;
 	}
@@ -124,7 +139,7 @@ void	ft_read_map(t_game *g, char *map_name)
 	j = -1;
 	fd = open(map_name, O_RDONLY);
 	ft_init(&g->map);
-	ct = get_map_size(&g->map, fd);
+	ct = get_map_size(&g->map, fd, g);
 	g->map.map = malloc(sizeof(char *) * g->map.ht + 1);
 	g->map.map[(int)g->map.ht] = NULL;
 	fd = open(map_name, O_RDONLY);
