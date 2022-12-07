@@ -1,4 +1,3 @@
-
 #include "raycaster.h"
 
 void	ft_clear_buffer(unsigned int **b, t_game *g)
