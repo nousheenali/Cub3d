@@ -2,12 +2,24 @@
 
 void check_for_wall(t_vec t, t_game *g)
 {
-	int x = (t.x + 32)/GRID;
-	int y = (t.y + 32)/GRID;
+	int	x;
+	int	y;
 
+	// if (t.x < 0)
+	// 	x = (t.x - 32) / GRID;
+	// else
+	// 	x = (t.x + 32) / GRID;
+	// if (t.y < 0)
+	// 	y = (t.y + 32)/GRID;
+	// else
+	// 	y = (t.y - 32)/GRID;
+
+
+	x = (t.x / GRID);
+	y = (t.y / GRID);
+		printf("test %f %f %d %d\n", t.x, t.y, x, y);
 	if (g->map.map[y][x] != '1')
 	{
-		// printf("test %f %f %d %d\n", t.x, t.y, x, y);
 		g->init_dist.x = t.x;
 		g->init_dist.y = t.y;
 	}
@@ -33,30 +45,31 @@ int ft_button(int key, t_game *g)
 	t.x = g->init_dist.x;
 	t.y = g->init_dist.y;
 	t.a = g->angle;
+	printf("ini:%f %f\n", g->init_dist.x, g->init_dist.y);
 
 	if (key == 13) //w
 	{
-		t.x -= (-cos(ft_convert_deg_to_rad(a)) * 8);
-		t.y -= (sin(ft_convert_deg_to_rad(a)) * 8);
+		t.x -= (-cos(ft_convert_deg_to_rad(a)) * 5);
+		t.y -= (sin(ft_convert_deg_to_rad(a)) * 5);
 		check_for_wall(t, g);
 	}
 	if (key == 1) //s
 	{
-		t.x += (-cos(ft_convert_deg_to_rad(a)) * 8);
-		t.y += (sin(ft_convert_deg_to_rad(a)) * 8);
+		t.x += (-cos(ft_convert_deg_to_rad(a)) * 5);
+		t.y += (sin(ft_convert_deg_to_rad(a)) * 5);
 		check_for_wall(t, g);
 	}
 
 	if (key == 0)//a
 	{
-		t.x -= (sin(ft_convert_deg_to_rad(a)) * 8);
-		t.y += (cos(ft_convert_deg_to_rad(a)) * 8);
+		t.x -= (sin(ft_convert_deg_to_rad(a)) * 5);
+		t.y -= (cos(ft_convert_deg_to_rad(a)) * 5);
 		check_for_wall(t, g);
 	}
 	if (key == 2)
 	{
-		t.x += (sin(ft_convert_deg_to_rad(a)) * 8);
-		t.y -= (cos(ft_convert_deg_to_rad(a)) * 8);
+		t.x += (sin(ft_convert_deg_to_rad(a)) * 5);
+		t.y += (cos(ft_convert_deg_to_rad(a)) * 5);
 		check_for_wall(t, g);
 	}
 

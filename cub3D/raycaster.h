@@ -6,7 +6,7 @@
 /*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:53:47 by nali              #+#    #+#             */
-/*   Updated: 2022/12/06 15:38:59 by sfathima         ###   ########.fr       */
+/*   Updated: 2022/12/07 09:09:19 by sfathima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ double	ft_x_axis_hit(t_game *g, float alpha);
 //init
 void	ft_init_variables(t_game *g);
 void	ft_create_buffer(t_game *g);
+void	ft_init(t_map *m);
 //raycaster
 void	ft_start(t_game *g);
 void	start_game(t_game *g);
@@ -121,9 +122,14 @@ int		ft_button(int key, t_game *g);
 int		ft_close(t_game *g);
 //parse_map
 void	parse_map(t_game *g, char *m_name);
-void	ft_valid_name(t_game *g, char *m_name);
+void	ft_valid_name(char *m_name);
 void	ft_valid_map(t_game *g);
 void	check_closed_walls(t_game *g);
+void check_closed_walls_r(t_game *g);
+void check_closed_walls_l(t_game *g);
+void check_closed_walls_bot(t_game *g);
+void	check_closed_walls_top(t_game *g);
+
 //error
 void	ft_error(t_game *g, char *msg);
 void ft_error_before(char *msg);

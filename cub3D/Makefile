@@ -1,6 +1,6 @@
 NAME	=	cube
 
-SRCS = main.c get_map.c error.c init.c raycaster.c hit.c move.c parse_map.c \
+SRCS = main.c get_map.c error.c init.c raycaster.c hit.c move.c parse_map1.c parse_map2.c\
 	math.c gnl/get_next_line.c load_textures.c \
 	render_texture.c render_utils.c buffer_utils.c
 

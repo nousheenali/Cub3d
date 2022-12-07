@@ -103,3 +103,10 @@ void ft_init_variables(t_game *g)
 	rad = ft_convert_deg_to_rad(g->fov / 2) ;
 	g->dist_proj = (g->win_wt / 2) / tan(rad); //projection plane distance
 }
+
+void	ft_init(t_map *m)
+{
+	m->map = NULL;
+	m->wt = 0.0;
+	m->ht = 0.0;
+}

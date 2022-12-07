@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/06 16:03:29 by sfathima          #+#    #+#             */
+/*   Updated: 2022/12/06 16:03:47 by sfathima         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "raycaster.h"
 
 int	main(int argc, char **argv)
@@ -15,6 +27,6 @@ int	main(int argc, char **argv)
 		return (1);
 	ft_start(&g);
 	mlx_hook(g.win, 2, 0, &ft_button, &g);
-	mlx_hook(g.win, 17, 0, ft_close, &g); //handles x-mouse click
+	mlx_hook(g.win, 17, 0, ft_close, &g);
 	mlx_loop(g.mlx);
 }

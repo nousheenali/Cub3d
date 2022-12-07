@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_map.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/06 16:12:24 by sfathima          #+#    #+#             */
+/*   Updated: 2022/12/06 16:13:58 by sfathima         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "raycaster.h"
 
 void	get_floor(char *ln, t_map *m)
@@ -71,7 +83,7 @@ int	get_map_size(t_map *m, int fd)
 	return (ct);
 }
 
-char *get_ln(char *ln)
+char	*get_ln(char *ln)
 {
 	char	*new;
 	int		i;
@@ -84,13 +96,6 @@ char *get_ln(char *ln)
 	}
 	new[i] = '\0';
 	return (new);
-}
-
-void ft_init(t_map *m)
-{
-	m->map = NULL;
-	m->wt = 0.0;
-	m->ht = 0.0;
 }
 
 void	ft_read_map(t_game *g, char *map_name)
@@ -109,11 +114,8 @@ void	ft_read_map(t_game *g, char *map_name)
 	g->map.map[(int)g->map.ht] = NULL;
 	fd = open(map_name, O_RDONLY);
 	i = g->map.ht;
-	while (ct > 0)
-	{
+	while (--ct > 0)
 		ln = get_next_line(fd);
-		ct--;
-	}
 	while (++j < i)
 	{
 		g->map.map[j] = get_ln(get_next_line(fd));
