@@ -5,19 +5,9 @@ void check_for_wall(t_vec t, t_game *g)
 	int	x;
 	int	y;
 
-	// if (t.x < 0)
-	// 	x = (t.x - 32) / GRID;
-	// else
-	// 	x = (t.x + 32) / GRID;
-	// if (t.y < 0)
-	// 	y = (t.y + 32)/GRID;
-	// else
-	// 	y = (t.y - 32)/GRID;
-
-
-	x = (t.x / GRID);
-	y = (t.y / GRID);
-		printf("test %f %f %d %d\n", t.x, t.y, x, y);
+	x = (int)(t.x / GRID);
+	y = (int)(t.y / GRID);
+	printf("test %f %f %d %d %c\n", t.x, t.y, x, y,g->map.map[y][x]);
 	if (g->map.map[y][x] != '1')
 	{
 		g->init_dist.x = t.x;

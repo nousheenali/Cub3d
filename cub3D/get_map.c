@@ -6,7 +6,7 @@
 /*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:12:24 by sfathima          #+#    #+#             */
-/*   Updated: 2022/12/06 16:13:58 by sfathima         ###   ########.fr       */
+/*   Updated: 2022/12/07 09:41:37 by sfathima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,22 @@ int	get_map_size(t_map *m, int fd)
 	int		ct;
 
 	ln = get_next_line(fd);
+	if (!ln)
+	{
+		close(fd);
+		ft_error_before("map empty!!");
+	}
 	ct = 0;
+	while (!ft_strcmp(ln, "\n"))
+	{
+		ln = get_next_line(fd);
+		ct++;
+	}
+	if (ln[0] != 'N')
+	{
+		close(fd);
+		ft_error_before("Invalid map!!");
+	}
 	while (ft_strcmp(ln, "\n"))
 	{
 		ln = get_next_line(fd);
@@ -97,6 +112,17 @@ char	*get_ln(char *ln)
 	new[i] = '\0';
 	return (new);
 }
+void ft_print_map(t_game *g)
+{
+	for(int i = 0; i < (int)(g->map.ht / GRID); i++)
+	{
+		for (int j = 0; j <= (int)(g->map.wt / GRID); j++)
+		{
+			printf("%c",  g->map.map[i][j]);
+		}
+		printf("\n");
+	}
+}
 
 void	ft_read_map(t_game *g, char *map_name)
 {
@@ -114,7 +140,7 @@ void	ft_read_map(t_game *g, char *map_name)
 	g->map.map[(int)g->map.ht] = NULL;
 	fd = open(map_name, O_RDONLY);
 	i = g->map.ht;
-	while (--ct > 0)
+	while (--ct >= 0)
 		ln = get_next_line(fd);
 	while (++j < i)
 	{
@@ -122,5 +148,6 @@ void	ft_read_map(t_game *g, char *map_name)
 	}
 	g->map.ht = g->map.ht * 64.0;
 	g->map.wt = (g->map.wt - 1) * 64.0;
+	// ft_print_map(g);
 	close(fd);
 }
