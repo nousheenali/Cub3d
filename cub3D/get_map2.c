@@ -6,7 +6,7 @@
 /*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 12:54:50 by sfathima          #+#    #+#             */
-/*   Updated: 2022/12/07 12:57:02 by sfathima         ###   ########.fr       */
+/*   Updated: 2022/12/07 13:25:06 by sfathima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,27 @@ void	ft_get_texture(t_game *g, char *ln)
 	if (ln[strlen(ln) - 1] == '\n')
 		ln[strlen(ln) - 1] = '\0';
 	if (ln[0] == 'N')
+	{
+		if (g->wall1.path)
+			ft_error_before("Wrong map content!!\n");
 		g->wall1.path = &ln[3];
+	}
 	else if (ln[0] == 'S')
+	{
+		if (g->wall2.path)
+			ft_error_before("Wrong map content!!\n");
 		g->wall2.path = &ln[3];
+	}
 	else if (ln[0] == 'W')
+	{
+		if (g->wall3.path)
+			ft_error_before("Wrong map content!!\n");
 		g->wall3.path = &ln[3];
+	}
 	else if (ln[0] == 'E')
+	{
+		if (g->wall4.path)
+			ft_error_before("Wrong map content!!\n");
 		g->wall4.path = &ln[3];
+	}
 }

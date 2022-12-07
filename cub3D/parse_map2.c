@@ -6,7 +6,7 @@
 /*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:06:41 by sfathima          #+#    #+#             */
-/*   Updated: 2022/12/07 13:14:42 by sfathima         ###   ########.fr       */
+/*   Updated: 2022/12/07 13:38:10 by sfathima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	check_closed_walls_bot(t_game *g)
 	int n = 1;
 	int flag = 0;
 
-	while (--i > 0)
+	while (--i >= 0)
 	{
 		j = -1;
 		printf("*%s\n",g->map.map[i]);
@@ -116,8 +116,8 @@ void	check_closed_walls_bot(t_game *g)
 				}
 				}
 			}
-		if (i == (int)(g->map.ht/64) - 1)
-			if (g->map.map[i][j] != '1')
+		if (i == (int)(g->map.ht/64) - 1 || i == 0)
+			if (g->map.map[i][j] != '1' && g->map.map[i][j] != ' ' && g->map.map[i][j] != 'x')
 				ft_error(g, "-map error");
 		}
 	}
@@ -159,6 +159,6 @@ void	check_closed_walls_top(t_game *g)
 		}
 		if (j == len - 1 && i == 0)
 			if (g->map.map[i][j-1] != '1' || g->map.map[i+1][j] != '1' || g->map.map[i][j] != '1')
-				ft_error(g, "-map error");
+				ft_error(g, "-*map error");
 	}
 }

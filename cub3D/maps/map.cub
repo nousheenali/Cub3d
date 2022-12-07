@@ -6,8 +6,9 @@ EA ./textures/multibrick.xpm
 NO ./textures/greybrick.xpm
 WE ./textures/browngreyborder.xpm
 
+
 111111
 100001
 100001
-100001
-1111N1
+100E01
+111111

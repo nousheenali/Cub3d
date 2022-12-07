@@ -6,7 +6,7 @@
 /*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:12:24 by sfathima          #+#    #+#             */
-/*   Updated: 2022/12/07 13:04:59 by sfathima         ###   ########.fr       */
+/*   Updated: 2022/12/07 13:33:56 by sfathima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,14 @@ int	get_map_size(t_map *m, char *ln, int ct)
 	return (ct - 1);
 }
 
+void	clear_texture(t_game *g)
+{
+	g->wall1.path = NULL;
+	g->wall2.path = NULL;
+	g->wall3.path = NULL;
+	g->wall4.path = NULL;
+}
+
 int	get_map_details(t_map *m, int fd, t_game *g)
 {
 	char	*ln;
@@ -43,6 +51,7 @@ int	get_map_details(t_map *m, int fd, t_game *g)
 	ln = get_next_line(fd);
 	ct = 0;
 	flag = 0;
+	clear_texture(g);
 	while (ln)
 	{
 		while (ln && ft_strcmp(ln, "\n") == 0)
@@ -77,7 +86,7 @@ char	*get_ln(char *ln)
 	return (new);
 }
 
-void ft_print_map(t_game *g)
+void	ft_print_map(t_game *g)
 {
 	for(int i = 0; i < (int)(g->map.ht / GRID); i++)
 	{
@@ -87,6 +96,12 @@ void ft_print_map(t_game *g)
 		}
 		printf("\n");
 	}
+}
+
+void	check_floor_ce(t_game *g)
+{
+	if (!g->map.fl || !g->map.ce)
+		ft_error_before("Map content missing!!\n");
 }
 
 void	ft_read_map(t_game *g, char *map_name)
@@ -101,6 +116,7 @@ void	ft_read_map(t_game *g, char *map_name)
 	fd = open(map_name, O_RDONLY);
 	ft_init(&g->map);
 	ct = get_map_details(&g->map, fd, g);
+	check_floor_ce(g);
 	g->map.map = malloc(sizeof(char *) * g->map.ht + 1);
 	g->map.map[(int)g->map.ht] = NULL;
 	fd = open(map_name, O_RDONLY);
@@ -113,7 +129,5 @@ void	ft_read_map(t_game *g, char *map_name)
 	}
 	g->map.ht = g->map.ht * 64.0;
 	g->map.wt = (g->map.wt - 1) * 64.0;
-	// ft_print_map(g);
 	close(fd);
 }
-
