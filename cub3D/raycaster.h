@@ -6,7 +6,7 @@
 /*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:53:47 by nali              #+#    #+#             */
-/*   Updated: 2022/12/07 13:05:08 by sfathima         ###   ########.fr       */
+/*   Updated: 2022/12/07 16:52:20 by sfathima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ void	ft_read_map(t_game *g, char *map_name);
 void	get_floor(char *ln, t_map *m);
 void	get_ceiling(char *ln, t_map *m);
 void	ft_get_texture(t_game *g, char *ln);
+void	clear_texture(t_game *g);
+void	check_floor_ce(t_game *g);
 //hit
 double	ft_y_axis_hit(t_game *g, float alpha);
 double	ft_x_axis_hit(t_game *g, float alpha);
@@ -119,7 +121,12 @@ void	check_closed_walls(t_game *g);
 void	check_closed_walls_r(t_game *g);
 void	check_closed_walls_l(t_game *g);
 void	check_closed_walls_bot(t_game *g);
+void	check_for_wall(t_vec t, t_game *g);
 void	check_closed_walls_top(t_game *g);
+void	check_end(t_game *g, int i, int j);
+void	set_value(int *i, int *k, int *l);
+void	set_value1(int *i, int *k, int *l, t_game *g);
+void	ft_check1(t_game *g, int i, int j, int *n);
 
 //error
 void	ft_error(t_game *g, char *msg);
@@ -137,6 +144,7 @@ void	ft_get_proj_top_bottom(t_game *g, int *top, int *bottom);
 double	ft_pythg(double x1, double x2, double y1, double y2);
 double	ft_convert_deg_to_rad(double deg);
 void	ft_get_floor_values(t_vec hit, int *x, int *y);
+double	limit_ang(double a);
 //buffer_utils
 void	ft_clear_buffer(unsigned int **b, t_game *g);
 void	ft_populate_buffer(t_game *g, double proj_h, int x);
@@ -145,7 +153,5 @@ int		ft_floor(unsigned int **buffer, int i, int k, t_game *g);
 //player
 void	set_ang(t_game *g, int i, int j);
 void	ft_find_ply_posi(t_game *g);
-
-void ft_print_map(t_game *g);
 
 #endif 

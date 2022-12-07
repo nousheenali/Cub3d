@@ -6,7 +6,7 @@
 /*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 09:49:18 by sfathima          #+#    #+#             */
-/*   Updated: 2022/12/07 13:01:59 by sfathima         ###   ########.fr       */
+/*   Updated: 2022/12/07 14:06:15 by sfathima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,6 @@ void	ft_init_variables(t_game *g)
 	g->win = mlx_new_window(g->mlx, g->win_wt, g->win_ht, "cuB3d");
 	g->img = mlx_new_image(g->mlx, g->win_wt, g->win_ht);
 	g->data = (int *)mlx_get_data_addr(g->img, &g->bits, &g->lines, &g->endian);
-	// ft_valid_ply(g);
-	// ft_find_ply_posi(g);
 	ft_create_buffer(g);
 	g->fov = 60;
 	g->n_rays = g->win_wt;

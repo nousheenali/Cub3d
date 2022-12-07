@@ -6,7 +6,7 @@
 /*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:06:41 by sfathima          #+#    #+#             */
-/*   Updated: 2022/12/07 13:38:10 by sfathima         ###   ########.fr       */
+/*   Updated: 2022/12/07 16:52:08 by sfathima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,34 +14,26 @@
 
 void	check_closed_walls_r(t_game *g)
 {
-	int i = 0;
-	int j = 0, len = 0;
-	char a, b, c;
-	int n = 1;
-	int flag = 0;
+	int		i;
+	int		j;
+	int		n[2];
 
+	set_value(&i, &n[0], &n[1]);
 	while (g->map.map[++i])
 	{
 		j = 0;
-		len = strlen(g->map.map[i]);
 		while (g->map.map[i][j] == 'x')
-		{
 			j++;
-		}
 		if (g->map.map[i][j] != '1')
 		{
-			while (flag == 0 && (i+n) < (int)g->map.ht/64)
+			while (n[1] == 0 && (i + n[0]) < (int)g->map.ht / 64)
 			{
-				printf("%d %d %c\n", i, j, g->map.map[i][j]);
-				a = g->map.map[i-1][j+n];
-				b = g->map.map[i][j+n];
-				c = g->map.map[i-1][j+n];
-				if (a != '1' && b != '1' && c != '1')
-					ft_error_before("+++map error");
-				else if (a == '1' && c == '1' && b != '1')
-					n++;
-				else if (a == '1' && b == '1' && c == '1')
-					flag = 1 ;
+				if (g->map.map[i - 1][j + n[0]] == '1' && g->map.map[i - 1] \
+				[j + n[0]] == '1' && g->map.map[i][j + n[0]] != '1')
+					n[0]++;
+				else if (g->map.map[i - 1][j + n[0]] == '1' && g->map.map[i] \
+				[j + n[0]] == '1' && g->map.map[i - 1][j + n[0]] == '1')
+					n[1] = 1 ;
 				else
 					ft_error_before("***map error");
 			}
@@ -51,114 +43,95 @@ void	check_closed_walls_r(t_game *g)
 
 void	check_closed_walls_l(t_game *g)
 {
-	int i = 0;
-	int j = 0, len = 0;
-	char a, b, c;
-	int n = 1;
-	int flag = 0;
+	int	i;
+	int	j;
+	int	n;
+	int	flag;
 
+	set_value(&i, &n, &flag);
 	while (g->map.map[++i])
 	{
-		len = strlen(g->map.map[i]);
-		j = len - 1;
+		j = strlen(g->map.map[i]) - 1;
 		if (g->map.map[i][j] != '1')
 		{
-			while (flag == 0 && (i+n) < (int)g->map.ht/64)
+			while (flag == 0 && (i + n) < (int)g->map.ht / 64)
 			{
-				a = g->map.map[i-1][j+n];
-				b = g->map.map[i][j+n];
-				c = g->map.map[i-1][j+n];
-				if (a != '1' && b != '1' && c != '1')
-					ft_error_before("++++map error");
-				else if (a == '1' && c == '1' && b != '1')
+				if (g->map.map[i - 1][j + n] == '1' && g->map.map[i - 1] \
+				[j + n] == '1' && g->map.map[i][j + n] != '1')
 					n++;
-				else if (a == '1' && b == '1' && c == '1')
+				else if (g->map.map[i - 1][j + n] == '1' && g->map.map[i] \
+				[j + n] == '1' && g->map.map[i - 1][j + n] == '1')
 					flag = 1 ;
 				else
 					ft_error_before("****map error");
 			}
 		}
 	}
+}	
+
+void	ft_check(t_game *g, int i, int j, int *n)
+{
+	if (g->map.map[i - n[0]][j - 1] == '1' && g->map.map[i - n[0]][j + 1] \
+	== '1' && g->map.map[i - n[0]][j] != '1')
+		n[0]++;
+	else if (g->map.map[i - n[0]][j - 1] == '1' && g->map.map[i - n[0]][j] \
+	== '1' && g->map.map[i - n[0]][j + 1] == '1')
+		n[1] = 1 ;
+	else
+		ft_error_before("**map error");
 }
 
 void	check_closed_walls_bot(t_game *g)
 {
-	int i = (int)g->map.ht/64;
-	int j = 0, len = 0;
-	char a, b, c;
-	int n = 1;
-	int flag = 0;
+	int	i;
+	int	j;
+	int	n[2];
 
+	set_value1(&i, &n[0], &n[1], g);
 	while (--i >= 0)
 	{
 		j = -1;
-		printf("*%s\n",g->map.map[i]);
-		len = strlen(g->map.map[i]);
-		while(++j < len-1)
+		while (++j < ft_strlen(g->map.map[i]) - 1)
 		{
-			if(g->map.map[i][j] == ' ')
-			{ 
-				while (flag == 0 && (i-n) > 1)
+			if (g->map.map[i][j] == ' ')
+			{
+				while (n[1] == 0 && (i - n[0]) > 1)
 				{
 					if (g->map.map[i][j + 1] == '1')
 					{
-						a = g->map.map[i-n][j-1];
-						b = g->map.map[i-n][j];
-						c = g->map.map[i-n][j + 1];
-						if (a != '1' && b != '1' && c != '1')
-							ft_error_before("++map error");
-						else if (a == '1' && c == '1' && b != '1')
-							n++;
-						else if (a == '1' && b == '1' && c == '1')
-							flag = 1 ;
-						else
-							ft_error_before("**map error");
-				}
+						ft_check(g, i, j, n);
+					}
 				}
 			}
-		if (i == (int)(g->map.ht/64) - 1 || i == 0)
-			if (g->map.map[i][j] != '1' && g->map.map[i][j] != ' ' && g->map.map[i][j] != 'x')
-				ft_error(g, "-map error");
+			check_end(g, i, j);
 		}
 	}
 }
 
 void	check_closed_walls_top(t_game *g)
 {
-	int i = -1, j = 0, len = 0;
-	char a, b, c;
-	int n = 1;
-	int flag = 0;
+	int	i;
+	int	j;
+	int	n[2];
 
+	set_value(&i, &n[0], &n[1]);
 	while (g->map.map[++i])
 	{
 		j = -1;
-		len = strlen(g->map.map[i]);
-		while(++j < len-1)
+		while (++j < ft_strlen(g->map.map[i]) - 1)
 		{
-			if(g->map.map[i][j] == ' ')
-			{ 
-				while (flag == 0 && (i+n) < (int)g->map.ht/64)
+			if (g->map.map[i][j] == ' ')
+			{
+				while (n[1] == 0 && (i + n[0]) < (int)g->map.ht / 64)
 				{
-				if (g->map.map[i][j + 1] == '1')
-				{
-					a = g->map.map[i+n][j-1];
-					b = g->map.map[i+n][j];
-					c = g->map.map[i+n][j + 1];
-					if (a != '1' && b != '1' && c != '1')
-						ft_error_before("+map error");
-					else if (a == '1' && c == '1' && b != '1')
-						n++;
-					else if (a == '1' && b == '1' && c == '1')
-						flag = 1 ;
-					else
-						ft_error_before("*map error");
-				}
+					if (g->map.map[i][j + 1] == '1')
+						ft_check1(g, i, j, n);
 				}
 			}
 		}
-		if (j == len - 1 && i == 0)
-			if (g->map.map[i][j-1] != '1' || g->map.map[i+1][j] != '1' || g->map.map[i][j] != '1')
+		if (j == ft_strlen(g->map.map[i]) - 1 && i == 0)
+			if (g->map.map[i][j - 1] != '1' || g->map.map[i + 1][j] != '1'
+				|| g->map.map[i][j] != '1')
 				ft_error(g, "-*map error");
 	}
 }
