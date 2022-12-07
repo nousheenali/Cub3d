@@ -6,13 +6,13 @@
 /*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:06:41 by sfathima          #+#    #+#             */
-/*   Updated: 2022/12/07 09:46:31 by sfathima         ###   ########.fr       */
+/*   Updated: 2022/12/07 10:07:34 by sfathima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raycaster.h"
 
-void check_closed_walls_r(t_game *g)
+void	check_closed_walls_r(t_game *g)
 {
 	int i = 0;
 	int j = 0, len = 0;
@@ -49,7 +49,7 @@ void check_closed_walls_r(t_game *g)
 	}
 }
 
-void check_closed_walls_l(t_game *g)
+void	check_closed_walls_l(t_game *g)
 {
 	int i = 0;
 	int j = 0, len = 0;
@@ -81,7 +81,7 @@ void check_closed_walls_l(t_game *g)
 	}
 }
 
-void check_closed_walls_bot(t_game *g)
+void	check_closed_walls_bot(t_game *g)
 {
 	int i = (int)g->map.ht/64;
 	int j = 0, len = 0;

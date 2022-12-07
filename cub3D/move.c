@@ -1,13 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   move.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/07 10:03:46 by sfathima          #+#    #+#             */
+/*   Updated: 2022/12/07 10:07:18 by sfathima         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "raycaster.h"
 
-void check_for_wall(t_vec t, t_game *g)
+void	check_for_wall(t_vec t, t_game *g)
 {
 	int	x;
 	int	y;
 
 	x = (int)(t.x / GRID);
 	y = (int)(t.y / GRID);
-	printf("test %f %f %d %d %c\n", t.x, t.y, x, y,g->map.map[y][x]);
 	if (g->map.map[y][x] != '1')
 	{
 		g->init_dist.x = t.x;
@@ -15,7 +26,7 @@ void check_for_wall(t_vec t, t_game *g)
 	}
 }
 
-double limit_ang(double a)
+double	limit_ang(double a)
 {
 	if (a > 359.00)
 		a -= 359.00;
@@ -24,33 +35,28 @@ double limit_ang(double a)
 	return (a);
 }
 
-//w = 13; s= 1; a= 0; d=2, esc = 53
 int ft_button(int key, t_game *g)
 {
-	t_game *m = (t_game *) g;
-	int a = 0; 
-	t_vec t;
-	
+	t_vec	t;
+	int		a;
+
 	a = (int)(g->angle);
 	t.x = g->init_dist.x;
 	t.y = g->init_dist.y;
 	t.a = g->angle;
-	printf("ini:%f %f\n", g->init_dist.x, g->init_dist.y);
-
-	if (key == 13) //w
+	if (key == 13)
 	{
 		t.x -= (-cos(ft_convert_deg_to_rad(a)) * 5);
 		t.y -= (sin(ft_convert_deg_to_rad(a)) * 5);
 		check_for_wall(t, g);
 	}
-	if (key == 1) //s
+	if (key == 1)
 	{
 		t.x += (-cos(ft_convert_deg_to_rad(a)) * 5);
 		t.y += (sin(ft_convert_deg_to_rad(a)) * 5);
 		check_for_wall(t, g);
 	}
-
-	if (key == 0)//a
+	if (key == 0)
 	{
 		t.x -= (sin(ft_convert_deg_to_rad(a)) * 5);
 		t.y -= (cos(ft_convert_deg_to_rad(a)) * 5);
@@ -62,21 +68,19 @@ int ft_button(int key, t_game *g)
 		t.y += (cos(ft_convert_deg_to_rad(a)) * 5);
 		check_for_wall(t, g);
 	}
-
-	if (key == 124) //->
+	if (key == 124)
 	{
-		t.a = m->angle - 10;
+		t.a = g->angle - 10;
 		t.a = limit_ang(t.a);
-		m->angle = t.a;
+		g->angle = t.a;
 	}
-	if (key == 123) //<-
+	if (key == 123)
 	{
-		t.a = m->angle + 10;
+		t.a = g->angle + 10;
 		t.a = limit_ang(t.a);
-		m->angle = t.a;
+		g->angle = t.a;
 	}
-
-	if (key == 53) //esc___yet to free all
+	if (key == 53)
 	{
 		mlx_destroy_window(g->mlx, g->win);
 		free (g->buffer);
@@ -85,9 +89,9 @@ int ft_button(int key, t_game *g)
 	ft_start(g);
 }
 
-int ft_close(t_game *g)
+int	ft_close(t_game *g)
 {
-		mlx_destroy_window(g->mlx, g->win);
-		free (g->buffer);
-		exit(0);
+	mlx_destroy_window(g->mlx, g->win);
+	free (g->buffer);
+	exit(0);
 }
