@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/07 09:49:18 by sfathima          #+#    #+#             */
+/*   Updated: 2022/12/07 09:49:37 by sfathima         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "raycaster.h"
 
 void	ft_create_buffer(t_game *g)
@@ -18,7 +30,7 @@ void	ft_create_buffer(t_game *g)
 	}
 }
 
-void ft_valid_ply(t_game *g)
+void	ft_valid_ply(t_game *g)
 {
 	int	i;
 	int	j;
@@ -39,7 +51,7 @@ void ft_valid_ply(t_game *g)
 		ft_error_before("wrong player!");
 }
 
-void ft_find_ply_posi(t_game *g)
+void	ft_find_ply_posi(t_game *g)
 {
 	int i = -1;
 	int j = -1;

@@ -6,7 +6,7 @@
 /*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:06:41 by sfathima          #+#    #+#             */
-/*   Updated: 2022/12/06 16:07:33 by sfathima         ###   ########.fr       */
+/*   Updated: 2022/12/07 09:46:31 by sfathima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,13 @@ void check_closed_walls_r(t_game *g)
 				b = g->map.map[i][j+n];
 				c = g->map.map[i-1][j+n];
 				if (a != '1' && b != '1' && c != '1')
-					ft_error(g, "+++map error");
+					ft_error_before("+++map error");
 				else if (a == '1' && c == '1' && b != '1')
 					n++;
 				else if (a == '1' && b == '1' && c == '1')
 					flag = 1 ;
 				else
-					ft_error(g, "***map error");
+					ft_error_before("***map error");
 			}
 		}
 	}
@@ -69,13 +69,13 @@ void check_closed_walls_l(t_game *g)
 				b = g->map.map[i][j+n];
 				c = g->map.map[i-1][j+n];
 				if (a != '1' && b != '1' && c != '1')
-					ft_error(g, "++++map error");
+					ft_error_before("++++map error");
 				else if (a == '1' && c == '1' && b != '1')
 					n++;
 				else if (a == '1' && b == '1' && c == '1')
 					flag = 1 ;
 				else
-					ft_error(g, "****map error");
+					ft_error_before("****map error");
 			}
 		}
 	}
@@ -105,13 +105,13 @@ void check_closed_walls_bot(t_game *g)
 						b = g->map.map[i-n][j];
 						c = g->map.map[i-n][j + 1];
 						if (a != '1' && b != '1' && c != '1')
-							ft_error(g, "++map error");
+							ft_error_before("++map error");
 						else if (a == '1' && c == '1' && b != '1')
 							n++;
 						else if (a == '1' && b == '1' && c == '1')
 							flag = 1 ;
 						else
-							ft_error(g, "**map error");
+							ft_error_before("**map error");
 				}
 				}
 			}
@@ -142,13 +142,13 @@ void	check_closed_walls_top(t_game *g)
 					b = g->map.map[i+n][j];
 					c = g->map.map[i+n][j + 1];
 					if (a != '1' && b != '1' && c != '1')
-						ft_error(g, "+map error");
+						ft_error_before("+map error");
 					else if (a == '1' && c == '1' && b != '1')
 						n++;
 					else if (a == '1' && b == '1' && c == '1')
 						flag = 1 ;
 					else
-						ft_error(g, "*map error");
+						ft_error_before("*map error");
 				}
 				}
 			}

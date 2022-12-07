@@ -6,7 +6,7 @@
 /*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:05:40 by sfathima          #+#    #+#             */
-/*   Updated: 2022/12/07 09:41:02 by sfathima         ###   ########.fr       */
+/*   Updated: 2022/12/07 09:47:12 by sfathima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	ft_valid_map(t_game *g)
 	int	j;
 
 	i = -1;
-	
 	while (++i < (int)(g->map.ht / GRID))
 	{
 		j = -1;
@@ -50,7 +49,6 @@ void	ft_valid_map(t_game *g)
 				ft_error_before("Invalid  map content!!\n");
 		}
 	}
-	
 }
 
 void	check_init_space(t_game *g)
@@ -67,15 +65,10 @@ void	check_init_space(t_game *g)
 	}
 }
 
-
-
 void	parse_map(t_game *g, char *m_name)
 {
 	ft_valid_name(m_name);
 	ft_read_map(g, m_name);
-	printf("here\n");
-	
-	// ft_print_map(g);
 	ft_valid_map(g);
 	check_init_space(g);
 	check_closed_walls_r(g);
