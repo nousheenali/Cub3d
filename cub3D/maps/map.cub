@@ -1,26 +1,13 @@
-
-
-
-
-NO ./textures/greybrick.xpm
-SO ./textures/brownbrick.xpm
-WE ./textures/browngreyborder.xpm
-EA ./textures/multibrick.xpm
-
-
-
-
-
-F 220,100,0
 C 225,30,0
+F 220,100,0
 
-
-
-
-
+SO ./textures/brownbrick.xpm
+EA ./textures/multibrick.xpm
+NO ./textures/greybrick.xpm
+WE ./textures/browngreyborder.xpm
 
 111111
-1000S1
 100001
 100001
-111111
+100001
+1111N1

@@ -6,7 +6,7 @@
 /*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:05:40 by sfathima          #+#    #+#             */
-/*   Updated: 2022/12/07 09:47:12 by sfathima         ###   ########.fr       */
+/*   Updated: 2022/12/07 13:04:54 by sfathima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,9 @@ void	parse_map(t_game *g, char *m_name)
 	ft_valid_name(m_name);
 	ft_read_map(g, m_name);
 	ft_valid_map(g);
+	ft_valid_ply(g);
+	ft_find_ply_posi(g);
+	ft_print_map(g);
 	check_init_space(g);
 	check_closed_walls_r(g);
 	check_closed_walls_l(g);

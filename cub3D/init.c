@@ -6,7 +6,7 @@
 /*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 09:49:18 by sfathima          #+#    #+#             */
-/*   Updated: 2022/12/07 10:03:16 by sfathima         ###   ########.fr       */
+/*   Updated: 2022/12/07 13:01:59 by sfathima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,39 +49,7 @@ void	ft_valid_ply(t_game *g)
 		}
 	}
 	if (flag != 1)
-		ft_error_before("wrong player!");
-}
-
-void	ft_find_ply_posi(t_game *g)
-{
-	int	i;
-	int	j;
-
-	ft_valid_ply(g);
-	i = -1;
-	while (g->map.map[++i])
-	{
-		j = -1;
-		while (++j < (int)(g->map.wt / 64))
-		{
-			if (g->map.map[i][j] == 'N' || g->map.map[i][j] == 'S'
-				|| g->map.map[i][j] == 'E' || g->map.map[i][j] == 'W')
-			{
-				g->init_dist.y = (i * 64.0) + 32;
-				g->init_dist.x = (j * 64.0) + 32;
-				if (g->map.map[i][j] == 'N')
-					g->angle = 90;
-				else if (g->map.map[i][j] == 'W')
-					g->angle = 180;
-				else if (g->map.map[i][j] == 'S')
-					g->angle = 270;
-				else if (g->map.map[i][j] == 'E')
-					g->angle = 360;
-				g->map.map[i][j] = '0';
-				return ;
-			}
-		}
-	}
+		ft_error_before("Wrong player position!");
 }
 
 void	ft_init_variables(t_game *g)
@@ -94,7 +62,8 @@ void	ft_init_variables(t_game *g)
 	g->win = mlx_new_window(g->mlx, g->win_wt, g->win_ht, "cuB3d");
 	g->img = mlx_new_image(g->mlx, g->win_wt, g->win_ht);
 	g->data = (int *)mlx_get_data_addr(g->img, &g->bits, &g->lines, &g->endian);
-	ft_find_ply_posi(g);
+	// ft_valid_ply(g);
+	// ft_find_ply_posi(g);
 	ft_create_buffer(g);
 	g->fov = 60;
 	g->n_rays = g->win_wt;
