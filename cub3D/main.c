@@ -6,7 +6,7 @@
 /*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:03:29 by sfathima          #+#    #+#             */
-/*   Updated: 2022/12/06 16:03:47 by sfathima         ###   ########.fr       */
+/*   Updated: 2022/12/08 16:48:06 by sfathima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ int	main(int argc, char **argv)
 	}
 	if (parse_map(&g, argv[1]))
 		return (1);
-	// ft_init_variables(&g);
-	// if (ft_convert_xpm_to_img(&g))
-	// 	return (1);
-	// ft_start(&g);
-	// mlx_hook(g.win, 2, 0, &ft_button, &g);
-	// mlx_hook(g.win, 17, 0, ft_close, &g);
-	// mlx_loop(g.mlx);
+	ft_init_variables(&g);
+	if (ft_convert_xpm_to_img(&g))
+		return (1);
+	ft_start(&g);
+	mlx_hook(g.win, 2, 0, &ft_button, &g);
+	mlx_hook(g.win, 17, 0, ft_close, &g);
+	mlx_loop(g.mlx);
 }

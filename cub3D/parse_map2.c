@@ -6,7 +6,7 @@
 /*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:06:41 by sfathima          #+#    #+#             */
-/*   Updated: 2022/12/08 16:42:10 by sfathima         ###   ########.fr       */
+/*   Updated: 2022/12/08 16:55:56 by sfathima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ void	check_closed_walls_top(t_game *g)
 						ft_check1(g, i, j, n);
 				}
 			}
-			if (i == 0 && (g->map.map[i][j] == '0'))
+			if (i == 0 && (g->map.map[i][j] != '1'))
 			{
 				ft_error_before(g, "-++*map error");
 				exit (1);
