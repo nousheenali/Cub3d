@@ -65,7 +65,7 @@ void	check_init_space(t_game *g)
 	}
 }
 
-void	parse_map(t_game *g, char *m_name)
+int	parse_map(t_game *g, char *m_name)
 {
 	ft_valid_name(g, m_name);
 	ft_read_map(g, m_name);
@@ -77,4 +77,5 @@ void	parse_map(t_game *g, char *m_name)
 	check_closed_walls_l(g);
 	check_closed_walls_top(g);
 	check_closed_walls_bot(g);
+	return (1);
 }

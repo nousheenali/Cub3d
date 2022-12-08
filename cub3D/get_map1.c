@@ -52,6 +52,8 @@ int	get_map_details(t_map *m, int fd, t_game *g)
 
 	ln = get_next_line(fd);
 	clear_texture(g, &ct, &flag);
+	if (!ln)
+		return (0);
 	while (ln)
 	{
 		while (ln && ft_strcmp(ln, "\n") == 0)

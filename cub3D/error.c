@@ -17,9 +17,12 @@ void	ft_free_map(t_game *g)
 	int	i;
 
 	i = -1;
-	while (g->map.map[++i])
-		free(g->map.map[i]);
+	if (g->map.map)
+	{
+		while (g->map.map[++i])
+			free(g->map.map[i]);
 	free(g->map.map);
+	}
 }
 
 void	ft_error(t_game *g, char *msg)
