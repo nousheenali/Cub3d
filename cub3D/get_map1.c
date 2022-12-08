@@ -6,7 +6,7 @@
 /*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:12:24 by sfathima          #+#    #+#             */
-/*   Updated: 2022/12/07 14:10:34 by sfathima         ###   ########.fr       */
+/*   Updated: 2022/12/08 09:12:28 by sfathima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,28 @@
 
 int	check_line(char *ln, t_game *g)
 {
-	if (ln[0] == 'N' || ln[0] == 'S' || ln[0] == 'E' || ln[0] == 'W')
+	char	*ln1;
+
+	ln1 = malloc(sizeof(char) * strlen(ln));
+	ft_strlcpy(ln1, ln, strlen(ln));
+	if (ln1[0] == 'N' || ln1[0] == 'S' || ln1[0] == 'E' || ln1[0] == 'W')
 	{
-		if (ln[strlen(ln) - 1] == '\n')
-		ln[strlen(ln) - 1] = '\0';
-		ft_get_texture(g, ln);
+	// 	if (ln1[strlen(ln) - 1] == '\n')
+	// 		ln[strlen(ln) - 1] = '\0';
+		ft_get_texture(g, ln1);
 	}
-	else if (ln[0] == 'F')
+	if (ln1[0] == 'F')
 		get_floor(ln, &g->map);
-	else if (ln[0] == 'C')
+	else if (ln1[0] == 'C')
 		get_ceiling(ln, &g->map);
-	if (ln[0] == 'N' || ln[0] == 'S' || ln[0] == 'E'
-		|| ln[0] == 'W' || ln[0] == 'F' || ln[0] == 'C')
+	printf("*%s\n", ln1);
+	if (ln1[10] == 'N' || ln1[0] == 'S' || ln1[0] == 'E'
+		|| ln1[0] == 'W' || ln1[0] == 'F' || ln1[0] == 'C')
+	{
+		free(ln1);
 		return (1);
+	}
+	free(ln1);
 	return (0);
 }
 
@@ -53,6 +62,7 @@ int	get_map_details(t_map *m, int fd, t_game *g)
 		while (ln && ft_strcmp(ln, "\n") == 0)
 		{
 			ct++;
+			free (ln);
 			ln = get_next_line(fd);
 		}
 		while (ln && ft_strcmp(ln, "\n"))
@@ -60,6 +70,7 @@ int	get_map_details(t_map *m, int fd, t_game *g)
 			flag = check_line(ln, g);
 			if (flag == 0)
 				ct = get_map_size(m, ln, ct);
+			free (ln);
 			ln = get_next_line(fd);
 			ct++;
 		}
@@ -79,6 +90,7 @@ char	*get_ln(char *ln)
 		new[i] = ln[i];
 	}
 	new[i] = '\0';
+	free(ln);
 	return (new);
 }
 
@@ -100,7 +112,10 @@ void	ft_read_map(t_game *g, char *map_name)
 	fd = open(map_name, O_RDONLY);
 	i = g->map.ht;
 	while (--ct >= 0)
+	{
 		ln = get_next_line(fd);
+		free(ln);
+	}
 	while (++j < i)
 	{
 		g->map.map[j] = get_ln(get_next_line(fd));
