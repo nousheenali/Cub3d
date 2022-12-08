@@ -89,11 +89,11 @@ typedef struct s_game
 }t_game;
 
 //get_map1
-void	ft_read_map(t_game *g, char *map_name);
+int	ft_read_map(t_game *g, char *map_name);
 //get_map2
-void	get_floor(char *ln, t_game *g);
-void	get_ceiling(char *ln, t_game *g);
-void	ft_get_texture(t_game *g, char *ln);
+int		get_floor(char *ln, t_game *g);
+int		get_ceiling(char *ln, t_game *g);
+int		ft_get_texture(t_game *g, char *ln);
 void	clear_texture(t_game *g, int *ct, int *flag);
 void	check_floor_ce(t_game *g);
 //hit
@@ -114,9 +114,9 @@ double	ft_convert_deg_to_rad(double deg);
 int		ft_button(int key, t_game *g);
 int		ft_close(t_game *g);
 //parse_map
-int	parse_map(t_game *g, char *m_name);
-void	ft_valid_name(t_game *g, char *m_name);
-void	ft_valid_map(t_game *g);
+int		parse_map(t_game *g, char *m_name);
+int		ft_valid_name(char *m_name);
+int		ft_valid_map(t_game *g);
 void	check_closed_walls(t_game *g);
 void	check_closed_walls_r(t_game *g);
 void	check_closed_walls_l(t_game *g);

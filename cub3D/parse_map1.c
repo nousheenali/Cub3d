@@ -12,7 +12,7 @@
 
 #include "raycaster.h"
 
-void	ft_valid_name(t_game *g, char *m_name)
+int	ft_valid_name(char *m_name)
 {
 	int	fd;
 
@@ -20,17 +20,27 @@ void	ft_valid_name(t_game *g, char *m_name)
 	{
 		if (ft_strncmp(ft_strrchr(m_name, '.'), ".cub", 5)
 			|| ft_strlen(m_name) == 4)
-			ft_error_before(g, "Map name invalid!\n");
+		{
+			printf("Map name invalid!\n");
+			return (1);
+		}
 	}
 	else
-		ft_error_before(g, "Map name invalid! Map should have .cub extension\n");
+	{
+		printf("Map name invalid! Map should have .cub extension\n");
+		return (1);
+	}
 	fd = open(m_name, O_RDONLY);
 	if (fd < 0)
-		ft_error_before(g, strerror(errno));
+	{
+		printf("Invalid file\n");
+		return (1);
+	}
 	close(fd);
+	return (0);
 }
 
-void	ft_valid_map(t_game *g)
+int	ft_valid_map(t_game *g)
 {
 	int	i;
 	int	j;
@@ -47,8 +57,10 @@ void	ft_valid_map(t_game *g)
 				&& g->map.map[i][j] != 'S' && g->map.map[i][j] != 'E'
 				&& g->map.map[i][j] != 'W'))
 				ft_error_before(g, "Invalid  map content!!\n");
+				return (1);
 		}
 	}
+	return (0);
 }
 
 void	check_init_space(t_game *g)
@@ -67,9 +79,13 @@ void	check_init_space(t_game *g)
 
 int	parse_map(t_game *g, char *m_name)
 {
-	ft_valid_name(g, m_name);
-	ft_read_map(g, m_name);
-	ft_valid_map(g);
+	if (ft_valid_name(m_name))
+		return (1);
+	if (ft_read_map(g, m_name))
+		return (1);
+	if (ft_valid_map(g))
+		return (1);
+	printf("hello3 \n");
 	ft_valid_ply(g);
 	ft_find_ply_posi(g);
 	check_init_space(g);
@@ -77,5 +93,5 @@ int	parse_map(t_game *g, char *m_name)
 	check_closed_walls_l(g);
 	check_closed_walls_top(g);
 	check_closed_walls_bot(g);
-	return (1);
+	return (0);
 }

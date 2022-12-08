@@ -21,7 +21,7 @@ void	ft_free_map(t_game *g)
 	{
 		while (g->map.map[++i])
 			free(g->map.map[i]);
-	free(g->map.map);
+		free(g->map.map);
 	}
 }
 
@@ -50,5 +50,4 @@ void	ft_error_before(t_game *g, char *msg)
 		free(g->wall4.path);
 	ft_free_map(g);
 	printf("%s", msg);
-	exit(1);
 }
