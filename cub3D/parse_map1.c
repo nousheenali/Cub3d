@@ -6,7 +6,7 @@
 /*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:05:40 by sfathima          #+#    #+#             */
-/*   Updated: 2022/12/08 16:10:11 by sfathima         ###   ########.fr       */
+/*   Updated: 2022/12/08 16:38:51 by sfathima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int	parse_map(t_game *g, char *m_name)
 	check_closed_walls_l(g);
 	check_closed_walls_bot(g);
 	check_closed_walls_top(g);
-	print_map(g);
 	printf("hello4 \n");
+	print_map(g);
 	return (0);
 }
