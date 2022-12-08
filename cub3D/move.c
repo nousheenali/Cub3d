@@ -6,7 +6,7 @@
 /*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 10:03:46 by sfathima          #+#    #+#             */
-/*   Updated: 2022/12/08 09:15:23 by sfathima         ###   ########.fr       */
+/*   Updated: 2022/12/08 10:44:49 by sfathima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,18 +74,20 @@ int	ft_button(int key, t_game *g)
 	else if (key == 124 || key == 123)
 		ft_rotate(g, t, key);
 	if (key == 53)
-	{
-		mlx_destroy_window(g->mlx, g->win);
-		free (g->buffer);
-		exit(0);
-	}
+		ft_close(g);
 	ft_start(g);
 	return (0);
 }
 
 int	ft_close(t_game *g)
 {
+	int	i;
+
+	i = -1;
+	while (g->buffer[++i])
+		free (g->buffer[i]);
+	free(g->buffer);
+	ft_free_map(g);
 	mlx_destroy_window(g->mlx, g->win);
-	free (g->buffer);
 	exit(0);
 }

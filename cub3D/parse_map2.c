@@ -6,7 +6,7 @@
 /*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:06:41 by sfathima          #+#    #+#             */
-/*   Updated: 2022/12/08 09:42:20 by sfathima         ###   ########.fr       */
+/*   Updated: 2022/12/08 12:15:30 by sfathima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,10 +115,11 @@ void	check_closed_walls_top(t_game *g)
 	int	n[2];
 
 	set_value(&i, &n[0], &n[1]);
+	i = -1;
 	while (g->map.map[++i])
 	{
 		j = -1;
-		while (++j < ft_strlen(g->map.map[i]) - 1)
+		while (++j < (ft_strlen(g->map.map[i]) - 1))
 		{
 			if (g->map.map[i][j] == ' ')
 			{
@@ -128,6 +129,8 @@ void	check_closed_walls_top(t_game *g)
 						ft_check1(g, i, j, n);
 				}
 			}
+			if (i == 0 && (g->map.map[i][j] == '0'))
+				ft_error_before(g, "-++*map error");
 		}
 		if (j == ft_strlen(g->map.map[i]) - 1 && i == 0)
 			if (g->map.map[i][j - 1] != '1' || g->map.map[i + 1][j] != '1'

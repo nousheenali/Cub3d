@@ -6,7 +6,7 @@
 /*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:53:47 by nali              #+#    #+#             */
-/*   Updated: 2022/12/08 09:43:54 by sfathima         ###   ########.fr       */
+/*   Updated: 2022/12/08 10:53:17 by sfathima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,10 +91,10 @@ typedef struct s_game
 //get_map1
 void	ft_read_map(t_game *g, char *map_name);
 //get_map2
-void	get_floor(char *ln, t_map *m);
-void	get_ceiling(char *ln, t_map *m);
+void	get_floor(char *ln, t_game *g);
+void	get_ceiling(char *ln, t_game *g);
 void	ft_get_texture(t_game *g, char *ln);
-void	clear_texture(t_game *g);
+void	clear_texture(t_game *g, int *ct, int *flag);
 void	check_floor_ce(t_game *g);
 //hit
 double	ft_y_axis_hit(t_game *g, float alpha);
@@ -131,6 +131,7 @@ void	ft_check1(t_game *g, int i, int j, int *n);
 //error
 void	ft_error(t_game *g, char *msg);
 void	ft_error_before(t_game *g, char *msg);
+void	ft_free_map(t_game *g);
 
 //load_textures
 int		ft_convert_xpm_to_img(t_game *g);
@@ -153,5 +154,8 @@ int		ft_floor(unsigned int **buffer, int i, int k, t_game *g);
 //player
 void	set_ang(t_game *g, int i, int j);
 void	ft_find_ply_posi(t_game *g);
+//get_map3
+void	skip_line(int ct, int fd);
+
 
 #endif 

@@ -6,38 +6,42 @@
 /*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 12:54:50 by sfathima          #+#    #+#             */
-/*   Updated: 2022/12/08 09:41:44 by sfathima         ###   ########.fr       */
+/*   Updated: 2022/12/08 10:52:49 by sfathima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raycaster.h"
 
-void	get_floor(char *ln, t_map *m)
+void	get_floor(char *ln, t_game *g)
 {
 	char	**c;
 	int		r;
-	int		g;
+	int		gr;
 	int		b;
 
 	c = ft_split(&ln[2], ',');
 	r = ft_atoi(c[0]);
-	g = ft_atoi(c[1]);
+	gr = ft_atoi(c[1]);
 	b = ft_atoi(c[2]);
-	m->fl = (r << 16) + (g << 8) + (b);
+	if (g->map.fl)
+		ft_error_before(g, "Wrong map content!!\n");
+	g->map.fl = (r << 16) + (gr << 8) + (b);
 }
 
-void	get_ceiling(char *ln, t_map *m)
+void	get_ceiling(char *ln, t_game *g)
 {
 	char	**c;
 	int		r;
-	int		g;
+	int		gr;
 	int		b;
 
 	c = ft_split(&ln[2], ',');
 	r = ft_atoi(c[0]);
-	g = ft_atoi(c[1]);
+	gr = ft_atoi(c[1]);
 	b = ft_atoi(c[2]);
-	m->ce = (r << 16) + (g << 8) + (b);
+	if (g->map.ce)
+		ft_error_before(g, "Wrong map content!!\n");
+	g->map.ce = (r << 16) + (gr << 8) + (b);
 }
 
 void	ft_get_texture(t_game *g, char *ln)
@@ -74,10 +78,14 @@ void	check_floor_ce(t_game *g)
 		ft_error_before(g, "Map content missing!!\n");
 }
 
-void	clear_texture(t_game *g)
+void	clear_texture(t_game *g, int *ct, int *flag)
 {
+	*ct = 0;
+	*flag = 0;
 	g->wall1.path = NULL;
 	g->wall2.path = NULL;
 	g->wall3.path = NULL;
 	g->wall4.path = NULL;
+	g->map.fl = 0;
+	g->map.ce = 0;
 }

@@ -6,7 +6,7 @@
 /*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:05:40 by sfathima          #+#    #+#             */
-/*   Updated: 2022/12/08 09:49:56 by sfathima         ###   ########.fr       */
+/*   Updated: 2022/12/08 11:38:38 by sfathima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,18 +65,6 @@ void	check_init_space(t_game *g)
 	}
 }
 
-void print_map(t_game *g)
-{
-	for(int i = 0; i < (int)(g->map.ht / GRID); i++)
-	{
-		for(int j = 0; j <= (int)(g->map.wt / GRID); j++)
-		{
-			printf("%c", g->map.map[i][j]);
-		}
-		printf("*\n");
-	}
-}
-
 void	parse_map(t_game *g, char *m_name)
 {
 	ft_valid_name(g, m_name);
@@ -88,6 +76,5 @@ void	parse_map(t_game *g, char *m_name)
 	check_closed_walls_r(g);
 	check_closed_walls_l(g);
 	check_closed_walls_top(g);
-	print_map(g);
 	check_closed_walls_bot(g);
 }
