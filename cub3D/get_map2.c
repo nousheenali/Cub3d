@@ -6,7 +6,7 @@
 /*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 12:54:50 by sfathima          #+#    #+#             */
-/*   Updated: 2022/12/08 10:52:49 by sfathima         ###   ########.fr       */
+/*   Updated: 2022/12/08 15:31:50 by sfathima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	ft_get_texture(t_game *g, char *ln)
 		}
 		g->wall1.path = ft_strdup(&ln[3]);
 	}
-	else if (ln[0] == 'E' && ln[1] =='A')
+	else if (ln[0] == 'E' && ln[1] == 'A')
 	{
 		if (g->wall2.path || ft_strncmp(ln, "EA ./textures/", 14))
 		{
@@ -84,7 +84,7 @@ int	ft_get_texture(t_game *g, char *ln)
 		}
 		g->wall2.path = ft_strdup(&ln[3]);
 	}
-	else if (ln[0] == 'S' && ln[1] =='O')
+	else if (ln[0] == 'S' && ln[1] == 'O')
 	{
 		if (g->wall3.path || ft_strncmp(ln, "SO ./textures/", 14))
 		{
@@ -93,7 +93,7 @@ int	ft_get_texture(t_game *g, char *ln)
 		}
 		g->wall3.path = ft_strdup(&ln[3]);
 	}
-	else if (ln[0] == 'N' && ln[1] =='O')
+	else if (ln[0] == 'N' && ln[1] == 'O')
 	{
 		if (g->wall4.path || ft_strncmp(ln, "NO ./textures/", 14))
 		{
@@ -112,16 +112,4 @@ void	check_floor_ce(t_game *g)
 		ft_error_before(g, "Floor or ceiling missing!!\n");
 		exit (1);
 	}
-}
-
-void	clear_texture(t_game *g, int *ct, int *flag)
-{
-	*ct = 0;
-	*flag = 0;
-	g->wall1.path = NULL;
-	g->wall2.path = NULL;
-	g->wall3.path = NULL;
-	g->wall4.path = NULL;
-	g->map.fl = 0;
-	g->map.ce = 0;
 }

@@ -6,7 +6,7 @@
 /*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:05:40 by sfathima          #+#    #+#             */
-/*   Updated: 2022/12/08 11:38:38 by sfathima         ###   ########.fr       */
+/*   Updated: 2022/12/08 16:10:11 by sfathima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,10 @@ int	ft_valid_map(t_game *g)
 				&& g->map.map[i][j] != '\0') && (g->map.map[i][j] != 'N'
 				&& g->map.map[i][j] != 'S' && g->map.map[i][j] != 'E'
 				&& g->map.map[i][j] != 'W'))
+			{
 				ft_error_before(g, "Invalid  map content!!\n");
 				return (1);
+			}
 		}
 	}
 	return (0);
@@ -77,6 +79,18 @@ void	check_init_space(t_game *g)
 	}
 }
 
+void print_map(t_game *g)
+{
+    for(int i = 0; i < (int)(g->map.ht / GRID); i++)
+    {
+        for(int j = 0; j <= (int)(g->map.wt / GRID); j++)
+        {
+            printf("%c", g->map.map[i][j]);
+        }
+        printf("*\n");
+    }
+}
+
 int	parse_map(t_game *g, char *m_name)
 {
 	if (ft_valid_name(m_name))
@@ -85,13 +99,14 @@ int	parse_map(t_game *g, char *m_name)
 		return (1);
 	if (ft_valid_map(g))
 		return (1);
-	printf("hello3 \n");
 	ft_valid_ply(g);
 	ft_find_ply_posi(g);
 	check_init_space(g);
 	check_closed_walls_r(g);
 	check_closed_walls_l(g);
-	check_closed_walls_top(g);
 	check_closed_walls_bot(g);
+	check_closed_walls_top(g);
+	print_map(g);
+	printf("hello4 \n");
 	return (0);
 }

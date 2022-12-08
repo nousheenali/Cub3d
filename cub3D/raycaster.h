@@ -6,7 +6,7 @@
 /*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:53:47 by nali              #+#    #+#             */
-/*   Updated: 2022/12/08 10:53:17 by sfathima         ###   ########.fr       */
+/*   Updated: 2022/12/08 15:33:50 by sfathima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ void	check_closed_walls_bot(t_game *g);
 void	check_for_wall(t_vec t, t_game *g);
 void	check_closed_walls_top(t_game *g);
 void	check_end(t_game *g, int i, int j);
-void	set_value(int *i, int *k, int *l);
+void	set_value(int *i, int *k, int *l, int flag);
 void	set_value1(int *i, int *k, int *l, t_game *g);
 void	ft_check1(t_game *g, int i, int j, int *n);
 
@@ -156,6 +156,7 @@ void	set_ang(t_game *g, int i, int j);
 void	ft_find_ply_posi(t_game *g);
 //get_map3
 void	skip_line(int ct, int fd);
+int	get_map_size(t_map *m, char *ln, int ct);
 
 
 #endif 

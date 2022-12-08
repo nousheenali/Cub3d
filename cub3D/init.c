@@ -6,7 +6,7 @@
 /*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 09:49:18 by sfathima          #+#    #+#             */
-/*   Updated: 2022/12/08 09:41:52 by sfathima         ###   ########.fr       */
+/*   Updated: 2022/12/08 14:35:05 by sfathima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,10 @@ void	ft_valid_ply(t_game *g)
 		}
 	}
 	if (flag != 1)
+	{
 		ft_error_before(g, "Wrong player position!");
+		exit (1);
+	}
 }
 
 void	ft_init_variables(t_game *g)

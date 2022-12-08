@@ -6,13 +6,13 @@
 /*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:12:24 by sfathima          #+#    #+#             */
-/*   Updated: 2022/12/08 11:38:34 by sfathima         ###   ########.fr       */
+/*   Updated: 2022/12/08 15:31:19 by sfathima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raycaster.h"
 
-void ft_exit_check_line(char *ln, char *ln1)
+void	ft_exit_check_line(char *ln, char *ln1)
 {
 	free(ln1);
 	free(ln);
@@ -22,6 +22,7 @@ void ft_exit_check_line(char *ln, char *ln1)
 int	check_line(char *ln, t_game *g)
 {
 	char	*ln1;
+	char	*trim;
 
 	ln1 = malloc(sizeof(char) * strlen(ln));
 	ft_strlcpy(ln1, ln, strlen(ln));
@@ -40,8 +41,9 @@ int	check_line(char *ln, t_game *g)
 		if (get_ceiling(ln, g))
 			ft_exit_check_line(ln, ln1);
 	}
-	if (ln1[0] != '1' && ln1[0] != '\n' && ln1[0] != 'N' && \
-	 ln1[0] != 'S' && ln1[0] != 'E'&& ln1[0] != 'W' && ln1[0] != 'F' && ln1[0] != 'C')
+	if (ln1[0] != '1' && ln1[0] != '\n' && ln1[0] != 'N' && ln1[0] != ' ' && \
+	ln[0] != 'S' && ln1[0] != 'E' && ln1[0] != 'W' && ln1[0] != 'F' && \
+	ln1[0] != 'C')
 	{
 		ft_error_before(g, "Invalid map content 123!!");
 		ft_exit_check_line(ln, ln1);
@@ -52,21 +54,19 @@ int	check_line(char *ln, t_game *g)
 		free(ln1);
 		return (1);
 	}
-	// else if (ln1[0] != '1' && ln1[0] != '\n' && ln1[0] != ' ')
-	// {
-	// 	ft_error_before(g, "Invalid map content!!");
-	// 	ft_exit_check_line(ln, ln1);
-	// }
+	if (ln1[0] == ' ' || ln1[0] == '\t')
+	{
+		trim = ft_strtrim(ln1, " ");
+		if (trim[0] != '1')
+		{
+			free(trim);
+			ft_error_before(g, "Invalid map content!!");
+			ft_exit_check_line(ln, ln1);
+		}
+		free(trim);
+	}
 	free(ln1);
 	return (0);
-}
-
-int	get_map_size(t_map *m, char *ln, int ct)
-{
-	if (m->wt < (double)ft_strlen(ln))
-		m->wt = ft_strlen(ln);
-	m->ht++;
-	return (ct - 1);
 }
 
 int	get_map_details(t_map *m, int fd, t_game *g)
@@ -131,7 +131,7 @@ int	ft_read_map(t_game *g, char *map_name)
 	if (ct <= 0)
 	{
 		printf("Map is empty\n");
-		return(1);
+		return (1);
 	}
 	check_floor_ce(g);
 	g->map.map = malloc(sizeof(char *) * g->map.ht + 1);
