@@ -6,7 +6,7 @@
 /*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 16:22:45 by sfathima          #+#    #+#             */
-/*   Updated: 2022/12/07 16:53:09 by sfathima         ###   ########.fr       */
+/*   Updated: 2022/12/08 09:42:29 by sfathima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,5 @@ void	ft_check1(t_game *g, int i, int j, int *n)
 	== '1' && g->map.map[i + n[0]][j + 1] == '1')
 		n[1] = 1 ;
 	else
-		ft_error_before("*map error");
+		ft_error_before(g, "*map error");
 }

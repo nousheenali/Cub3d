@@ -6,13 +6,13 @@
 /*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:05:40 by sfathima          #+#    #+#             */
-/*   Updated: 2022/12/07 14:20:00 by sfathima         ###   ########.fr       */
+/*   Updated: 2022/12/08 09:49:56 by sfathima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raycaster.h"
 
-void	ft_valid_name(char *m_name)
+void	ft_valid_name(t_game *g, char *m_name)
 {
 	int	fd;
 
@@ -20,13 +20,13 @@ void	ft_valid_name(char *m_name)
 	{
 		if (ft_strncmp(ft_strrchr(m_name, '.'), ".cub", 5)
 			|| ft_strlen(m_name) == 4)
-			ft_error_before("Map name invalid!\n");
+			ft_error_before(g, "Map name invalid!\n");
 	}
 	else
-		ft_error_before("Map name invalid! Map should have .cub extension\n");
+		ft_error_before(g, "Map name invalid! Map should have .cub extension\n");
 	fd = open(m_name, O_RDONLY);
 	if (fd < 0)
-		ft_error_before(strerror(errno));
+		ft_error_before(g, strerror(errno));
 	close(fd);
 }
 
@@ -46,7 +46,7 @@ void	ft_valid_map(t_game *g)
 				&& g->map.map[i][j] != '\0') && (g->map.map[i][j] != 'N'
 				&& g->map.map[i][j] != 'S' && g->map.map[i][j] != 'E'
 				&& g->map.map[i][j] != 'W'))
-				ft_error_before("Invalid  map content!!\n");
+				ft_error_before(g, "Invalid  map content!!\n");
 		}
 	}
 }
@@ -65,9 +65,21 @@ void	check_init_space(t_game *g)
 	}
 }
 
+void print_map(t_game *g)
+{
+	for(int i = 0; i < (int)(g->map.ht / GRID); i++)
+	{
+		for(int j = 0; j <= (int)(g->map.wt / GRID); j++)
+		{
+			printf("%c", g->map.map[i][j]);
+		}
+		printf("*\n");
+	}
+}
+
 void	parse_map(t_game *g, char *m_name)
 {
-	ft_valid_name(m_name);
+	ft_valid_name(g, m_name);
 	ft_read_map(g, m_name);
 	ft_valid_map(g);
 	ft_valid_ply(g);
@@ -76,5 +88,6 @@ void	parse_map(t_game *g, char *m_name)
 	check_closed_walls_r(g);
 	check_closed_walls_l(g);
 	check_closed_walls_top(g);
+	print_map(g);
 	check_closed_walls_bot(g);
 }

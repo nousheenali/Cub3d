@@ -6,7 +6,7 @@
 /*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:06:41 by sfathima          #+#    #+#             */
-/*   Updated: 2022/12/07 16:52:08 by sfathima         ###   ########.fr       */
+/*   Updated: 2022/12/08 09:42:20 by sfathima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	check_closed_walls_r(t_game *g)
 				[j + n[0]] == '1' && g->map.map[i - 1][j + n[0]] == '1')
 					n[1] = 1 ;
 				else
-					ft_error_before("***map error");
+					ft_error_before(g, "***map error");
 			}
 		}
 	}
@@ -63,7 +63,7 @@ void	check_closed_walls_l(t_game *g)
 				[j + n] == '1' && g->map.map[i - 1][j + n] == '1')
 					flag = 1 ;
 				else
-					ft_error_before("****map error");
+					ft_error_before(g, "****map error");
 			}
 		}
 	}
@@ -78,7 +78,7 @@ void	ft_check(t_game *g, int i, int j, int *n)
 	== '1' && g->map.map[i - n[0]][j + 1] == '1')
 		n[1] = 1 ;
 	else
-		ft_error_before("**map error");
+		ft_error_before(g, "**map error");
 }
 
 void	check_closed_walls_bot(t_game *g)

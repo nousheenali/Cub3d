@@ -6,7 +6,7 @@
 /*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:12:24 by sfathima          #+#    #+#             */
-/*   Updated: 2022/12/08 09:12:28 by sfathima         ###   ########.fr       */
+/*   Updated: 2022/12/08 09:32:46 by sfathima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	check_line(char *ln, t_game *g)
 
 	ln1 = malloc(sizeof(char) * strlen(ln));
 	ft_strlcpy(ln1, ln, strlen(ln));
+	// printf("*%s*\n", ln1);
 	if (ln1[0] == 'N' || ln1[0] == 'S' || ln1[0] == 'E' || ln1[0] == 'W')
 	{
 	// 	if (ln1[strlen(ln) - 1] == '\n')
@@ -28,8 +29,7 @@ int	check_line(char *ln, t_game *g)
 		get_floor(ln, &g->map);
 	else if (ln1[0] == 'C')
 		get_ceiling(ln, &g->map);
-	printf("*%s\n", ln1);
-	if (ln1[10] == 'N' || ln1[0] == 'S' || ln1[0] == 'E'
+	if (ln1[0] == 'N' || ln1[0] == 'S' || ln1[0] == 'E'
 		|| ln1[0] == 'W' || ln1[0] == 'F' || ln1[0] == 'C')
 	{
 		free(ln1);
@@ -70,12 +70,12 @@ int	get_map_details(t_map *m, int fd, t_game *g)
 			flag = check_line(ln, g);
 			if (flag == 0)
 				ct = get_map_size(m, ln, ct);
+			ct++;
 			free (ln);
 			ln = get_next_line(fd);
-			ct++;
 		}
 	}
-	return (ct);
+	return (ct + 1);
 }
 
 char	*get_ln(char *ln)
@@ -111,14 +111,15 @@ void	ft_read_map(t_game *g, char *map_name)
 	g->map.map[(int)g->map.ht] = NULL;
 	fd = open(map_name, O_RDONLY);
 	i = g->map.ht;
-	while (--ct >= 0)
+	while (--ct > 0)
 	{
 		ln = get_next_line(fd);
 		free(ln);
 	}
 	while (++j < i)
 	{
-		g->map.map[j] = get_ln(get_next_line(fd));
+		ln = get_next_line(fd);
+		g->map.map[j] = get_ln(ln);
 	}
 	g->map.ht = g->map.ht * 64.0;
 	g->map.wt = (g->map.wt - 1) * 64.0;

@@ -6,7 +6,7 @@
 /*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 12:54:50 by sfathima          #+#    #+#             */
-/*   Updated: 2022/12/07 15:31:26 by sfathima         ###   ########.fr       */
+/*   Updated: 2022/12/08 09:41:44 by sfathima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,33 +45,33 @@ void	ft_get_texture(t_game *g, char *ln)
 	if (ln[0] == 'W')
 	{
 		if (g->wall1.path)
-			ft_error_before("Wrong map content!!\n");
-		g->wall1.path = &ln[3];
+			ft_error_before(g, "Wrong map content!!\n");
+		g->wall1.path = ft_strdup(&ln[3]);
 	}
 	else if (ln[0] == 'E')
 	{
 		if (g->wall2.path)
-			ft_error_before("Wrong map content!!\n");
-		g->wall2.path = &ln[3];
+			ft_error_before(g, "Wrong map content!!\n");
+		g->wall2.path = ft_strdup(&ln[3]);
 	}
 	else if (ln[0] == 'S')
 	{
 		if (g->wall3.path)
-			ft_error_before("Wrong map content!!\n");
-		g->wall3.path = &ln[3];
+			ft_error_before(g, "Wrong map content!!\n");
+		g->wall3.path = ft_strdup(&ln[3]);
 	}
 	else if (ln[0] == 'N')
 	{
 		if (g->wall4.path)
-			ft_error_before("Wrong map content!!\n");
-		g->wall4.path = &ln[3];
+			ft_error_before(g, "Wrong map content!!\n");
+		g->wall4.path = ft_strdup(&ln[3]);
 	}
 }
 
 void	check_floor_ce(t_game *g)
 {
 	if (!g->map.fl || !g->map.ce)
-		ft_error_before("Map content missing!!\n");
+		ft_error_before(g, "Map content missing!!\n");
 }
 
 void	clear_texture(t_game *g)

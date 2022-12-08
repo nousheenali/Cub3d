@@ -6,7 +6,7 @@
 /*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 10:03:46 by sfathima          #+#    #+#             */
-/*   Updated: 2022/12/07 14:27:51 by sfathima         ###   ########.fr       */
+/*   Updated: 2022/12/08 09:15:23 by sfathima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ int	ft_button(int key, t_game *g)
 		exit(0);
 	}
 	ft_start(g);
+	return (0);
 }
 
 int	ft_close(t_game *g)

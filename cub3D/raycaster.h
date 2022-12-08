@@ -6,7 +6,7 @@
 /*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:53:47 by nali              #+#    #+#             */
-/*   Updated: 2022/12/07 16:52:20 by sfathima         ###   ########.fr       */
+/*   Updated: 2022/12/08 09:43:54 by sfathima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ int		ft_button(int key, t_game *g);
 int		ft_close(t_game *g);
 //parse_map
 void	parse_map(t_game *g, char *m_name);
-void	ft_valid_name(char *m_name);
+void	ft_valid_name(t_game *g, char *m_name);
 void	ft_valid_map(t_game *g);
 void	check_closed_walls(t_game *g);
 void	check_closed_walls_r(t_game *g);
@@ -130,7 +130,7 @@ void	ft_check1(t_game *g, int i, int j, int *n);
 
 //error
 void	ft_error(t_game *g, char *msg);
-void	ft_error_before(char *msg);
+void	ft_error_before(t_game *g, char *msg);
 
 //load_textures
 int		ft_convert_xpm_to_img(t_game *g);
