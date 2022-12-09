@@ -15,7 +15,7 @@
 int	ft_valid_name(char *m_name)
 {
 	int	fd;
-
+	
 	if (ft_strrchr(m_name, '.'))
 	{
 		if (ft_strncmp(ft_strrchr(m_name, '.'), ".cub", 5)

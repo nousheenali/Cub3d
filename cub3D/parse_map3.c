@@ -67,11 +67,11 @@ void	ft_check1(t_game *g, int i, int j, int *n)
 			exit (1);
 		}
 	}
-	if (g->map.map[i + n[0]][j - 1] == '1' && g->map.map[i + n[0]][j + 1] \
-	== '1' && g->map.map[i + n[0]][j] != '1')
+	if (g->map.map[i + n[0]][j - 1] == '1' && \
+	g->map.map[i + n[0]][j + 1] == '1' && g->map.map[i + n[0]][j] != '1')
 		n[0]++;
-	else if (g->map.map[i + n[0]][j - 1] == '1' && g->map.map[i + n[0]][j] \
-	== '1' && g->map.map[i + n[0]][j + 1] == '1')
+	else if (g->map.map[i + n[0]][j - 1] == '1' \
+	&& g->map.map[i + n[0]][j] == '1' && g->map.map[i + n[0]][j + 1] == '1')
 		n[1] = 1 ;
 	else
 	{
