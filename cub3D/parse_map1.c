@@ -102,10 +102,7 @@ int	parse_map(t_game *g, char *m_name)
 	ft_valid_ply(g);
 	ft_find_ply_posi(g);
 	check_init_space(g);
-	check_closed_walls_r(g);
-	check_closed_walls_l(g);
-	check_closed_walls_bot(g);
-	check_closed_walls_top(g);
-	// print_map(g);
+	check_closed_walls(g);
+	check_wall_all_dir(g);
 	return (0);
 }

@@ -158,5 +158,8 @@ void	ft_find_ply_posi(t_game *g);
 void	skip_line(int ct, int fd);
 int	get_map_size(t_map *m, char *ln, int ct);
 
+void	check_closed_walls(t_game *g);
+void	check_wall_all_dir(t_game *g);
+void	print_map(t_game *g);
 
 #endif 

@@ -40,14 +40,14 @@ void	ft_error(t_game *g, char *msg)
 
 void	ft_error_before(t_game *g, char *msg)
 {
-	if (g->wall1.path)
-		free(g->wall1.path);
-	if (g->wall2.path)
-		free(g->wall2.path);
-	if (g->wall3.path)
-		free(g->wall3.path);
-	if (g->wall4.path)
-		free(g->wall4.path);
-	ft_free_map(g);
+	// if (g->wall1.path)
+	// 	free(g->wall1.path);
+	// if (g->wall2.path)
+	// 	free(g->wall2.path);
+	// if (g->wall3.path)
+	// 	free(g->wall3.path);
+	// if (g->wall4.path)
+	// 	free(g->wall4.path);
+	// ft_free_map(g);
 	printf("%s", msg);
 }

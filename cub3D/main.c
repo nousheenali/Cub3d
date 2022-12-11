@@ -27,7 +27,7 @@ int	main(int argc, char **argv)
 	if (ft_convert_xpm_to_img(&g))
 		return (1);
 	ft_start(&g);
-	mlx_hook(g.win, 2, 0, &ft_button, &g);
+	mlx_hook(g.win, 2, 1L << 0, &ft_button, &g);
 	mlx_hook(g.win, 17, 0, ft_close, &g);
 	mlx_loop(g.mlx);
 }
