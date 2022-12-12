@@ -1,3 +1,4 @@
+
 NAME	=	cube
 
 SRCS = main.c get_map1.c get_map2.c error.c init.c raycaster.c hit.c move.c \

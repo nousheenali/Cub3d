@@ -66,9 +66,6 @@ int	get_north_south(t_game *g, char *ln)
 
 int	ft_get_texture(t_game *g, char *ln)
 {
-	char	*trim;
-
-	trim = ft_strtrim(&ln[3], " \t");
 	if (ln[0] == 'W' || ln[0] == 'E')
 	{
 		if (get_east_west(g, ln))
