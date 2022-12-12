@@ -94,10 +94,13 @@ int		ft_read_map(t_game *g, char *map_name);
 int		get_floor(char *ln, t_game *g);
 int		get_ceiling(char *ln, t_game *g);
 int		ft_get_texture(t_game *g, char *ln);
-void	clear_texture(t_game *g, int *ct, int *flag);
+void	get_details(char *ln, t_game *g, char *ln1);
 void	check_floor_ce(t_game *g);
 void	ft_2darray(void **c);
 int		get_east_west(t_game *g, char *ln);
+int		check_line(char *ln, t_game *g);
+//get_map4
+void	clear_texture(t_game *g, int *ct, int *flag);
 //hit
 double	ft_y_axis_hit(t_game *g, float alpha);
 double	ft_x_axis_hit(t_game *g, float alpha);

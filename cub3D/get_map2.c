@@ -54,61 +54,58 @@ int	get_ceiling(char *ln, t_game *g)
 	return (0);
 }
 
-int	get_east_west(t_game *g, char *ln)
+void	get_details(char *ln, t_game *g, char *ln1)
 {
-	char	*trim;
-
-	trim = ft_strtrim(&ln[3], " \t");
-	if (ln[0] == 'W' && ln[1] == 'E')
+	if (ln1[0] == 'N' || ln1[0] == 'S' || ln1[0] == 'E' || ln1[0] == 'W')
 	{
-		if (g->wall1.path || ft_strncmp(trim, "./textures/", 11))
-		{
-			ft_error_before(g, "Invalid or duplicate Entry!!\n");
-			return (1);
-		}
-		g->wall1.path = trim;
+		if (ft_get_texture(g, ln1))
+			ft_exit_check_line(ln, ln1);
 	}
-	else if (ln[0] == 'E' && ln[1] == 'A')
+	if (ln1[0] == 'F')
 	{
-		if (g->wall2.path || ft_strncmp(trim, "./textures/", 11))
-		{
-			ft_error_before(g, "Invalid or duplicate Entry!!\n");
-			return (1);
-		}
-		g->wall2.path = trim;
+		if (get_floor(ln, g))
+			ft_exit_check_line(ln, ln1);
 	}
-	return (0);
+	else if (ln1[0] == 'C')
+	{
+		if (get_ceiling(ln, g))
+			ft_exit_check_line(ln, ln1);
+	}
+	if (ln1[0] != '1' && ln1[0] != '\n' && ln1[0] != 'N' && ln1[0] != ' ' && \
+	ln1[0] != 'S' && ln1[0] != 'E' && ln1[0] != 'W' && ln1[0] != 'F' && \
+	ln1[0] != 'C' && ln1[0] != '\t')
+	{
+		ft_error_before(g, "Invalid map content 123!!");
+		ft_exit_check_line(ln, ln1);
+	}
 }
 
-int	ft_get_texture(t_game *g, char *ln)
+int	check_line(char *ln, t_game *g)
 {
+	char	*ln1;
 	char	*trim;
 
-	if (ln[0] == 'W' || ln[0] == 'E')
+	ln1 = malloc(sizeof(char) * strlen(ln));
+	ft_strlcpy(ln1, ln, strlen(ln));
+	get_details(ln, g, ln1);
+	if (ln1[0] == ' ' || ln1[0] == '\t')
 	{
-		if (get_east_west(g, ln))
-			return (1);
-	}
-	else if (ln[0] == 'S' && ln[1] == 'O')
-	{
-		trim = ft_strtrim(&ln[3], " \t");
-		if (g->wall3.path || ft_strncmp(trim, "./textures/", 11))
+		trim = ft_strtrim(ln1, " ");
+		if (trim[0] != '1')
 		{
-			ft_error_before(g, "Invalid or duplicate Entry!!\n");
-			return (1);
+			free(trim);
+			ft_error_before(g, "Invalid map content!!");
+			ft_exit_check_line(ln, ln1);
 		}
-		g->wall3.path = ft_strdup(&ln[3]);
+		free(trim);
 	}
-	else if (ln[0] == 'N' && ln[1] == 'O')
+	if (ln1[0] == 'N' || ln1[0] == 'S' || ln1[0] == 'E'
+		|| ln1[0] == 'W' || ln1[0] == 'F' || ln1[0] == 'C')
 	{
-		trim = ft_strtrim(&ln[3], " \t");
-		if (g->wall4.path || ft_strncmp(trim, "./textures/", 11))
-		{
-			ft_error_before(g, "Invalid or duplicate Entry!!\n");
-			return (1);
-		}
-		g->wall4.path = ft_strdup(&ln[3]);
+		free(ln1);
+		return (1);
 	}
+	free(ln1);
 	return (0);
 }
 

@@ -12,59 +12,12 @@
 
 #include "raycaster.h"
 
-void	get_details(char *ln, t_game *g, char *ln1)
+char	*skip_newlines(int *ct, char *ln, int fd)
 {
-	if (ln1[0] == 'N' || ln1[0] == 'S' || ln1[0] == 'E' || ln1[0] == 'W')
-	{
-		if (ft_get_texture(g, ln1))
-			ft_exit_check_line(ln, ln1);
-	}
-	if (ln1[0] == 'F')
-	{
-		if (get_floor(ln, g))
-			ft_exit_check_line(ln, ln1);
-	}
-	else if (ln1[0] == 'C')
-	{
-		if (get_ceiling(ln, g))
-			ft_exit_check_line(ln, ln1);
-	}
-	if (ln1[0] != '1' && ln1[0] != '\n' && ln1[0] != 'N' && ln1[0] != ' ' && \
-	ln1[0] != 'S' && ln1[0] != 'E' && ln1[0] != 'W' && ln1[0] != 'F' && \
-	ln1[0] != 'C' && ln1[0] != '\t')
-	{
-		ft_error_before(g, "Invalid map content 123!!");
-		ft_exit_check_line(ln, ln1);
-	}
-}
-
-int	check_line(char *ln, t_game *g)
-{
-	char	*ln1;
-	char	*trim;
-
-	ln1 = malloc(sizeof(char) * strlen(ln));
-	ft_strlcpy(ln1, ln, strlen(ln));
-	get_details(ln, g, ln1);
-	if (ln1[0] == ' ' || ln1[0] == '\t')
-	{
-		trim = ft_strtrim(ln1, " ");
-		if (trim[0] != '1')
-		{
-			free(trim);
-			ft_error_before(g, "Invalid map content!!");
-			ft_exit_check_line(ln, ln1);
-		}
-		free(trim);
-	}
-	if (ln1[0] == 'N' || ln1[0] == 'S' || ln1[0] == 'E'
-		|| ln1[0] == 'W' || ln1[0] == 'F' || ln1[0] == 'C')
-	{
-		free(ln1);
-		return (1);
-	}
-	free(ln1);
-	return (0);
+	*ct = *ct + 1;
+	free (ln);
+	ln = get_next_line(fd);
+	return (ln);
 }
 
 int	get_map_details(t_map *m, int fd, t_game *g)
@@ -80,11 +33,7 @@ int	get_map_details(t_map *m, int fd, t_game *g)
 	while (ln)
 	{
 		while (ln && ft_strcmp(ln, "\n") == 0)
-		{
-			ct++;
-			free (ln);
-			ln = get_next_line(fd);
-		}
+			ln = skip_newlines(&ct, ln, fd);
 		while (ln && ft_strcmp(ln, "\n"))
 		{
 			flag = check_line(ln, g);
@@ -115,6 +64,15 @@ char	*get_ln(char *ln)
 	return (new);
 }
 
+void	store_line(int i, int j, int fd, t_game *g)
+{
+	while (++j < i)
+		g->map.map[j] = get_ln(get_next_line(fd));
+	g->map.ht = g->map.ht * 64.0;
+	g->map.wt = (g->map.wt - 1) * 64.0;
+	close(fd);
+}
+
 int	ft_read_map(t_game *g, char *map_name)
 {
 	int		fd;
@@ -138,10 +96,6 @@ int	ft_read_map(t_game *g, char *map_name)
 	fd = open(map_name, O_RDONLY);
 	i = g->map.ht;
 	skip_line(ct, fd);
-	while (++j < i)
-		g->map.map[j] = get_ln(get_next_line(fd));
-	g->map.ht = g->map.ht * 64.0;
-	g->map.wt = (g->map.wt - 1) * 64.0;
-	close(fd);
+	store_line(i, j, fd, g);
 	return (0);
 }

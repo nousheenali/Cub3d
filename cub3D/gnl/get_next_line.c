@@ -72,7 +72,7 @@ char	*read_till_newline(int fd, char *str)
 		while (ft_strchr(str, '\n') == NULL && flag == 0)
 		{
 			buffer = read_buffer(fd, &flag);
-			if (buffer != NULL)		
+			if (buffer != NULL)
 				str = str_concat(str, buffer);
 			else
 				break ;
@@ -107,6 +107,5 @@ char	*get_next_line(int fd)
 	else
 		remaining = NULL;
 	free(str);
-	// printf("------%s------\n", output);
 	return (output);
 }
