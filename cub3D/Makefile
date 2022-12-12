@@ -11,7 +11,7 @@ MLX_DIR = minilibx
 
 CC		= gcc
 
-CFLAGS	= -Wall -Wextra
+CFLAGS	= -Wall -Wextra -Werror
 
 IFLAGS = -I. -I./libft -I./minilibx
 
