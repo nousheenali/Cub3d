@@ -75,7 +75,7 @@ void	get_details(char *ln, t_game *g, char *ln1)
 	ln1[0] != 'S' && ln1[0] != 'E' && ln1[0] != 'W' && ln1[0] != 'F' && \
 	ln1[0] != 'C' && ln1[0] != '\t')
 	{
-		ft_error_before(g, "Invalid map content 123!!");
+		ft_error_before(g, "Invalid map content!!");
 		ft_exit_check_line(ln, ln1);
 	}
 }

@@ -109,7 +109,7 @@ void	ft_init_variables(t_game *g);
 void	ft_create_buffer(t_game *g);
 void	ft_init(t_map *m);
 void	ft_valid_ply(t_game *g);
-void	ft_free(t_game *g);
+void	ft_free_1(t_game *g);
 //raycaster
 void	ft_start(t_game *g);
 void	start_game(t_game *g);

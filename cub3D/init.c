@@ -80,9 +80,9 @@ void	ft_init(t_map *m)
 	m->ht = 0.0;
 }
 
-void	ft_free(t_game *g)
+void	ft_free_1(t_game *g)
 {
-	mlx_destroy_window(g->mlx, g->win);
 	ft_2darray((void **)g->buffer);
 	ft_error_exit(g, "");
+	mlx_destroy_window(g->mlx, g->win);
 }

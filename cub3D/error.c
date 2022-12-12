@@ -17,6 +17,8 @@ void	ft_free_map(t_game *g)
 	int	i;
 
 	i = -1;
+	if (!g->map.map)
+		return ;
 	if (g->map.map)
 	{
 		while (g->map.map[++i])
@@ -50,7 +52,6 @@ void	ft_error_before(t_game *g, char *msg)
 	if (g->wall3.path)
 		free(g->wall3.path);
 	if (g->wall4.path)
-		free(g->wall4.path);
 	ft_free_map(g);
 	printf("%s", msg);
 }
