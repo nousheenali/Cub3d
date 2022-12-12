@@ -84,10 +84,13 @@ int	ft_close(t_game *g)
 	int	i;
 
 	i = -1;
-	while (g->buffer[++i])
-		free (g->buffer[i]);
-	free(g->buffer);
-	ft_free_map(g);
+	if (g->buffer)
+	{
+		while (g->buffer[++i])
+			free (g->buffer[i]);
+		free(g->buffer);
+	}
+	ft_error_before(g, "");
 	mlx_destroy_window(g->mlx, g->win);
 	exit(0);
 }

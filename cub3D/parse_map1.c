@@ -96,9 +96,12 @@ void	ft_2darray(void **c)
 	int	i;
 
 	i = -1;
-	while (c[++i])
-		free(c[i]);
-	free(c);
+	if (c)
+	{
+		while (c[++i])
+			free(c[i]);
+		free(c);
+	}
 }
 
 int	parse_map(t_game *g, char *m_name)

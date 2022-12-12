@@ -30,7 +30,7 @@ void	get_details(char *ln, t_game *g, char *ln1)
 			ft_exit_check_line(ln, ln1);
 	}
 	if (ln1[0] != '1' && ln1[0] != '\n' && ln1[0] != 'N' && ln1[0] != ' ' && \
-	ln[0] != 'S' && ln1[0] != 'E' && ln1[0] != 'W' && ln1[0] != 'F' && \
+	ln1[0] != 'S' && ln1[0] != 'E' && ln1[0] != 'W' && ln1[0] != 'F' && \
 	ln1[0] != 'C' && ln1[0] != '\t')
 	{
 		ft_error_before(g, "Invalid map content 123!!");
@@ -74,7 +74,9 @@ int	get_map_details(t_map *m, int fd, t_game *g)
 	int		flag;
 
 	ln = get_next_line(fd);
-	clear_texture(g, &ct, &flag, ln);
+	if (!ln)
+		return (0);
+	clear_texture(g, &ct, &flag);
 	while (ln)
 	{
 		while (ln && ft_strcmp(ln, "\n") == 0)
@@ -124,7 +126,10 @@ int	ft_read_map(t_game *g, char *map_name)
 	ft_init(&g->map);
 	ct = get_map_details(&g->map, fd, g);
 	if (ct <= 0)
-		ft_error_exit(g, "Map is empty\n");
+	{
+		printf("Map is empty\n");
+		return (1);
+	}
 	check_floor_ce(g);
 	g->map.map = malloc(sizeof(char *) * g->map.ht + 1);
 	g->map.map[(int)g->map.ht] = NULL;

@@ -94,7 +94,7 @@ int		ft_read_map(t_game *g, char *map_name);
 int		get_floor(char *ln, t_game *g);
 int		get_ceiling(char *ln, t_game *g);
 int		ft_get_texture(t_game *g, char *ln);
-void	clear_texture(t_game *g, int *ct, int *flag, char *ln);
+void	clear_texture(t_game *g, int *ct, int *flag);
 void	check_floor_ce(t_game *g);
 void	ft_2darray(void **c);
 int		get_east_west(t_game *g, char *ln);

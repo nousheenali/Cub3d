@@ -31,10 +31,8 @@ int	get_map_size(t_map *m, char *ln, int ct)
 	return (ct - 1);
 }
 
-void	clear_texture(t_game *g, int *ct, int *flag, char *ln)
+void	clear_texture(t_game *g, int *ct, int *flag)
 {
-	if (!ln)
-		ft_error_exit(g, "Map is empty!");
 	*ct = 0;
 	*flag = 0;
 	g->wall1.path = NULL;

@@ -3,65 +3,110 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nali <nali@42abudhabi.ae>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/14 13:45:02 by sfathima          #+#    #+#             */
-/*   Updated: 2022/03/16 11:35:39 by sfathima         ###   ########.fr       */
+/*   Created: 2021/12/12 09:04:22 by nali              #+#    #+#             */
+/*   Updated: 2021/12/12 09:04:22 by nali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	get_line(int fd, char *buf, char *ln, int *flag)
+char	*get_output_string(char *str, int *bytesread, int *i, char *output)
 {
-	int	i;
-	int	rd;
+	int	j;
+	int	b;
 
-	rd = 1;
-	i = 0;
-	while (rd > 0 && i < BUFFER_SIZE)
+	j = 0;
+	b = ft_findlen(str);
+	while (str[j] != '\n' && j < b)
+		j++;
+	if (str[j] == '\n')
+		j++;
+	*bytesread = b;
+	*i = j;
+	output = (char *)malloc((j + 1) * sizeof(char));
+	if (!output)
+		return (NULL);
+	ft_strlcpy(output, str, j + 1);
+	return (output);
+}
+
+char	*read_buffer(int fd, int *flag)
+{
+	char	*buf;
+	int		bytesread;
+
+	buf = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
+	if (!buf)
+		return (NULL);
+	bytesread = read(fd, buf, BUFFER_SIZE);
+	if (bytesread > 0)
 	{
-		rd = read(fd, buf + i, 1);
-		if (rd == -1)
+		if (bytesread != BUFFER_SIZE)
+			*flag = 1;
+		buf[bytesread] = '\0';
+		return (buf);
+	}
+	*flag = 1;
+	free(buf);
+	return (NULL);
+}
+
+char	*read_till_newline(int fd, char *str)
+{
+	char		*buffer;
+	static int	flag;
+
+	flag = 0;
+	buffer = read_buffer(fd, &flag);
+	if (buffer != NULL)
+	{
+		if (str == NULL)
+			str = buffer;
+		else
+			str = str_concat(str, buffer);
+	}
+	if (str != NULL)
+	{
+		while (ft_strchr(str, '\n') == NULL && flag == 0)
 		{
-			free(buf);
-			free(ln);
-			return (1);
-		}
-		if (!rd || buf[i++] == '\n')
-		{
-			*flag = 0;
-			break ;
+			buffer = read_buffer(fd, &flag);
+			if (buffer != NULL)		
+				str = str_concat(str, buffer);
+			else
+				break ;
 		}
 	}
-	buf[i] = '\0';
-	return (0);
+	return (str);
 }
 
 char	*get_next_line(int fd)
-{
+{	
 	char		*str;
-	static char	*buf[1024];
-	int			flag;
+	int			bytesread;
+	int			i;
+	char		*output;
+	static char	*remaining;
 
-	flag = 1;
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE < 1)
 		return (NULL);
-	buf[fd] = malloc(BUFFER_SIZE + 1);
-	if (!buf[fd])
+	str = remaining;
+	output = NULL;
+	str = read_till_newline(fd, str);
+	if (str == NULL)
 		return (NULL);
-	str = malloc(1);
-	while (flag != 0)
+	output = get_output_string(str, &bytesread, &i, output);
+	if (bytesread > i)
 	{
-		if (get_line(fd, buf[fd], str, &flag))
+		remaining = (char *)malloc((bytesread - i + 1) * sizeof(char));
+		if (!remaining)
 			return (NULL);
-		if (!ft_strlen(str) && !ft_strlen(buf[fd]))
-		{
-			free(str);
-			str = NULL;
-		}
-		str = ft_strjoin(str, buf[fd]);
+		ft_strlcpy(remaining, &str[i], bytesread - i + 1);
 	}
-	free (buf[fd]);
-	return (str);
+	else
+		remaining = NULL;
+	free(str);
+	return (output);
 }
+

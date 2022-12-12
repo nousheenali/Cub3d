@@ -30,9 +30,12 @@ void	ft_error(t_game *g, char *msg)
 	int	i;
 
 	i = -1;
-	while (g->buffer[++i])
-		free (g->buffer[i]);
-	free(g->buffer);
+	if (g->buffer)
+	{
+		while (g->buffer[++i])
+			free (g->buffer[i]);
+		free(g->buffer);
+	}
 	ft_free_map(g);
 	printf("%s", msg);
 	exit(1);
@@ -60,7 +63,9 @@ void	ft_error_exit(t_game *g, char *msg)
 
 void	ft_exit_check_line(char *ln, char *ln1)
 {
-	free(ln1);
-	free(ln);
+	if (ln1)
+		free(ln1);
+	if (ln)
+		free(ln);
 	exit(1);
 }

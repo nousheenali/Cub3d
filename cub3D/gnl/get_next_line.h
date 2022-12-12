@@ -3,24 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nali <nali@42abudhabi.ae>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/16 11:31:56 by sfathima          #+#    #+#             */
-/*   Updated: 2022/12/06 15:22:54 by sfathima         ###   ########.fr       */
+/*   Created: 2021/12/10 15:52:44 by nali              #+#    #+#             */
+/*   Updated: 2021/12/10 15:52:44 by nali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-# include<stdlib.h>
-# include<unistd.h>
-# include<fcntl.h>
-# include<stdio.h>
-# include "../libft/libft.h"
-# define BUFFER_SIZE 1
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE	5
+# endif
 
-char	*get_next_line(int fd);
-//zvoid	*ft_memcpy(void *dst, const void *restrict src, size_t n);
+# include <stdio.h>
+# include <stddef.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <fcntl.h>
+# include "../libft/libft.h"
+
+char			*get_next_line(int fd);
+int				ft_findlen(const char *s);
+// unsigned int	ft_strlcpy(char *dst, const char *src, unsigned int dstsize);
+// char			*ft_strchr(char *str, int c);
+char			*str_concat(char *s1, const char *s2);
 
 #endif
