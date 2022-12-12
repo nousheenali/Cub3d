@@ -107,6 +107,6 @@ char	*get_next_line(int fd)
 	else
 		remaining = NULL;
 	free(str);
+	// printf("------%s------\n", output);
 	return (output);
 }
-

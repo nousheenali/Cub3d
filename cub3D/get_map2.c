@@ -6,7 +6,7 @@
 /*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 12:54:50 by sfathima          #+#    #+#             */
-/*   Updated: 2022/12/12 09:55:16 by sfathima         ###   ########.fr       */
+/*   Updated: 2022/12/12 17:08:14 by sfathima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,29 +56,34 @@ int	get_ceiling(char *ln, t_game *g)
 
 int	get_east_west(t_game *g, char *ln)
 {
+	char	*trim;
+
+	trim = ft_strtrim(&ln[3], " \t");
 	if (ln[0] == 'W' && ln[1] == 'E')
 	{
-		if (g->wall1.path || ft_strncmp(ln, "WE ./textures/", 14))
+		if (g->wall1.path || ft_strncmp(trim, "./textures/", 11))
 		{
 			ft_error_before(g, "Invalid or duplicate Entry!!\n");
 			return (1);
 		}
-		g->wall1.path = ft_strdup(&ln[3]);
+		g->wall1.path = trim;
 	}
 	else if (ln[0] == 'E' && ln[1] == 'A')
 	{
-		if (g->wall2.path || ft_strncmp(ln, "EA ./textures/", 14))
+		if (g->wall2.path || ft_strncmp(trim, "./textures/", 11))
 		{
 			ft_error_before(g, "Invalid or duplicate Entry!!\n");
 			return (1);
 		}
-		g->wall2.path = ft_strdup(&ln[3]);
+		g->wall2.path = trim;
 	}
 	return (0);
 }
 
 int	ft_get_texture(t_game *g, char *ln)
 {
+	char	*trim;
+
 	if (ln[0] == 'W' || ln[0] == 'E')
 	{
 		if (get_east_west(g, ln))
@@ -86,7 +91,8 @@ int	ft_get_texture(t_game *g, char *ln)
 	}
 	else if (ln[0] == 'S' && ln[1] == 'O')
 	{
-		if (g->wall3.path || ft_strncmp(ln, "SO ./textures/", 14))
+		trim = ft_strtrim(&ln[3], " \t");
+		if (g->wall3.path || ft_strncmp(trim, "./textures/", 11))
 		{
 			ft_error_before(g, "Invalid or duplicate Entry!!\n");
 			return (1);
@@ -95,7 +101,8 @@ int	ft_get_texture(t_game *g, char *ln)
 	}
 	else if (ln[0] == 'N' && ln[1] == 'O')
 	{
-		if (g->wall4.path || ft_strncmp(ln, "NO ./textures/", 14))
+		trim = ft_strtrim(&ln[3], " \t");
+		if (g->wall4.path || ft_strncmp(trim, "./textures/", 11))
 		{
 			ft_error_before(g, "Invalid or duplicate Entry!!\n");
 			return (1);

@@ -6,7 +6,7 @@
 /*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:12:24 by sfathima          #+#    #+#             */
-/*   Updated: 2022/12/12 09:48:24 by sfathima         ###   ########.fr       */
+/*   Updated: 2022/12/12 16:45:40 by sfathima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,11 +103,12 @@ char	*get_ln(char *ln)
 	char	*new;
 	int		i;
 
-	i = -1;
+	i = 0;
 	new = malloc(sizeof(char) * ft_strlen(ln));
-	while (ln[++i] != '\n' && ln[i] != '\0')
+	while (ln[i] != '\n' && ln[i] != '\0')
 	{
 		new[i] = ln[i];
+		i++;
 	}
 	new[i] = '\0';
 	free(ln);
@@ -125,6 +126,7 @@ int	ft_read_map(t_game *g, char *map_name)
 	fd = open(map_name, O_RDONLY);
 	ft_init(&g->map);
 	ct = get_map_details(&g->map, fd, g);
+	close(fd);
 	if (ct <= 0)
 	{
 		printf("Map is empty\n");

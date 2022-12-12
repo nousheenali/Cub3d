@@ -6,7 +6,7 @@
 /*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:05:40 by sfathima          #+#    #+#             */
-/*   Updated: 2022/12/12 09:53:25 by sfathima         ###   ########.fr       */
+/*   Updated: 2022/12/12 16:46:39 by sfathima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	ft_valid_map(t_game *g)
 	while (++i < (int)(g->map.ht / GRID))
 	{
 		j = -1;
-		while (++j <= (int)(g->map.wt / GRID))
+		while (g->map.map[i][++j])
 		{
 			if (g->map.map[i][j] != '1' && g->map.map[i][j] != '0'
 				&& g->map.map[i][j] != ' ' && (g->map.map[i][j] != '\n'
@@ -81,13 +81,19 @@ void	check_init_space(t_game *g)
 
 // void	print_map(t_game *g)
 // {
-// 	for (int i = 0; i < (int)(g->map.ht / GRID); i++)
+// 	int i =0;
+// 	int j=0;
+
+// 	while (i < (int)(g->map.ht / GRID))
 // 	{
-// 		for (int j = 0; j <= (int)(g->map.wt / GRID); j++)
+// 		j = 0;
+// 		while (g->map.map[i][j])
 // 		{
 // 			printf("%c", g->map.map[i][j]);
+// 			j++;
 // 		}
 // 		printf("*\n");
+// 		i++;
 // 	}
 // }
 
