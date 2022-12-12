@@ -6,21 +6,11 @@
 /*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 12:54:50 by sfathima          #+#    #+#             */
-/*   Updated: 2022/12/08 15:31:50 by sfathima         ###   ########.fr       */
+/*   Updated: 2022/12/12 09:55:16 by sfathima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raycaster.h"
-
-void	ft_2darray(char **c)
-{
-	int	i;
-
-	i = -1;
-	while (c[++i])
-		free(c[i]);
-	free(c);
-}
 
 int	get_floor(char *ln, t_game *g)
 {
@@ -38,7 +28,7 @@ int	get_floor(char *ln, t_game *g)
 	r = ft_atoi(c[0]);
 	gr = ft_atoi(c[1]);
 	b = ft_atoi(c[2]);
-	ft_2darray(c);
+	ft_2darray((void **)c);
 	g->map.fl = (r << 16) + (gr << 8) + (b);
 	return (0);
 }
@@ -59,12 +49,12 @@ int	get_ceiling(char *ln, t_game *g)
 	r = ft_atoi(c[0]);
 	gr = ft_atoi(c[1]);
 	b = ft_atoi(c[2]);
-	ft_2darray(c);
+	ft_2darray((void **)c);
 	g->map.ce = (r << 16) + (gr << 8) + (b);
 	return (0);
 }
 
-int	ft_get_texture(t_game *g, char *ln)
+int	get_east_west(t_game *g, char *ln)
 {
 	if (ln[0] == 'W' && ln[1] == 'E')
 	{
@@ -83,6 +73,16 @@ int	ft_get_texture(t_game *g, char *ln)
 			return (1);
 		}
 		g->wall2.path = ft_strdup(&ln[3]);
+	}
+	return (0);
+}
+
+int	ft_get_texture(t_game *g, char *ln)
+{
+	if (ln[0] == 'W' || ln[0] == 'E')
+	{
+		if (get_east_west(g, ln))
+			return (1);
 	}
 	else if (ln[0] == 'S' && ln[1] == 'O')
 	{

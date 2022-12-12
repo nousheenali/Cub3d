@@ -6,7 +6,7 @@
 /*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:05:40 by sfathima          #+#    #+#             */
-/*   Updated: 2022/12/08 16:50:32 by sfathima         ###   ########.fr       */
+/*   Updated: 2022/12/12 09:53:25 by sfathima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,16 +79,26 @@ void	check_init_space(t_game *g)
 	}
 }
 
-void	print_map(t_game *g)
+// void	print_map(t_game *g)
+// {
+// 	for (int i = 0; i < (int)(g->map.ht / GRID); i++)
+// 	{
+// 		for (int j = 0; j <= (int)(g->map.wt / GRID); j++)
+// 		{
+// 			printf("%c", g->map.map[i][j]);
+// 		}
+// 		printf("*\n");
+// 	}
+// }
+
+void	ft_2darray(void **c)
 {
-	for (int i = 0; i < (int)(g->map.ht / GRID); i++)
-	{
-		for (int j = 0; j <= (int)(g->map.wt / GRID); j++)
-		{
-			printf("%c", g->map.map[i][j]);
-		}
-		printf("*\n");
-	}
+	int	i;
+
+	i = -1;
+	while (c[++i])
+		free(c[i]);
+	free(c);
 }
 
 int	parse_map(t_game *g, char *m_name)

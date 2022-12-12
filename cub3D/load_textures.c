@@ -6,7 +6,7 @@
 /*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 09:24:18 by nali              #+#    #+#             */
-/*   Updated: 2022/12/07 11:03:36 by sfathima         ###   ########.fr       */
+/*   Updated: 2022/12/12 09:37:01 by sfathima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_wall_1_image(t_game *g)
 	g->wall1.img = mlx_xpm_file_to_image(g->mlx, wall, &pos[0], &pos[1]);
 	if (!(g->wall1.img))
 	{
-		printf("-Unable to load xpm image.\n");
+		printf("Unable to load xpm image.\n");
 		return (1);
 	}
 	g->wall1.addr = mlx_get_data_addr(g->wall1.img, \

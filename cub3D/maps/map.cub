@@ -7,9 +7,8 @@ EA ./textures/wood.xpm
 NO ./textures/eagle.xpm
 WE ./textures/redbrick.xpm
 
-
 1111 1
-100111
-N00001
+100011
+100S01
 100001
 111111

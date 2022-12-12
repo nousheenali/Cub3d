@@ -6,7 +6,7 @@
 /*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 09:49:18 by sfathima          #+#    #+#             */
-/*   Updated: 2022/12/08 14:35:05 by sfathima         ###   ########.fr       */
+/*   Updated: 2022/12/12 09:43:05 by sfathima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,11 @@ void	ft_init(t_map *m)
 	m->map = NULL;
 	m->wt = 0.0;
 	m->ht = 0.0;
+}
+
+void	ft_free(t_game *g)
+{
+	mlx_destroy_window(g->mlx, g->win);
+	ft_2darray((void **)g->buffer);
+	ft_error_exit(g, "");
 }

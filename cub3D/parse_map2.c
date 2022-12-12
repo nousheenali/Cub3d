@@ -5,166 +5,105 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/06 16:06:41 by sfathima          #+#    #+#             */
-/*   Updated: 2022/12/08 16:55:56 by sfathima         ###   ########.fr       */
+/*   Created: 2022/12/12 08:20:17 by sfathima          #+#    #+#             */
+/*   Updated: 2022/12/12 09:33:26 by sfathima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raycaster.h"
 
-void	check_closed_walls_r(t_game *g)
+int	contain_walls_or_spaces_only(char *temp)
+{
+	int	j;
+
+	j = 0;
+	while (temp[j])
+	{
+		if (temp[j] != '1' && temp[j] != ' ')
+			return (1);
+		j++;
+	}
+	return (0);
+}
+
+void	check_closed_walls(t_game *g)
+{
+	int		i;
+	int		flag;
+	char	*temp;
+
+	i = 0;
+	flag = 0;
+	while (g->map.map[i])
+	{
+		temp = ft_strtrim(g->map.map[i], "x");
+		if (temp[0] != '1' || temp[ft_strlen(temp) - 1] != '1')
+			flag = 1;
+		if (i == 0)
+			if (contain_walls_or_spaces_only(temp))
+				flag = 1;
+		if (i == ((int)g->map.ht / 64 - 1))
+			if (contain_walls_or_spaces_only(temp))
+				flag = 1;
+		free(temp);
+		if (flag == 1)
+		{
+			ft_error_before(g, "Map not enclosed by walls!!!");
+			exit(1);
+		}
+		i++;
+	}
+}
+
+void	check_before_space(t_game *g, int i, int j)
+{
+	if (i + 1 < (int)g->map.ht / 64)
+		if (g->map.map[i + 1][j] != ' ' && g->map.map[i + 1][j] != '1')
+			ft_error_exit(g, "Map not enclosed by walls!!!");
+	if (i - 1 >= 0)
+		if (g->map.map[i - 1][j] != ' ' && g->map.map[i - 1][j] != '1')
+			ft_error_exit(g, "Map not enclosed by walls!!!");
+	if (j + 1 < (int)g->map.wt / 64)
+		if (g->map.map[i][j + 1] != ' ' && g->map.map[i][j + 1] != '1')
+			ft_error_exit(g, "Map not enclosed by walls!!!");
+	if (j - 1 >= 0)
+		if (g->map.map[i][j - 1] != ' ' && g->map.map[i][j - 1] != '1')
+			ft_error_exit(g, "Map not enclosed by walls!!!");
+}
+
+void	check_wall_all_dir(t_game *g)
 {
 	int		i;
 	int		j;
-	int		n[2];
+	char	*temp;
 
-	set_value(&i, &n[0], &n[1], 0);
-	while (g->map.map[++i])
+	i = 0;
+	while (g->map.map[i])
 	{
 		j = 0;
-		while (g->map.map[i][j] == 'x')
+		temp = g->map.map[i];
+		while (g->map.map[i][j])
+		{
+			if (temp[j] == ' ')
+			{	
+				check_before_space(g, i, j);
+			}
 			j++;
-		if (g->map.map[i][j] != '1')
-		{
-			while (n[1] == 0 && (i + n[0]) < (int)g->map.ht / 64)
-			{
-				if (g->map.map[i - 1][j + n[0]] == '1' && g->map.map[i + 1] \
-				[j + n[0]] == '1' && g->map.map[i][j + n[0]] != '1')
-					n[0]++;
-				else if (g->map.map[i - 1][j + n[0]] == '1' && g->map.map[i] \
-				[j + n[0]] == '1' && g->map.map[i - 1][j + n[0]] == '1')
-					n[1] = 1 ;
-				else
-				{
-					ft_error_before(g, "***map error");
-					exit(1);
-				}
-			}
 		}
+		i++;
 	}
 }
 
-void	check_closed_walls_l(t_game *g)
+void	check_for_wall(t_vec t, t_game *g)
 {
-	int	i;
-	int	j;
-	int	n;
-	int	flag;
+	int	x;
+	int	y;
 
-	set_value(&i, &n, &flag, 0);
-	while (g->map.map[++i])
+	x = (int)(t.x / GRID);
+	y = (int)(t.y / GRID);
+	if (g->map.map[y][x] != '1')
 	{
-		j = strlen(g->map.map[i]) - 1;
-		if (g->map.map[i][j] != '1')
-		{
-			while (flag == 0 && (i + n) < (int)g->map.ht / 64)
-			{
-				if (g->map.map[i - 1][j + n] == '1' && g->map.map[i + 1] \
-				[j + n] == '1' && g->map.map[i][j + n] != '1')
-					n++;
-				else if (g->map.map[i - 1][j + n] == '1' && g->map.map[i] \
-				[j + n] == '1' && g->map.map[i - 1][j + n] == '1')
-					flag = 1 ;
-				else
-				{
-					ft_error_before(g, "****map error");
-					exit (1);
-				}
-			}
-		}
-	}
-}	
-
-void	ft_check(t_game *g, int i, int j, int *n)
-{
-	if (j == ft_strlen(g->map.map[i]))
-	{
-		if (g->map.map[i][j - 1] != '1' || g->map.map[i][j] != '1')
-		{
-			ft_error_before(g, "*map error");
-			exit (1);
-		}
-	}
-	if (g->map.map[i - n[0]][j - 1] == '1' && g->map.map[i - n[0]][j + 1] \
-	== '1' && g->map.map[i - n[0]][j] != '1')
-		n[0]++;
-	else if (g->map.map[i - n[0]][j - 1] == '1' && g->map.map[i - n[0]][j] \
-	== '1' && g->map.map[i - n[0]][j + 1] == '1')
-		n[1] = 1 ;
-	else
-	{
-		ft_error_before(g, "**map error");
-		exit (1);
-	}
-}
-
-void	check_closed_walls_bot(t_game *g)
-{
-	int	i;
-	int	j;
-	int	n[2];
-
-	set_value1(&i, &n[0], &n[1], g);
-	while (--i >= 0)
-	{
-		j = 0;
-		while (++j < ft_strlen(g->map.map[i]))
-		{
-			if (g->map.map[i][j] != '1')
-			{
-				while (n[1] == 0 && (i - n[0]) > 0)
-				{
-					if (g->map.map[i][j + 1] == '1')
-					{
-						ft_check(g, i, j, n);
-					}
-					else
-						n[0]++;
-				}
-			}
-			check_end(g, i, j);
-		}
-	}
-}
-
-void	check_closed_walls_top(t_game *g)
-{
-	int	i;
-	int	j;
-	int	n[2];
-
-	set_value(&i, &n[0], &n[1], 1);
-	while (g->map.map[++i])
-	{
-		j = -1;
-		while (++j < (ft_strlen(g->map.map[i])))
-		{
-			while (g->map.map[i][j] == 'x')
-				j++;
-			if (g->map.map[i][j] != '1')
-			{
-				while (n[1] == 0 && (i + n[0]) < (int)g->map.ht / 64)
-				{
-					if (g->map.map[i][j + 1] == '1')
-						ft_check1(g, i, j, n);
-				}
-			}
-			if (i == 0 && (g->map.map[i][j] != '1'))
-			{
-				ft_error_before(g, "-++*map error");
-				exit (1);
-			}
-			else
-				n[0]++;
-		}
-		if (j == (ft_strlen(g->map.map[i]) - 1) && i == 0)
-		{
-			if (g->map.map[i][j - 1] != '1' || g->map.map[i + 1][j] != '1'
-				|| g->map.map[i][j] != '1')
-			{
-				ft_error(g, "-*map error");
-				exit(1);
-			}
-		}
+		g->init_dist.x = t.x;
+		g->init_dist.y = t.y;
 	}
 }

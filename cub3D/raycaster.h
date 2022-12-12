@@ -6,7 +6,7 @@
 /*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:53:47 by nali              #+#    #+#             */
-/*   Updated: 2022/12/08 15:33:50 by sfathima         ###   ########.fr       */
+/*   Updated: 2022/12/12 09:54:56 by sfathima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,13 +89,15 @@ typedef struct s_game
 }t_game;
 
 //get_map1
-int	ft_read_map(t_game *g, char *map_name);
+int		ft_read_map(t_game *g, char *map_name);
 //get_map2
 int		get_floor(char *ln, t_game *g);
 int		get_ceiling(char *ln, t_game *g);
 int		ft_get_texture(t_game *g, char *ln);
-void	clear_texture(t_game *g, int *ct, int *flag);
+void	clear_texture(t_game *g, int *ct, int *flag, char *ln);
 void	check_floor_ce(t_game *g);
+void	ft_2darray(void **c);
+int		get_east_west(t_game *g, char *ln);
 //hit
 double	ft_y_axis_hit(t_game *g, float alpha);
 double	ft_x_axis_hit(t_game *g, float alpha);
@@ -104,6 +106,7 @@ void	ft_init_variables(t_game *g);
 void	ft_create_buffer(t_game *g);
 void	ft_init(t_map *m);
 void	ft_valid_ply(t_game *g);
+void	ft_free(t_game *g);
 //raycaster
 void	ft_start(t_game *g);
 void	start_game(t_game *g);
@@ -118,20 +121,14 @@ int		parse_map(t_game *g, char *m_name);
 int		ft_valid_name(char *m_name);
 int		ft_valid_map(t_game *g);
 void	check_closed_walls(t_game *g);
-void	check_closed_walls_r(t_game *g);
-void	check_closed_walls_l(t_game *g);
-void	check_closed_walls_bot(t_game *g);
 void	check_for_wall(t_vec t, t_game *g);
-void	check_closed_walls_top(t_game *g);
 void	check_end(t_game *g, int i, int j);
-void	set_value(int *i, int *k, int *l, int flag);
-void	set_value1(int *i, int *k, int *l, t_game *g);
-void	ft_check1(t_game *g, int i, int j, int *n);
-
 //error
 void	ft_error(t_game *g, char *msg);
 void	ft_error_before(t_game *g, char *msg);
 void	ft_free_map(t_game *g);
+void	ft_error_exit(t_game *g, char *msg);
+void	ft_exit_check_line(char *ln, char *ln1);
 
 //load_textures
 int		ft_convert_xpm_to_img(t_game *g);
@@ -156,7 +153,7 @@ void	set_ang(t_game *g, int i, int j);
 void	ft_find_ply_posi(t_game *g);
 //get_map3
 void	skip_line(int ct, int fd);
-int	get_map_size(t_map *m, char *ln, int ct);
+int		get_map_size(t_map *m, char *ln, int ct);
 
 void	check_closed_walls(t_game *g);
 void	check_wall_all_dir(t_game *g);

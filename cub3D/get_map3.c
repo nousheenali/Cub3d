@@ -6,7 +6,7 @@
 /*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 10:50:01 by sfathima          #+#    #+#             */
-/*   Updated: 2022/12/08 15:31:53 by sfathima         ###   ########.fr       */
+/*   Updated: 2022/12/12 09:34:24 by sfathima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,10 @@ int	get_map_size(t_map *m, char *ln, int ct)
 	return (ct - 1);
 }
 
-void	clear_texture(t_game *g, int *ct, int *flag)
+void	clear_texture(t_game *g, int *ct, int *flag, char *ln)
 {
+	if (!ln)
+		ft_error_exit(g, "Map is empty!");
 	*ct = 0;
 	*flag = 0;
 	g->wall1.path = NULL;
