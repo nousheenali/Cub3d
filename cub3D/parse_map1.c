@@ -6,7 +6,7 @@
 /*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:05:40 by sfathima          #+#    #+#             */
-/*   Updated: 2022/12/12 16:46:39 by sfathima         ###   ########.fr       */
+/*   Updated: 2022/12/13 09:19:00 by sfathima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,8 @@ void	check_init_space(t_game *g)
 
 // void	print_map(t_game *g)
 // {
-// 	int i =0;
-// 	int j=0;
+// 	int	i =0;
+// 	int	j = 0;
 
 // 	while (i < (int)(g->map.ht / GRID))
 // 	{

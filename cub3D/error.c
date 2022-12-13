@@ -6,7 +6,7 @@
 /*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:11:54 by sfathima          #+#    #+#             */
-/*   Updated: 2022/12/12 09:33:53 by sfathima         ###   ########.fr       */
+/*   Updated: 2022/12/13 09:22:08 by sfathima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	ft_error_before(t_game *g, char *msg)
 	if (g->wall3.path)
 		free(g->wall3.path);
 	if (g->wall4.path)
+		free(g->wall4.path);
 	ft_free_map(g);
 	printf("%s", msg);
 }

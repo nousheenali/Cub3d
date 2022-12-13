@@ -6,7 +6,7 @@
 /*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 08:20:17 by sfathima          #+#    #+#             */
-/*   Updated: 2022/12/12 09:33:26 by sfathima         ###   ########.fr       */
+/*   Updated: 2022/12/13 09:14:35 by sfathima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	check_closed_walls(t_game *g)
 	flag = 0;
 	while (g->map.map[i])
 	{
-		temp = ft_strtrim(g->map.map[i], "x");
+		temp = ft_strtrim(g->map.map[i], " x");
 		if (temp[0] != '1' || temp[ft_strlen(temp) - 1] != '1')
 			flag = 1;
 		if (i == 0)
@@ -85,7 +85,7 @@ void	check_wall_all_dir(t_game *g)
 		while (g->map.map[i][j])
 		{
 			if (temp[j] == ' ')
-			{	
+			{
 				check_before_space(g, i, j);
 			}
 			j++;
