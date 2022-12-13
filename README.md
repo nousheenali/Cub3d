@@ -95,16 +95,41 @@ To allow motion, two more attributes are needed, the player’s movement speed a
 many units the player should move(displacement). The player’s turning speed (measured in angle) defines how many angle to be added or subtracted when
 the player is turning.
 
-**Moving forward & backward**
+**MOVING FORWARD & BACKWARD**
 
 We have define the player’s movement speed to be 5 units. (This can be any number; but the larger number, the less smooth the movement will appear.) The process of finding the x and y displacement is illustrated below.
 - If the player is moving forward, we add the XDisplacement to the current player’s X coordinate and add Ydisplacement to the current player’s Y coordinate.
 - If the player is moving backward, we subtract the XDisplacement to the current player’s X coordinate; and subtract Ydisplacement to the current player’s Y coordinate. 
 - Also check for boundaries walls so that the player won’t go outside the map or walk through it.
+![alt text](https://permadi.com/tutorial/raycast/images/figure31.gif)
+Here, in the image, the displacement is 10 units.
 
+**TURNING**
 
+The process of turning is very simple to implement. All we need to do is to add or subtract an angle increment to the current player’s viewing angle (wrap around whenever the turn goes to a full circle).
+Again, larger angle increment will cause the movement appear less smooth (We have used 10° units to be used as turning speed).
 
+![alt text](https://permadi.com/tutorial/raycast/images/figure32.gif)
 
+## PARSING
+
+**Things to be handled**
+
+- The program must take as a first argument a scene description file with the .cub extension.
+- The map must be composed of only 6 possible characters: 0 for an empty space, 1 for a wall, and N,S,E or W for the player’s start position and spawning orientation.
+- The map must be closed/surrounded by walls, if not the program must return an error.
+- Except for the map content, each type of element can be separated by one or more empty line(s).
+- Except for the map content which always has to be the last, each type of element can be set in any order in the file.
+- Except for the map, each type of information from an element can be separated by one or more space(s).
+- The program must be able to set the floor and ceiling colors to two different ones.
+- The program displays the image in a window and respects the following rules:
+  * The left and right arrow keys of the keyboard must allow you to look left and right in the maze.
+  * The W, A, S, and D keys must allow you to move the point of view through the maze.
+  * Pressing ESC must close the window and quit the program cleanly.
+  * Clicking on the red cross on the window’s frame must close the window and quit the program cleanly.
+- The colors for floor and ceiling will be defined as RGB in range of  [0,255]: 0, 255, 255
+- The textures for the four walls (NO, SO, WE, EA) is passed as path is also provided in the map.
+- If any misconfiguration of any kind is encountered in the file, the program must exit properly , without leaks and return an error message.
   
 
 
