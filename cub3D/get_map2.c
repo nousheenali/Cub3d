@@ -6,7 +6,7 @@
 /*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 12:54:50 by sfathima          #+#    #+#             */
-/*   Updated: 2022/12/12 17:08:14 by sfathima         ###   ########.fr       */
+/*   Updated: 2022/12/13 13:51:39 by sfathima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@ int	get_floor(char *ln, t_game *g)
 		return (1);
 	}
 	c = ft_split(&ln[2], ',');
+	if (!c[0] || !c[1] || !c[2])
+	{
+		ft_error_before(g, "Invalid or duplicate entry for F\n");
+		return (1);
+	}
 	r = ft_atoi(c[0]);
 	gr = ft_atoi(c[1]);
 	b = ft_atoi(c[2]);
@@ -46,6 +51,11 @@ int	get_ceiling(char *ln, t_game *g)
 		return (1);
 	}
 	c = ft_split(&ln[2], ',');
+	if (!c[0] || !c[1] || !c[2])
+	{
+		ft_error_before(g, "Invalid or duplicate entry for C\n");
+		return (1);
+	}
 	r = ft_atoi(c[0]);
 	gr = ft_atoi(c[1]);
 	b = ft_atoi(c[2]);

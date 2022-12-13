@@ -6,7 +6,7 @@
 /*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:11:54 by sfathima          #+#    #+#             */
-/*   Updated: 2022/12/13 09:22:08 by sfathima         ###   ########.fr       */
+/*   Updated: 2022/12/13 13:50:54 by sfathima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ void	ft_free_map(t_game *g)
 	if (g->map.map)
 	{
 		while (g->map.map[++i])
-			free(g->map.map[i]);
+		{
+			if (g->map.map[i])
+				free(g->map.map[i]);
+		}
 		free(g->map.map);
 	}
 }
@@ -35,7 +38,10 @@ void	ft_error(t_game *g, char *msg)
 	if (g->buffer)
 	{
 		while (g->buffer[++i])
-			free (g->buffer[i]);
+		{
+			if (g->buffer[i])
+				free (g->buffer[i]);
+		}
 		free(g->buffer);
 	}
 	ft_free_map(g);
