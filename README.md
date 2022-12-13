@@ -89,6 +89,18 @@ PD = sqrt((P.x - D.x)(P.x - D.x) + (P.y - D.y)(P.y - D.y))
 
 [Image reference link](https://permadi.com/1996/05/ray-casting-tutorial-7/)
 
+## MOVEING AROUND
+
+To allow motion, two more attributes are needed, the player’s movement speed and the player’s turning speed. The player’s movement speed defines how
+many units the player should move(displacement). The player’s turning speed (measured in angle) defines how many angle to be added or subtracted when
+the player is turning.
+
+**Moving forward & backward**
+
+We have define the player’s movement speed to be 5 units. (This can be any number; but the larger number, the less smooth the movement will appear.) The process of finding the x and y displacement is illustrated below.
+- If the player is moving forward, we add the XDisplacement to the current player’s X coordinate and add Ydisplacement to the current player’s Y coordinate.
+- If the player is moving backward, we subtract the XDisplacement to the current player’s X coordinate; and subtract Ydisplacement to the current player’s Y coordinate. 
+- Also check for boundaries walls so that the player won’t go outside the map or walk through it.
 
 
 
