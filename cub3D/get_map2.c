@@ -19,20 +19,23 @@ int	get_floor(char *ln, t_game *g)
 	int		gr;
 	int		b;
 
-	if (g->map.fl || (ln[1] != ' ' && !ft_isdigit(ln[2])))
+	if (g->map.fl || (ln[1] != ' ' && !ft_isdigit(ln[2])) \
+	|| ft_count_char(&ln[2], ',') > 2)
 	{
 		ft_error_before(g, "Invalid or duplicate entry for F\n");
 		return (1);
 	}
 	c = ft_split(&ln[2], ',');
-	if (!c[0] || !c[1] || !c[2])
+	if (ceiling_floor_tests(c, g))
+		return (1);
+	r = ft_atoi_c(c[0]);
+	gr = ft_atoi_c(c[1]);
+	b = ft_atoi_c(c[2]);
+	if (r < 0 || gr < 0 || b < 0 || r > 255 || gr > 255 || b > 255)
 	{
-		ft_error_before(g, "Invalid or duplicate entry for F\n");
+		ft_error_before(g, "Value of F invalid\n");
 		return (1);
 	}
-	r = ft_atoi(c[0]);
-	gr = ft_atoi(c[1]);
-	b = ft_atoi(c[2]);
 	ft_2darray((void **)c);
 	g->map.fl = (r << 16) + (gr << 8) + (b);
 	return (0);
@@ -45,20 +48,23 @@ int	get_ceiling(char *ln, t_game *g)
 	int		gr;
 	int		b;
 
-	if (g->map.ce || (ln[1] != ' ' && !ft_isdigit(ln[2])))
+	if (g->map.ce || (ln[1] != ' ' && !ft_isdigit(ln[2])) \
+	|| ft_count_char(&ln[2], ',') > 2)
 	{
 		ft_error_before(g, "Invalid or duplicate entry for C\n");
 		return (1);
 	}
 	c = ft_split(&ln[2], ',');
-	if (!c[0] || !c[1] || !c[2])
+	if (ceiling_floor_tests(c, g))
+		return (1);
+	r = ft_atoi_c(c[0]);
+	gr = ft_atoi_c(c[1]);
+	b = ft_atoi_c(c[2]);
+	if (r < 0 || gr < 0 || b < 0 || r > 255 || gr > 255 || b > 255)
 	{
-		ft_error_before(g, "Invalid or duplicate entry for C\n");
+		ft_error_before(g, "Value of C invalid\n");
 		return (1);
 	}
-	r = ft_atoi(c[0]);
-	gr = ft_atoi(c[1]);
-	b = ft_atoi(c[2]);
 	ft_2darray((void **)c);
 	g->map.ce = (r << 16) + (gr << 8) + (b);
 	return (0);

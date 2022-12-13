@@ -157,9 +157,14 @@ void	ft_find_ply_posi(t_game *g);
 //get_map3
 void	skip_line(int ct, int fd);
 int		get_map_size(t_map *m, char *ln, int ct);
-
+int		ceiling_floor_tests(char **c, t_game *g);
+int		ft_count_char(char const *s, char c);
 void	check_closed_walls(t_game *g);
 void	check_wall_all_dir(t_game *g);
 void	print_map(t_game *g);
+//ft_atoi_cube
+int		ft_atoi_c(const char *str);
+//ft_split_cube
+char	**ft_split_c(char const *s, char c);
 
 #endif 

@@ -1,9 +1,9 @@
 
-NAME	=	cube
+NAME	=	cub3D
 
 SRCS = main.c get_map1.c get_map2.c error.c init.c raycaster.c hit.c move.c \
 		math.c gnl/get_next_line.c gnl/get_next_line_utils.c load_textures.c parse_map1.c parse_map2.c \
-		render_texture.c render_utils.c buffer_utils.c player.c get_map3.c  get_map4.c 
+		render_texture.c render_utils.c buffer_utils.c player.c get_map3.c  get_map4.c ft_atoi_cube.c
 
 				
 LIBFT 	= libft

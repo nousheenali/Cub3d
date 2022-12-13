@@ -42,3 +42,36 @@ void	clear_texture(t_game *g, int *ct, int *flag)
 	g->map.fl = 0;
 	g->map.ce = 0;
 }
+
+int	ceiling_floor_tests(char **c, t_game *g)
+{
+	if (!c[0] || !c[1] || !c[2])
+	{
+		ft_error_before(g, "Missing entry for C and F\n");
+		return (1);
+	}
+	if (c[3])
+	{
+		ft_error_before(g, "Invalid entry for C or F\n");
+		return (1);
+	}
+	return (0);
+}
+
+/* 	specifically checks cases such as 
+	C   135,,206,235 or C   135,206,,235*/
+int	ft_count_char(char const *s, char c)
+{
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (s[i])
+	{
+		if (s[i] == c)
+			count++;
+		i++;
+	}
+	return (count);
+}
