@@ -48,11 +48,13 @@ int	ceiling_floor_tests(char **c, t_game *g)
 	if (!c[0] || !c[1] || !c[2])
 	{
 		ft_error_before(g, "Error: Missing entry for C or F\n");
+		ft_2darray((void **)c);
 		return (1);
 	}
 	if (c[3])
 	{
 		ft_error_before(g, "Error: Invalid entry for C or F\n");
+		ft_2darray((void **)c);
 		return (1);
 	}
 	return (0);

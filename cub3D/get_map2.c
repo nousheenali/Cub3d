@@ -31,12 +31,12 @@ int	get_floor(char *ln, t_game *g)
 	r = ft_atoi_c(c[0]);
 	gr = ft_atoi_c(c[1]);
 	b = ft_atoi_c(c[2]);
+	ft_2darray((void **)c);
 	if (r < 0 || gr < 0 || b < 0 || r > 255 || gr > 255 || b > 255)
 	{
 		ft_error_before(g, "Error: Invalid entry for F\n");
 		return (1);
 	}
-	ft_2darray((void **)c);
 	g->map.fl = (r << 16) + (gr << 8) + (b);
 	return (0);
 }
