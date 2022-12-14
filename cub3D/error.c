@@ -6,7 +6,7 @@
 /*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:11:54 by sfathima          #+#    #+#             */
-/*   Updated: 2022/12/13 13:50:54 by sfathima         ###   ########.fr       */
+/*   Updated: 2022/12/14 10:17:24 by sfathima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ void	ft_error(t_game *g, char *msg)
 	i = -1;
 	if (g->buffer)
 	{
-		while (g->buffer[++i])
+		while (++i < g->win_ht)
 		{
 			if (g->buffer[i])
-				free (g->buffer[i]);
+				free(g->buffer[i]);
 		}
 		free(g->buffer);
 	}

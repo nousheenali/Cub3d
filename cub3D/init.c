@@ -6,7 +6,7 @@
 /*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 09:49:18 by sfathima          #+#    #+#             */
-/*   Updated: 2022/12/12 09:43:05 by sfathima         ###   ########.fr       */
+/*   Updated: 2022/12/14 10:41:14 by sfathima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	ft_valid_ply(t_game *g)
 	}
 	if (flag != 1)
 	{
-		ft_error_before(g, "Wrong player position!");
+		ft_error_before(g, "Error : with player position!!!\n");
 		exit (1);
 	}
 }
@@ -78,11 +78,4 @@ void	ft_init(t_map *m)
 	m->map = NULL;
 	m->wt = 0.0;
 	m->ht = 0.0;
-}
-
-void	ft_free_1(t_game *g)
-{
-	ft_2darray((void **)g->buffer);
-	ft_error_exit(g, "");
-	mlx_destroy_window(g->mlx, g->win);
 }

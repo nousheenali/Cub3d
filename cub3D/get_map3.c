@@ -6,7 +6,7 @@
 /*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 10:50:01 by sfathima          #+#    #+#             */
-/*   Updated: 2022/12/12 09:34:24 by sfathima         ###   ########.fr       */
+/*   Updated: 2022/12/14 10:38:17 by sfathima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,12 @@ int	ceiling_floor_tests(char **c, t_game *g)
 {
 	if (!c[0] || !c[1] || !c[2])
 	{
-		ft_error_before(g, "Missing entry for C and F\n");
+		ft_error_before(g, "Error: Missing entry for C or F\n");
 		return (1);
 	}
 	if (c[3])
 	{
-		ft_error_before(g, "Invalid entry for C or F\n");
+		ft_error_before(g, "Error: Invalid entry for C or F\n");
 		return (1);
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 12:54:50 by sfathima          #+#    #+#             */
-/*   Updated: 2022/12/12 17:08:14 by sfathima         ###   ########.fr       */
+/*   Updated: 2022/12/14 10:38:43 by sfathima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	get_east_west(t_game *g, char *ln)
 	{
 		if (g->wall1.path || ft_strncmp(trim, "./textures/", 11))
 		{
-			ft_error_before(g, "Invalid or duplicate Entry!!\n");
+			ft_error_before(g, "Error: Invalid or duplicate Entry!!\n");
 			return (1);
 		}
 		g->wall1.path = trim;
@@ -30,7 +30,7 @@ int	get_east_west(t_game *g, char *ln)
 	{
 		if (g->wall2.path || ft_strncmp(trim, "./textures/", 11))
 		{
-			ft_error_before(g, "Invalid or duplicate Entry!!\n");
+			ft_error_before(g, "Error: Invalid or duplicate Entry!!\n");
 			return (1);
 		}
 		g->wall2.path = trim;
@@ -47,7 +47,7 @@ int	get_north_south(t_game *g, char *ln)
 	{
 		if (g->wall3.path || ft_strncmp(trim, "./textures/", 11))
 		{
-			ft_error_before(g, "Invalid or duplicate Entry!!\n");
+			ft_error_before(g, "Error: Invalid or duplicate Entry!!\n");
 			return (1);
 		}
 		g->wall3.path = trim;
@@ -56,7 +56,7 @@ int	get_north_south(t_game *g, char *ln)
 	{
 		if (g->wall4.path || ft_strncmp(trim, "./textures/", 11))
 		{
-			ft_error_before(g, "Invalid or duplicate Entry!!\n");
+			ft_error_before(g, "Error: Invalid or duplicate Entry!!\n");
 			return (1);
 		}
 		g->wall4.path = trim;

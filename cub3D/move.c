@@ -6,7 +6,7 @@
 /*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 10:03:46 by sfathima          #+#    #+#             */
-/*   Updated: 2022/12/12 09:46:12 by sfathima         ###   ########.fr       */
+/*   Updated: 2022/12/14 09:51:51 by sfathima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,13 +84,13 @@ int	ft_close(t_game *g)
 	int	i;
 
 	i = -1;
+	mlx_destroy_window(g->mlx, g->win);
 	if (g->buffer)
 	{
-		while (g->buffer[++i])
+		while (++i < g->win_ht)
 			free (g->buffer[i]);
 		free(g->buffer);
 	}
 	ft_error_before(g, "");
-	mlx_destroy_window(g->mlx, g->win);
 	exit(0);
 }
