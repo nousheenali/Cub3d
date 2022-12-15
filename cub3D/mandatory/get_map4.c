@@ -20,6 +20,7 @@ int	get_west(t_game *g, char *ln)
 	if (ln[0] == 'W' && ln[1] == 'E' && ln[2] != ' ')
 	{
 		ft_error_before(g, "Error: Invalid Entry for West!!\n");
+		free(trim);
 		return (1);
 	}
 	else if (ln[0] == 'W' && ln[1] == 'E' && ln[2] == ' ')
@@ -27,6 +28,7 @@ int	get_west(t_game *g, char *ln)
 		if (g->wall1.path || ft_strncmp(trim, "./textures/", 11))
 		{
 			ft_error_before(g, "Error: Invalid or duplicate Entry!!\n");
+			free(trim);
 			return (1);
 		}
 		g->wall1.path = trim;
@@ -42,6 +44,7 @@ int	get_east(t_game *g, char *ln)
 	if (ln[0] == 'E' && ln[1] == 'A' && ln[2] != ' ')
 	{
 		ft_error_before(g, "Error: Invalid Entry for East!!\n");
+		free(trim);
 		return (1);
 	}
 	else if (ln[0] == 'E' && ln[1] == 'A' && ln[2] == ' ')
@@ -49,6 +52,7 @@ int	get_east(t_game *g, char *ln)
 		if (g->wall2.path || ft_strncmp(trim, "./textures/", 11))
 		{
 			ft_error_before(g, "Error: Invalid or duplicate Entry!!\n");
+			free(trim);
 			return (1);
 		}
 		g->wall2.path = trim;
@@ -64,6 +68,7 @@ int	get_south(t_game *g, char *ln)
 	if (ln[0] == 'S' && ln[1] == 'O' && ln[2] != ' ')
 	{
 		ft_error_before(g, "Error: Invalid Entry for South!!\n");
+		free(trim);
 		return (1);
 	}
 	else if (ln[0] == 'S' && ln[1] == 'O' && ln[2] == ' ')
@@ -71,6 +76,7 @@ int	get_south(t_game *g, char *ln)
 		if (g->wall3.path || ft_strncmp(trim, "./textures/", 11))
 		{
 			ft_error_before(g, "Error: Invalid or duplicate Entry!!\n");
+			free(trim);
 			return (1);
 		}
 		g->wall3.path = trim;
@@ -86,6 +92,7 @@ int	get_north(t_game *g, char *ln)
 	if (ln[0] == 'N' && ln[1] == 'O' && ln[2] != ' ')
 	{
 		ft_error_before(g, "Error: Invalid Entry for North!!\n");
+		free(trim);
 		return (1);
 	}
 	else if (ln[0] == 'N' && ln[1] == 'O' && ln[2] == ' ')
@@ -93,6 +100,7 @@ int	get_north(t_game *g, char *ln)
 		if (g->wall4.path || ft_strncmp(trim, "./textures/", 11))
 		{
 			ft_error_before(g, "Error: Invalid or duplicate Entry!!\n");
+			free(trim);
 			return (1);
 		}
 		g->wall4.path = trim;
