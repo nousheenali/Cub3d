@@ -48,7 +48,7 @@ void	check_closed_walls(t_game *g)
 		free(temp);
 		if (flag == 1)
 		{
-			ft_error_before(g, "Error: Map not enclosed by walls!!!\n");
+			ft_error_before(g, "Error: Map not enclosed by walls1!!!\n");
 			exit(1);
 		}
 		i++;
@@ -69,15 +69,31 @@ void	check_all_dir(t_game *g, int i, int j)
 	if ((g->map.map[u][r] != '1' && g->map.map[u][r] != '0')
 		|| (g->map.map[u][j] != '1' && g->map.map[u][j] != '0')
 		|| (g->map.map[u][l] != '1' && g->map.map[u][l] != '0'))
-		ft_error_exit(g, "Error: Map not enclosed by walls!!!\n");
+		ft_error_exit(g, "Error: Map not enclosed by walls2!!!\n");
 	if ((g->map.map[d][r] != '1' && g->map.map[d][r] != '0')
 		|| (g->map.map[d][j] != '1' && g->map.map[d][j] != '0')
 		|| (g->map.map[d][l] != '1' && g->map.map[d][l] != '0'))
-		ft_error_exit(g, "Error: Map not enclosed by walls!!!\n");
+		ft_error_exit(g, "Error: Map not enclosed by walls3!!!\n");
 	if (g->map.map[i][r] != '1' && g->map.map[i][r] != '0')
-		ft_error_exit(g, "Error: Map not enclosed by walls!!!\n");
+		ft_error_exit(g, "Error: Map not enclosed by walls4!!!\n");
 	if (g->map.map[i][l] != '1' && g->map.map[i][l] != '0')
-		ft_error_exit(g, "Error: Map not enclosed by walls!!!\n");
+		ft_error_exit(g, "Error: Map not enclosed by walls5!!!\n");
+}
+
+void	check_before_space(t_game *g, int i, int j)
+{
+	if (i + 1 < (int)g->map.ht / 64)
+		if (g->map.map[i + 1][j] != ' ' && g->map.map[i + 1][j] != '1')
+			ft_error_exit(g, "Map not enclosed by walls6!!!");
+	if (i - 1 >= 0)
+		if (g->map.map[i - 1][j] != ' ' && g->map.map[i - 1][j] != '1')
+			ft_error_exit(g, "Map not enclosed by walls7!!!");
+	if (j + 1 < (int)g->map.wt / 64)
+		if (g->map.map[i][j + 1] != ' ' && g->map.map[i][j + 1] != '1')
+			ft_error_exit(g, "Map not enclosed by walls8!!!");
+	if (j - 1 >= 0)
+		if (g->map.map[i][j - 1] != ' ' && g->map.map[i][j - 1] != '1')
+			ft_error_exit(g, "Map not enclosed by walls9!!!");
 }
 
 void	check_wall_all_dir(t_game *g)
@@ -91,9 +107,10 @@ void	check_wall_all_dir(t_game *g)
 		j = 0;
 		while (g->map.map[i][j])
 		{
-			if (g->map.map[i][j] == '0')
+			if (g->map.map[i][j] == ' ')
 			{
-				check_all_dir(g, i, j);
+				// printf("%d %d %c\n", i, j, g->map.map[i][j]);
+				check_before_space(g, i, j);
 			}
 			j++;
 		}
@@ -108,7 +125,7 @@ void	check_for_wall(t_vec t, t_game *g)
 
 	x = (int)(t.x / GRID);
 	y = (int)(t.y / GRID);
-	if (g->map.map[y][x] != '1')
+	if (g->map.map[y][x] == '0')
 	{
 		g->init_dist.x = t.x;
 		g->init_dist.y = t.y;

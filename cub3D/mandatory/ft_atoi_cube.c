@@ -33,10 +33,8 @@ int	ft_atoi_c(const char *str)
 
 	n = 0;
 	str = skip_spaces_tabs(str);
-	if (!*str || (*str == '-'))
+	if (!*str || (*str == '-') || (*str == '+'))
 		return (-1);
-	if (*str == '+')
-		str++;
 	while (*str)
 	{
 		if ((*str >= '0') && (*str <= '9'))

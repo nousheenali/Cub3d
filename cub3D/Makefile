@@ -1,7 +1,7 @@
 
 NAME	=	cub3D
 
-SRC_DIR = mand
+SRC_DIR = mandatory
 
 SRCS	= main.c get_map1.c get_map2.c error.c init.c raycaster.c hit.c move.c math.c \
 		../gnl/get_next_line.c ../gnl/get_next_line_utils.c load_textures.c parse_map1.c parse_map2.c \

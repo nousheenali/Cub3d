@@ -12,12 +12,17 @@
 
 #include "raycaster.h"
 
-int	get_east_west(t_game *g, char *ln)
+int	get_west(t_game *g, char *ln)
 {
 	char	*trim;
 
 	trim = ft_strtrim(&ln[3], " \t");
-	if (ln[0] == 'W' && ln[1] == 'E')
+	if (ln[0] == 'W' && ln[1] == 'E' && ln[2] != ' ')
+	{
+		ft_error_before(g, "Error: Invalid Entry for West!!\n");
+		return (1);
+	}
+	else if (ln[0] == 'W' && ln[1] == 'E' && ln[2] == ' ')
 	{
 		if (g->wall1.path || ft_strncmp(trim, "./textures/", 11))
 		{
@@ -26,7 +31,20 @@ int	get_east_west(t_game *g, char *ln)
 		}
 		g->wall1.path = trim;
 	}
-	else if (ln[0] == 'E' && ln[1] == 'A')
+	return (0);
+}
+
+int	get_east(t_game *g, char *ln)
+{
+	char	*trim;
+
+	trim = ft_strtrim(&ln[3], " \t");
+	if (ln[0] == 'E' && ln[1] == 'A' && ln[2] != ' ')
+	{
+		ft_error_before(g, "Error: Invalid Entry for East!!\n");
+		return (1);
+	}
+	else if (ln[0] == 'E' && ln[1] == 'A' && ln[2] == ' ')
 	{
 		if (g->wall2.path || ft_strncmp(trim, "./textures/", 11))
 		{
@@ -38,12 +56,17 @@ int	get_east_west(t_game *g, char *ln)
 	return (0);
 }
 
-int	get_north_south(t_game *g, char *ln)
+int	get_south(t_game *g, char *ln)
 {
 	char	*trim;
 
 	trim = ft_strtrim(&ln[3], " \t");
-	if (ln[0] == 'S' && ln[1] == 'O')
+	if (ln[0] == 'S' && ln[1] == 'O' && ln[2] != ' ')
+	{
+		ft_error_before(g, "Error: Invalid Entry for South!!\n");
+		return (1);
+	}
+	else if (ln[0] == 'S' && ln[1] == 'O' && ln[2] == ' ')
 	{
 		if (g->wall3.path || ft_strncmp(trim, "./textures/", 11))
 		{
@@ -52,7 +75,20 @@ int	get_north_south(t_game *g, char *ln)
 		}
 		g->wall3.path = trim;
 	}
-	else if (ln[0] == 'N' && ln[1] == 'O')
+	return (0);
+}
+
+int	get_north(t_game *g, char *ln)
+{
+	char	*trim;
+
+	trim = ft_strtrim(&ln[3], " \t");
+	if (ln[0] == 'N' && ln[1] == 'O' && ln[2] != ' ')
+	{
+		ft_error_before(g, "Error: Invalid Entry for North!!\n");
+		return (1);
+	}
+	else if (ln[0] == 'N' && ln[1] == 'O' && ln[2] == ' ')
 	{
 		if (g->wall4.path || ft_strncmp(trim, "./textures/", 11))
 		{
@@ -66,14 +102,24 @@ int	get_north_south(t_game *g, char *ln)
 
 int	ft_get_texture(t_game *g, char *ln)
 {
-	if (ln[0] == 'W' || ln[0] == 'E')
+	if (ln[0] == 'E')
 	{
-		if (get_east_west(g, ln))
+		if (get_east(g, ln))
 			return (1);
 	}
-	if (ln[0] == 'N' || ln[0] == 'S')
+	if (ln[0] == 'W')
 	{
-		if (get_north_south(g, ln))
+		if (get_west(g, ln))
+			return (1);
+	}
+	if (ln[0] == 'N')
+	{
+		if (get_north(g, ln))
+			return (1);
+	}
+	if (ln[0] == 'S')
+	{
+		if (get_south(g, ln))
 			return (1);
 	}
 	return (0);
