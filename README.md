@@ -23,7 +23,7 @@ Considerations:
 
 * Screenwidth = 640
 * Screenheight = 400
-* FOV = 60
+* FOV(field of view) = 60
 * GRID = 64
 * alpha = angle each ray forms with the x axis.
 
