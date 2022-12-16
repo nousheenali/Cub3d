@@ -68,9 +68,9 @@ We start from the leftmost ray.
 
 **STEP 3** : Increament A.y in steps, find coressponding A.x. Continue this till it hits a wall.
 
-    C.y = A.y - GRID
+    * C.y = A.y - GRID
   
-    C.x = A.x + GRID/tan(alpha)
+    * C.x = A.x + GRID/tan(alpha)
   
     (C.x,C.y)is not a wall so find (D.x, D.y)
   
