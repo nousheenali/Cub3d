@@ -114,7 +114,8 @@ We have used Lode's tutorial for texturing of wall.
 - Check at which x-coordinate or y-coordinate the ray hits the wall
 - Based on this information find the x-coordinate of the texture that needs to be rendered in that position.
 - Find the rate(step size) at which projected height needs to be increased for 1 pixel increase in texture.
-- For each step, get the color value for that particular pixel in the texture.
+- Each time step is increased, get the color value for that particular pixel in the texture and store it in a buffer.
+- Once all pixel values are stored in the buffer display it on the window.
 
 
 
