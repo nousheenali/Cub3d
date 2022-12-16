@@ -36,7 +36,7 @@ By knowing the field of view and width of the projection plane we can calculate 
 
 (half of screenwidth) / distance to projection plane = tan(30°)
 
-**distance to projection plane** = 320 /tan(30°)
+**distance to projection plane** = 160 /tan(30°)
 
 **Angle between subsequent rays** = fov / screenwidth = 60/640
 
@@ -89,7 +89,29 @@ PD = sqrt((P.x - D.x)(P.x - D.x) + (P.y - D.y)(P.y - D.y))
 
 [Image reference link](https://permadi.com/1996/05/ray-casting-tutorial-7/)
 
-## MOVEING AROUND
+ 
+## PROJECTION HEIGHT
+
+Now find the height of projection using the following formula
+
+**Projected height / Distance of the player to projection plane = Actual wall height / Distance to wall**
+
+**Projected Height** = (Distance of the player to projection plane * Actual wall height) / Distance to wall
+  
+  
+Distance of the player to projection plane. - we calculated this earlier(160 /tan(30°))
+
+Actual wall height - height of the grid (64). We assume each wall unit is 64x64x64 
+
+Distance to wall - length of the ray when it hits the wall. This PD or PE whichever is smaller.
+
+
+
+## TEXTURING OF THE WALL
+
+
+
+## MOVING AROUND
 
 To allow motion, two more attributes are needed, the player’s movement speed and the player’s turning speed. The player’s movement speed defines how
 many units the player should move(displacement). The player’s turning speed (measured in angle) defines how many angle to be added or subtracted when
