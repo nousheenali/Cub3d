@@ -8,7 +8,7 @@ To create 3D projection of a 2D map using raycasting and DDA algorithm.
 
 ## REFERENCES
 
-1. The calculations used in the program are based on the [permadi's raycasting tutorial](https://permadi.com/1996/05/ray-casting-tutorial-table-of-contents/). We have used the images from the same article for better understanding.
+1. The calculations used in the program are based on the [permadi's raycasting tutorial](https://permadi.com/1996/05/ray-casting-tutorial-table-of-contents/). We have used the images from the same article here for better understaning.
 
 2. [Abrar's raycasting tutorial](https://github.com/Saxsori/ray-cast)
 
