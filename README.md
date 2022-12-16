@@ -99,11 +99,11 @@ Now find the height of projection using the following formula
 **Projected Height** = (Distance of the player to projection plane * Actual wall height) / Distance to wall
   
   
-Distance of the player to projection plane. - we calculated this earlier(160 /tan(30°))
+- Distance of the player to projection plane. - we calculated this earlier(160 /tan(30°))
 
-Actual wall height - height of the grid (64). We assume each wall unit is 64x64x64 
+- Actual wall height - height of the grid (64). We assume each wall unit is 64x64x64 
 
-Distance to wall - length of the ray when it hits the wall. This PD or PE whichever is smaller.
+- Distance to wall - length of the ray when it hits the wall. This PD or PE whichever is smaller.
 
 
 
