@@ -1,7 +1,7 @@
 
 WE ./textures/redbrick.xpm
-SO ./textures/redborder.xpm
-EA ./textures/wood.xpm
+SO 			 	   		./textures/redborder.xpm
+EA						./textures/wood.xpm
 NO                      ./textures/eagle.xpm
 
 
@@ -11,6 +11,5 @@ C 135,206,235
   1
  101
 10001
- 101
-  1N1
-   1
+ 1N1
+  1
