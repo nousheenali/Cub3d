@@ -6,7 +6,7 @@
 /*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 12:54:50 by sfathima          #+#    #+#             */
-/*   Updated: 2022/12/14 10:38:43 by sfathima         ###   ########.fr       */
+/*   Updated: 2022/12/16 12:56:43 by sfathima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ int	get_west(t_game *g, char *ln)
 	char	*trim;
 
 	trim = ft_strtrim(&ln[3], " \t");
-	if (ln[0] == 'W' && ln[1] == 'E' && ln[2] != ' ')
+	if (ln[0] == 'W' && ln[1] == 'E' && (ln[2] != ' ' && ln[2] != '\t'))
 	{
 		ft_error_before(g, "Error: Invalid Entry for West!!\n");
 		free(trim);
 		return (1);
 	}
-	else if (ln[0] == 'W' && ln[1] == 'E' && ln[2] == ' ')
+	else if (ln[0] == 'W' && ln[1] == 'E' && (ln[2] == ' ' || ln[2] == '\t'))
 	{
 		if (g->wall1.path || ft_strncmp(trim, "./textures/", 11))
 		{
@@ -41,13 +41,13 @@ int	get_east(t_game *g, char *ln)
 	char	*trim;
 
 	trim = ft_strtrim(&ln[3], " \t");
-	if (ln[0] == 'E' && ln[1] == 'A' && ln[2] != ' ')
+	if (ln[0] == 'E' && ln[1] == 'A' && (ln[2] != ' ' && ln[2] != '\t'))
 	{
-		ft_error_before(g, "Error: Invalid Entry for East!!\n");
+		ft_error_before(g, "Error: Invalid Entry for East111!!\n");
 		free(trim);
 		return (1);
 	}
-	else if (ln[0] == 'E' && ln[1] == 'A' && ln[2] == ' ')
+	else if (ln[0] == 'E' && ln[1] == 'A' && (ln[2] == ' ' || ln[2] == '\t'))
 	{
 		if (g->wall2.path || ft_strncmp(trim, "./textures/", 11))
 		{
@@ -65,13 +65,13 @@ int	get_south(t_game *g, char *ln)
 	char	*trim;
 
 	trim = ft_strtrim(&ln[3], " \t");
-	if (ln[0] == 'S' && ln[1] == 'O' && ln[2] != ' ')
+	if (ln[0] == 'S' && ln[1] == 'O' && (ln[2] != ' ' && ln[2] != '\t'))
 	{
 		ft_error_before(g, "Error: Invalid Entry for South!!\n");
 		free(trim);
 		return (1);
 	}
-	else if (ln[0] == 'S' && ln[1] == 'O' && ln[2] == ' ')
+	else if (ln[0] == 'S' && ln[1] == 'O' && (ln[2] == ' ' || ln[2] == '\t'))
 	{
 		if (g->wall3.path || ft_strncmp(trim, "./textures/", 11))
 		{
@@ -89,13 +89,13 @@ int	get_north(t_game *g, char *ln)
 	char	*trim;
 
 	trim = ft_strtrim(&ln[3], " \t");
-	if (ln[0] == 'N' && ln[1] == 'O' && ln[2] != ' ')
+	if (ln[0] == 'N' && ln[1] == 'O' && (ln[2] != ' ' && ln[2] != '\t'))
 	{
 		ft_error_before(g, "Error: Invalid Entry for North!!\n");
 		free(trim);
 		return (1);
 	}
-	else if (ln[0] == 'N' && ln[1] == 'O' && ln[2] == ' ')
+	else if (ln[0] == 'N' && ln[1] == 'O' && (ln[2] == ' ' || ln[2] == '\t'))
 	{
 		if (g->wall4.path || ft_strncmp(trim, "./textures/", 11))
 		{

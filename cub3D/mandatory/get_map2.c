@@ -6,7 +6,7 @@
 /*   By: sfathima <sfathima@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 12:54:50 by sfathima          #+#    #+#             */
-/*   Updated: 2022/12/14 10:39:49 by sfathima         ###   ########.fr       */
+/*   Updated: 2022/12/16 12:37:06 by sfathima         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,8 @@ int	check_line(char *ln, t_game *g)
 	char	*ln1;
 	char	*trim;
 
-	ln1 = malloc(sizeof(char) * strlen(ln));
-	ft_strlcpy(ln1, ln, strlen(ln));
+	ln1 = malloc(sizeof(char) * strlen(ln) + 1);
+	ft_strlcpy(ln1, ln, strlen(ln) + 1);
 	get_details(ln, g, ln1);
 	if (ln1[0] == ' ')
 	{
