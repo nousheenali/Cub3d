@@ -109,6 +109,13 @@ Distance to wall - length of the ray when it hits the wall. This PD or PE whiche
 
 ## TEXTURING OF THE WALL
 
+We have used Lode's tutorial for texturing of wall.
+
+- Check at which x-coordinate or y-coordinate the ray hits the wall
+- Based on this information find the x-coordinate of the texture that needs to be rendered in that position.
+- Find the rate(step size) at which projected height needs to be increased for 1 pixel increase in texture.
+- For each step, get the color value for that particular pixel in the texture.
+
 
 
 ## MOVING AROUND
