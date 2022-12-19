@@ -6,6 +6,12 @@
 ## AIM
 To create 3D projection of a 2D map using raycasting and DDA algorithm.
 
+
+![2022-12-19 15-15-09](https://user-images.githubusercontent.com/66158938/208414308-94568332-5a09-4d98-a64b-97e3c9907b9c.gif)
+
+
+
+
 ## REFERENCES
 
 1. The calculations used in the program are based on the [permadi's raycasting tutorial](https://permadi.com/1996/05/ray-casting-tutorial-table-of-contents/). We have used the images from the same article here for better understaning.
