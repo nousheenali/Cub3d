@@ -161,10 +161,10 @@ Again, larger angle increment will cause the movement appear less smooth (We hav
 - The textures for the four walls (NO, SO, WE, EA) is passed as path is also provided in the map.
 - If any misconfiguration of any kind is encountered in the file, the program must exit properly , without leaks and return an error message.
   
+## BONUS
+We have done only 1 part of the bonus: Rotate the point of view with the mouse.
 
-
-
-
+Using mlx_hook, we execute mouse movement evvent. The first thing to do is fix the mouse position to the center of the screen. Based on the position of the cursor(x and y) we add and offset angle as we did for the turning the player around using arrow keys.
 
 
 
